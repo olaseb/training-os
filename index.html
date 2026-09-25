@@ -195,6 +195,52 @@ h2.sec{font-family:var(--disp);font-weight:800;font-size:13px;letter-spacing:.14
 .anctl{display:flex;gap:8px}
 .anctl button{flex:1;height:40px;border-radius:10px;border:1.5px solid var(--line);background:var(--card);font-weight:600;font-size:14px;color:var(--dim)}
 .anctl button[aria-pressed="true"]{border-color:var(--acc);color:var(--acc)}
+/* réglages */
+.optrow{display:flex;align-items:center;gap:12px;background:var(--card);border:1px solid var(--line);
+  border-radius:12px;padding:12px 14px;width:100%;text-align:left}
+.optrow .n{flex:1}
+.optrow .n b{display:block;font-size:15px;font-weight:600}
+.optrow .n span{display:block;font-family:var(--mono);font-size:11.5px;color:var(--dim);margin-top:2px}
+.optrow .box{width:26px;height:26px;border-radius:8px;border:2px solid var(--line);flex:0 0 auto;
+  display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:800;color:transparent}
+.optrow[aria-pressed="true"] .box{background:var(--acc);border-color:var(--acc);color:var(--on-acc)}
+.syncline{display:flex;align-items:center;gap:8px;font-family:var(--mono);font-size:12px;color:var(--dim)}
+.syncline i{width:8px;height:8px;border-radius:50%;background:var(--dim);display:block;flex:0 0 auto}
+.syncline i.ok{background:#2FBF71}.syncline i.err{background:#E0452F}.syncline i.wait{background:var(--warm)}
+.charges{font-family:var(--mono);font-size:12.5px;color:var(--dim);background:var(--card);border:1px solid var(--line);
+  border-left:4px solid var(--acc);border-radius:10px;padding:11px 13px;margin-top:10px;line-height:1.6}
+.charges b{color:var(--ink);font-weight:600}
+.nextup{font-family:var(--mono);font-size:12px;color:var(--dim);margin-top:8px}
+.nextup b{color:var(--ink)}
+.rir{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:10px}
+.rir button{height:52px;border-radius:11px;border:1.5px solid var(--line);background:var(--card);
+  font-family:var(--disp);font-weight:800;font-size:17px;color:var(--dim)}
+.rir button[aria-pressed="true"]{background:var(--acc);border-color:var(--acc);color:var(--on-acc)}
+/* séries et progression */
+.repsrow{display:flex;align-items:center;justify-content:center;gap:14px;margin-top:16px}
+.repsrow .lab{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--dim)}
+.repsrow button{width:46px;height:46px;border-radius:12px;border:1.5px solid var(--line);background:var(--card);
+  font-size:22px;font-weight:700;color:var(--ink);display:flex;align-items:center;justify-content:center}
+.repsrow .v{font-family:var(--disp);font-weight:800;font-size:34px;min-width:58px;text-align:center;letter-spacing:-.03em}
+.prog{display:flex;flex-direction:column;gap:6px;margin-top:4px}
+.prog div{font-size:14px;color:var(--ink);background:var(--card);border:1px solid var(--line);
+  border-left:4px solid var(--acc);border-radius:10px;padding:10px 12px;text-align:left}
+.prog div.rec{border-left-color:var(--warm)}
+.detail{font-family:var(--mono);font-size:11.5px;color:var(--dim);padding:2px 0 8px 22px;line-height:1.7}
+.mesure{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px;display:flex;flex-direction:column;gap:10px}
+.mesure b{font-size:15px;font-weight:700}
+.mesure .sub{font-family:var(--mono);font-size:12px;color:var(--dim)}
+.mesure .in{display:flex;gap:8px}
+.mesure input{flex:1;height:48px;border-radius:11px;border:1.5px solid var(--line);background:var(--card2);color:var(--ink);
+  padding:0 12px;font-family:var(--mono);font-size:15px;min-width:0;text-align:center}
+.mesure .hist{display:flex;gap:14px;font-family:var(--mono);font-size:12px;color:var(--dim);flex-wrap:wrap}
+.banner{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--warm);border-radius:12px;
+  padding:12px 14px;display:flex;align-items:center;gap:12px}
+.banner .n{flex:1}
+.banner .n b{display:block;font-size:14px;font-weight:700}
+.banner .n span{display:block;font-family:var(--mono);font-size:11.5px;color:var(--dim);margin-top:2px}
+.banner button{flex:0 0 auto;height:38px;padding:0 14px;border-radius:10px;border:1.5px solid var(--acc);
+  background:none;color:var(--acc);font-weight:700;font-size:13px}
 /* séance */
 .exrow{display:flex;align-items:center;gap:10px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 12px 12px 0;margin-top:8px;overflow:hidden}
 .exrow .bar{width:5px;align-self:stretch;flex:0 0 5px;margin-right:2px;background:var(--dim)}
@@ -278,9 +324,13 @@ h2.sec{font-family:var(--disp);font-weight:800;font-size:13px;letter-spacing:.14
 <div class="app">
   <div class="top">
     <div class="brand">Training<span>-Os</span></div>
+    <div style="display:flex;gap:8px">
+    <button class="iconbtn" id="cfgBtn" title="Réglages" aria-label="Réglages">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><circle cx="12" cy="12" r="3.1"/><path d="M19.2 13.5l1.7 1-1.9 3.2-1.9-.8c-.5.4-1.1.7-1.7 1l-.3 1.9h-3.8l-.3-1.9c-.6-.2-1.2-.6-1.7-1l-1.9.8-1.9-3.2 1.7-1a7.7 7.7 0 0 1 0-2l-1.7-1 1.9-3.2 1.9.8c.5-.4 1.1-.7 1.7-1l.3-1.9h3.8l.3 1.9c.6.2 1.2.6 1.7 1l1.9-.8 1.9 3.2-1.7 1c.1.7.1 1.3 0 2z"/></svg>
+    </button>
     <button class="iconbtn" id="themeBtn" title="Changer de thème" aria-label="Changer de thème">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.4v2.2M12 19.4v2.2M2.4 12h2.2M19.4 12h2.2M5.2 5.2l1.6 1.6M17.2 17.2l1.6 1.6M18.8 5.2l-1.6 1.6M6.8 17.2l-1.6 1.6"/></svg>
-    </button>
+    </button></div>
   </div>
 
   <div class="seg" role="group">
@@ -293,6 +343,8 @@ h2.sec{font-family:var(--disp);font-weight:800;font-size:13px;letter-spacing:.14
   <!-- ============ REPOS ============ -->
   <!-- ============ SÉANCE ============ -->
   <section id="viewSes" style="display:flex;flex-direction:column;gap:14px">
+    <div id="sesReprise"></div>
+    <div id="sesBanner"></div>
     <h2 class="sec">Tu as combien de temps ?</h2>
     <div class="presets" id="sesTime"></div>
     <h2 class="sec">Comment tu te sens ?</h2>
@@ -303,6 +355,7 @@ h2.sec{font-family:var(--disp);font-weight:800;font-size:13px;letter-spacing:.14
 
     <div id="sesPlan" hidden>
       <div class="total" style="margin-top:18px"><b class="tnum" id="sesTot">00:00</b><span id="sesDesc"></span></div>
+      <div class="charges" id="sesCharges"></div>
       <div id="sesList"></div>
       <button class="btn primary" id="sesStart" style="height:58px;margin-top:14px">Démarrer la séance</button>
       <p class="hint" style="margin-top:12px">Touche <b>i</b> pour la fiche d'un exercice, ⇄ pour le remplacer, ✕ pour le retirer.</p>
@@ -415,6 +468,7 @@ h2.sec{font-family:var(--disp);font-weight:800;font-size:13px;letter-spacing:.14
       <div class="tile"><b id="sumNb">0</b><span>séances</span></div>
       <div class="tile"><b id="sumRpe">—</b><span>effort moyen</span></div>
     </div>
+    <div id="poidsCard"></div>
     <h2 class="sec">Six dernières semaines</h2>
     <div class="weeks" id="weeks"></div>
     <h2 class="sec">Séances</h2>
@@ -445,6 +499,20 @@ h2.sec{font-family:var(--disp);font-weight:800;font-size:13px;letter-spacing:.14
     <button class="btn ghost" id="runStop" style="flex:0 0 84px">Arrêter</button>
   </div>
 
+<!-- répétitions en réserve -->
+<div class="sheet" id="rir" hidden>
+  <div class="panel" role="dialog" aria-modal="true">
+    <div class="head"><h3>Dernière série</h3></div>
+    <p class="fichetxt" style="margin:0"><span id="rirN"></span><br>
+    Combien de répétitions aurais-tu encore pu faire, proprement, avant l'échec ?</p>
+    <div class="rir" id="rirGrid">
+      <button data-rir="0">0</button><button data-rir="1">1</button>
+      <button data-rir="2">2</button><button data-rir="3">3 +</button>
+    </div>
+    <button class="btn ghost" id="rirSkip">Je ne sais pas</button>
+  </div>
+</div>
+
   <div class="done" id="doneBox" hidden>
     <h2 id="doneTitle">Séance terminée</h2>
     <div class="rec" id="doneRec">Rameur · fractionné · 20:00</div>
@@ -452,6 +520,7 @@ h2.sec{font-family:var(--disp);font-weight:800;font-size:13px;letter-spacing:.14
       <div class="rpelab"><span>Facile</span><span>Maximal</span></div>
       <div class="rpe" id="rpeGrid" style="margin-top:8px"></div>
     </div>
+    <div class="prog" id="doneProg"></div>
     <div class="row">
       <button class="btn primary" id="doneSave" style="flex:2">Enregistrer</button>
       <button class="btn ghost" id="doneSkip">Passer</button>
@@ -467,11 +536,17 @@ h2.sec{font-family:var(--disp);font-weight:800;font-size:13px;letter-spacing:.14
     <div class="cnt tnum" id="sesBig">1 / 3</div>
     <div class="cad" id="sesBigLab" style="letter-spacing:.2em;text-transform:uppercase">série</div>
     <div class="sets" id="sesSets"></div>
+    <div class="repsrow" id="sesRepsRow" hidden>
+      <button data-rep2="-1" aria-label="Une répétition de moins">−</button>
+      <div><div class="v tnum" id="sesRepsV">10</div><div class="lab">répétitions</div></div>
+      <button data-rep2="1" aria-label="Une répétition de plus">+</button>
+    </div>
     <div class="meta" style="margin-top:14px"><span id="sesNext"></span></div>
   </div>
   <div class="restwrap" id="sesRestWrap" hidden>
     <div class="top2"><span>Repos</span><b class="tnum" id="sesRestT">1:30</b></div>
     <div class="track"><i id="sesRestBar"></i></div>
+    <div class="nextup" id="sesNextUp"></div>
   </div>
   <div class="row">
     <button class="btn primary" id="sesDo" style="flex:2">Série faite</button>
@@ -510,9 +585,23 @@ h2.sec{font-family:var(--disp);font-weight:800;font-size:13px;letter-spacing:.14
     <div class="head"><h3>Série d'étalonnage</h3></div>
     <p class="fichetxt" style="margin:0"><span id="calN"></span> — <span id="calSub"></span>.<br>
     Combien de répétitions propres as-tu tenues, en t'arrêtant avant de perdre la technique ?</p>
-    <input class="numin" id="calV" type="number" inputmode="numeric" min="1" max="200" value="10">
+    <input class="numin" id="calV" type="text" inputmode="numeric" autocomplete="off" value="10">
     <button class="btn primary" id="calOk" style="height:56px">Valider</button>
     <button class="btn ghost" id="calCancel">Annuler</button>
+  </div>
+</div>
+
+<!-- réglages -->
+<div class="sheet" id="cfg" hidden>
+  <div class="panel" role="dialog" aria-modal="true" aria-label="Réglages">
+    <div class="head"><h3>Réglages</h3><button class="iconbtn" id="cfgClose" aria-label="Fermer">✕</button></div>
+    <h2 class="sec" style="margin-top:0">Mon matériel</h2>
+    <div id="matList" style="display:flex;flex-direction:column;gap:8px"></div>
+    <p class="hint" style="text-align:left">Décoche ce que tu n'as pas : les exercices correspondants disparaissent des séances.</p>
+    <h2 class="sec">Sauvegarde</h2>
+    <div class="syncline" id="syncTxt"><i></i><span>hors ligne</span></div>
+    <button class="btn" id="syncNow" style="height:46px;font-size:14px">Synchroniser maintenant</button>
+    <p class="hint" style="text-align:left" id="syncHint"></p>
   </div>
 </div>
 
@@ -580,7 +669,9 @@ h2.sec{font-family:var(--disp);font-weight:800;font-size:13px;letter-spacing:.14
 <script>
 /* ---------------- utils ---------------- */
 var LS={get:function(k,d){try{var v=localStorage.getItem(k);return v===null?d:JSON.parse(v);}catch(e){return d;}},
-        set:function(k,v){try{localStorage.setItem(k,JSON.stringify(v));}catch(e){}}};
+        set:function(k,v){try{localStorage.setItem(k,JSON.stringify(v));}catch(e){}
+          if(k!=='tos-v'&&k!=='tos-tab'){try{localStorage.setItem('tos-v',JSON.stringify(Date.now()));}catch(e){}
+            if(window.SYNC&&SYNC.planifier)SYNC.planifier();}}};
 function mmss(s){s=Math.max(0,Math.round(s));var m=Math.floor(s/60);return m+':'+String(s%60).padStart(2,'0');}
 function mmss2(s){s=Math.max(0,Math.round(s));var m=Math.floor(s/60);return String(m).padStart(2,'0')+':'+String(s%60).padStart(2,'0');}
 function $(id){return document.getElementById(id);}
@@ -725,7 +816,8 @@ function blkHTML(b,zone,i){
    '</span></div>';
 }
 function drawInt(){
-  $('machines').innerHTML=MACHINES.map(function(m){return '<button data-m="'+m.k+'" aria-pressed="'+(m.k===P.machine)+'">'+m.n+'</button>';}).join('');
+  $('machines').innerHTML=MACHINES.filter(function(m){return aMat(m.k);})
+    .map(function(m){return '<button data-m="'+m.k+'" aria-pressed="'+(m.k===P.machine)+'">'+m.n+'</button>';}).join('');
   $('warmBox').innerHTML=P.warm.map(function(b,i){return blkHTML(b,'warm',i);}).join('');
   $('cycleBox').innerHTML=P.cycle.map(function(b,i){return blkHTML(b,'cycle',i);}).join('');
   $('coolBox').innerHTML=P.cool.map(function(b,i){return blkHTML(b,'cool',i);}).join('');
@@ -823,6 +915,7 @@ function askRpe(complete){
     mode:(runner.ctx&&runner.ctx.mode)||'Cardio',
     blocks:runner.list.length,date:Date.now()};
   var mn=MACHINES.filter(function(m){return m.k===pendingRpe.machine;})[0];
+  $('doneProg').innerHTML='';
   $('doneTitle').textContent=complete?'Séance terminée':'Séance arrêtée';
   $('doneRec').textContent=(mn?mn.n:'Cardio')+' · '+pendingRpe.mode.toLowerCase()+' · '+mmss2(dur);
   $('rpeGrid').innerHTML='';
@@ -1079,6 +1172,16 @@ function drawHist(){
       (h.rpe?'<span class="rpepill">'+h.rpe+'/10</span>':'')+
       '<span class="d">'+mmss2(h.dur)+'</span>'+
       '<button class="delbtn" data-del="'+i+'" aria-label="Supprimer cette séance">✕</button></div>';
+    if(h.sets&&h.sets.length){
+      var par={};
+      h.sets.forEach(function(x){(par[x.id]=par[x.id]||[]).push(x);});
+      html+='<div class="detail">'+Object.keys(par).map(function(id){
+        var e=exById(id);if(!e)return '';
+        var l=par[id];
+        return (e?e.n:id)+' · '+l.length+' × '+l.map(function(x){return x.r;}).join('/')+
+               (e.c0!==null&&l[0].c!==null&&l[0].c!==undefined?' · '+kg(l[0].c):'');
+      }).filter(Boolean).join('<br>')+'</div>';
+    }
   });
   $('histList').innerHTML=html;
 }
@@ -1086,6 +1189,149 @@ $('histList').addEventListener('click',function(e){
   var b=e.target.closest('[data-del]');if(!b)return;
   HIST.splice(+b.dataset.del,1);LS.set('tos-hist',HIST);drawHist();
 });
+
+/* ================= POIDS ET TOUR DE TAILLE ================= */
+/* Une fois par mois seulement. Une pesée isolée ne dit rien : c'est la tendance
+   sur plusieurs mois qui compte, et le tour de taille la complète quand la
+   balance ne bouge pas alors que le corps change. */
+var POIDS=LS.get('tos-poids',[]);
+function joursDepuis(t){return Math.floor((Date.now()-t)/86400000);}
+function drawPoids(){
+  var last=POIDS.length?POIDS[0]:null;
+  var du=last?joursDepuis(last.d):999;
+  var h='';
+  if(du>=28){
+    h='<div class="mesure"><b>Mesure du mois</b>'+
+      '<span class="sub">Le matin, à jeun, avant de boire. Le tour de taille au nombril, debout, sans rentrer le ventre.</span>'+
+      '<div class="in"><input id="pKg" type="text" inputmode="decimal" autocomplete="off" placeholder="poids en kg">'+
+      '<input id="pTaille" type="text" inputmode="numeric" autocomplete="off" placeholder="taille en cm"></div>'+
+      '<button class="btn primary" id="pSave" style="height:48px">Enregistrer</button>';
+    if(last)h+='<div class="hist">Dernière : '+String(last.kg).replace('.',',')+' kg'+
+      (last.cm?' · '+last.cm+' cm':'')+', il y a '+du+' jours</div>';
+    h+='</div>';
+  }else{
+    var prev=POIDS[1];
+    var d=prev?(last.kg-prev.kg):null;
+    var dc=(prev&&prev.cm&&last.cm)?(last.cm-prev.cm):null;
+    h='<div class="mesure"><b>'+String(last.kg).replace('.',',')+' kg'+(last.cm?' · '+last.cm+' cm de tour de taille':'')+'</b>'+
+      '<span class="sub">mesuré il y a '+du+' jour'+(du>1?'s':'')+
+      (d!==null?' · '+(d>0?'+':'')+String(Math.round(d*10)/10).replace('.',',')+' kg depuis la fois d\u2019avant':'')+
+      (dc!==null?' · '+(dc>0?'+':'')+dc+' cm':'')+'</span>';
+    if(POIDS.length>1){
+      h+='<div class="hist">'+POIDS.slice(0,6).map(function(x){
+        var dd=new Date(x.d);
+        return (dd.getDate())+'/'+(dd.getMonth()+1)+' : '+String(x.kg).replace('.',',')+' kg';}).join('</div><div class="hist">')+'</div>';
+    }
+    h+='<span class="sub">Prochaine mesure dans '+(28-du)+' jour'+((28-du)>1?'s':'')+'.</span></div>';
+  }
+  $('poidsCard').innerHTML=h;
+}
+$('poidsCard').addEventListener('click',function(ev){
+  if(!ev.target.closest('#pSave'))return;
+  var kgv=parseFloat(String($('pKg').value).replace(',','.'));
+  var cm=parseInt($('pTaille').value,10);
+  if(!kgv||kgv<25||kgv>300){$('pKg').value='';$('pKg').placeholder='poids invalide';return;}
+  POIDS.unshift({d:Date.now(),kg:Math.round(kgv*10)/10,cm:(cm>40&&cm<250)?cm:null});
+  LS.set('tos-poids',POIDS);drawPoids();
+});
+
+/* ---- rappel d'étalonnage cardio ---- */
+function drawBanner(){
+  var m=P.machine,c=card(m),n=niveau(m);
+  var derniere=0;
+  c.end.concat(c.max).forEach(function(x){if(x.date>derniere)derniere=x.date;});
+  var h='';
+  if(!n.e||!n.p){
+    h='<div class="banner"><span class="n"><b>Niveau '+machineName(m).toLowerCase()+' non mesuré</b>'+
+      '<span>les allures du cardio sont encore approximatives</span></span>'+
+      '<button data-goniv="1">Mesurer</button></div>';
+  }else if(joursDepuis(derniere)>=35){
+    h='<div class="banner"><span class="n"><b>Niveau '+machineName(m).toLowerCase()+' à revérifier</b>'+
+      '<span>dernière mesure il y a '+Math.floor(joursDepuis(derniere)/7)+' semaines</span></span>'+
+      '<button data-goniv="1">Mesurer</button></div>';
+  }
+  $('sesBanner').innerHTML=h;
+}
+$('sesBanner').addEventListener('click',function(ev){
+  if(ev.target.closest('[data-goniv]'))show('int');
+});
+
+/* ================= SAUVEGARDE DANS LE NUAGE ================= */
+/* Tout l'état tient dans un seul document Firestore, propre à cet utilisateur.
+   La version la plus récente gagne. L'app fonctionne normalement sans réseau :
+   la synchronisation reprend d'elle-même au retour de la connexion. */
+var CLES=['tos-rest','tos-plan','tos-mode','tos-cont','tos-contcad','tos-metro','tos-hist',
+          'tos-prof','tos-cardio','tos-poids','tos-min','tos-theme','tos-gene','tos-mat','tos-run'];
+var SYNC={etat:'attente',msg:'connexion…',uid:null,timer:null,dernier:0};
+
+function etatLocal(){
+  var d={};
+  CLES.forEach(function(k){var v=LS.get(k,undefined);if(v!==undefined)d[k]=v;});
+  return {v:LS.get('tos-v',0),d:d};
+}
+function appliquerEtat(o){
+  if(!o||!o.d)return;
+  Object.keys(o.d).forEach(function(k){
+    try{localStorage.setItem(k,JSON.stringify(o.d[k]));}catch(e){}
+  });
+  try{localStorage.setItem('tos-v',JSON.stringify(o.v||Date.now()));}catch(e){}
+}
+function drawSync(){
+  var cls=SYNC.etat==='ok'?'ok':(SYNC.etat==='erreur'?'err':'wait');
+  var t=$('syncTxt');if(!t)return;
+  t.innerHTML='<i class="'+cls+'"></i><span>'+SYNC.msg+'</span>';
+  var h=$('syncHint');
+  if(h)h.textContent=SYNC.uid
+    ? 'Tes données sont copiées dans ton espace Firebase à chaque modification. Identifiant de l\u2019appareil : '+SYNC.uid.slice(0,8)+'…'
+    : 'Sans connexion, tout reste sur ce téléphone et la copie repartira toute seule au retour du réseau.';
+}
+SYNC.planifier=function(){
+  if(!SYNC.envoyer)return;
+  clearTimeout(SYNC.timer);
+  SYNC.timer=setTimeout(function(){SYNC.envoyer();},2500);
+};
+$('syncNow').addEventListener('click',function(){
+  if(SYNC.envoyer)SYNC.envoyer(true); else {SYNC.msg='service indisponible';drawSync();}
+});
+
+/* ================= MATÉRIEL ================= */
+/* Ce que tu possèdes. Décoche, et les exercices correspondants disparaissent
+   des séances. Coche le jour où tu achètes : rien d'autre à faire. */
+var MATOS=[
+ {k:'halteres',n:'Haltères réglables',d:'2,5 à 24 kg, deux exemplaires'},
+ {k:'banc',n:'Banc de musculation',d:'développés, rowing, écartés'},
+ {k:'poignees',n:'Poignées de pompes',d:'pompes et variantes'},
+ {k:'roue',n:'Roue abdominale',d:'gainage profond'},
+ {k:'rameur',n:'Rameur',d:'cardio et fractionné'},
+ {k:'tapis',n:'Tapis de course',d:'cardio et fractionné'},
+ {k:'velo',n:'Vélo',d:'cardio et récupération'},
+ {k:'corde',n:'Corde à sauter',d:'échauffement et fractionné'}
+];
+var MAT=LS.get('tos-mat',null);
+if(!MAT){MAT={};MATOS.forEach(function(m){MAT[m.k]=true;});LS.set('tos-mat',MAT);}
+function aMat(k){return k==='aucun'||MAT[k]!==false;}
+
+function drawMat(){
+  $('matList').innerHTML=MATOS.map(function(m){
+    return '<button class="optrow" data-mat="'+m.k+'" aria-pressed="'+(MAT[m.k]!==false)+'">'+
+      '<span class="n"><b>'+m.n+'</b><span>'+m.d+'</span></span><span class="box">✓</span></button>';
+  }).join('');
+}
+$('matList').addEventListener('click',function(ev){
+  var b=ev.target.closest('[data-mat]');if(!b)return;
+  var k=b.dataset.mat;
+  MAT[k]=(MAT[k]===false);
+  LS.set('tos-mat',MAT);drawMat();
+  /* si la machine cardio courante n'existe plus, on bascule sur une disponible */
+  if(!aMat(P.machine)){
+    var dispo=MACHINES.filter(function(x){return aMat(x.k);});
+    if(dispo.length){P.machine=dispo[0].k;drawInt();drawCont();drawNiveau();}
+  }
+  if(SES.plan){makePlan();drawSes();}
+});
+$('cfgBtn').addEventListener('click',function(){drawMat();drawSync();$('cfg').hidden=false;});
+$('cfgClose').addEventListener('click',function(){$('cfg').hidden=true;});
+$('cfg').addEventListener('click',function(ev){if(ev.target===$('cfg'))$('cfg').hidden=true;});
 
 /* ---------------- tabs ---------------- */
 var VIEWS={ses:'viewSes',rest:'viewRest',int:'viewInt',hist:'viewHist'};
@@ -1096,8 +1342,8 @@ function show(which){
     $(VIEWS[k]).style.display=(k===which)?'flex':'none';
     $(TABS[k]).setAttribute('aria-pressed',k===which);
   });
-  if(which==='hist')drawHist();
-  if(which==='ses'&&window.drawSes)drawSes();
+  if(which==='hist'){drawHist();drawPoids();}
+  if(which==='ses'&&window.drawSes){drawSes();drawBanner();drawReprise();}
   LS.set('tos-tab',which);
 }
 $('tabSes').addEventListener('click',function(){show('ses');});
@@ -1246,7 +1492,8 @@ function dureeEx(e,p,series){
   var travail=e.tps?reps:reps*3.5;               /* gainage : la valeur est en secondes */
   return Math.round(series*(travail+e.repos)+40);
 }
-function libre(e){                                /* pas de gêne sur une zone sollicitée */
+function libre(e){        /* matériel possédé, et aucune gêne sur une zone sollicitée */
+  if(!aMat(e.mat))return false;
   return !e.zones.some(function(z){return GENE.z.indexOf(z)>=0;});
 }
 function derniers(){                              /* exercices des 2 dernières séances muscu */
@@ -1321,6 +1568,15 @@ function drawPlan(){
   $('sesPlan').hidden=false;
   $('sesList').innerHTML=SES.plan.map(itemHTML).join('');
   var n=SES.plan.filter(function(i){return i.t==='ex';}).length;
+  var poids=[];
+  SES.plan.forEach(function(i){
+    if(i.t!=='ex')return;var e=exById(i.id),q=prof(e);
+    if(e.c0!==null&&q.c!==null&&q.c!==undefined&&poids.indexOf(q.c)<0)poids.push(q.c);
+  });
+  poids.sort(function(a,b){return a-b;});
+  $('sesCharges').innerHTML=poids.length
+    ? 'Haltères à prévoir : <b>'+poids.map(function(c){return kg(c);}).join(' · ')+'</b>'
+    : 'Aucune charge à régler sur cette séance.';
   $('sesTot').textContent=mmss2(planDur());
   $('sesDesc').textContent=n+' exercice'+(n>1?'s':'')+' · objectif '+SES.min+' min';
   $('sesTot').style.color=Math.abs(planDur()-SES.min*60)>300?'var(--warm)':'';
@@ -1416,11 +1672,39 @@ $('ficheClose').addEventListener('click',function(){$('fiche').hidden=true;animS
 var RUN={on:false,i:0,set:1,done:[],startedAt:0,restRaf:null,restEnd:0};
 
 function curItem(){return SES.plan[RUN.i];}
+/* L'état de la séance est écrit à chaque étape : un appel, un verrouillage trop
+   long ou une fermeture d'onglet ne font plus perdre la séance en cours. */
+function saveRun(){
+  if(!RUN.on){LS.set('tos-run',null);return;}
+  LS.set('tos-run',{plan:SES.plan,i:RUN.i,set:RUN.set,log:RUN.log,done:RUN.done,
+                    reps:RUN.reps,startedAt:RUN.startedAt,t:Date.now(),min:SES.min});
+}
+function drawReprise(){
+  var r=LS.get('tos-run',null);
+  if(!r||!r.plan||RUN.on||(Date.now()-r.t)>6*3600000){$('sesReprise').innerHTML='';return;}
+  var mn=Math.round((Date.now()-r.t)/60000);
+  $('sesReprise').innerHTML='<div class="banner"><span class="n"><b>Séance en cours</b>'+
+    '<span>étape '+(r.i+1)+' sur '+r.plan.length+', interrompue il y a '+
+    (mn<60?mn+' min':Math.round(mn/60)+' h')+'</span></span>'+
+    '<button data-reprise="1">Reprendre</button></div>';
+}
+$('sesReprise').addEventListener('click',function(ev){
+  if(ev.target.closest('[data-reprise]'))repriseRun();
+});
+function repriseRun(){
+  var r=LS.get('tos-run',null);if(!r)return;
+  audio();SES.plan=r.plan;SES.min=r.min||SES.min;
+  RUN.on=true;RUN.i=r.i;RUN.set=r.set;RUN.log=r.log||[];RUN.done=r.done||[];
+  RUN.reps=r.reps;RUN.startedAt=r.startedAt||Date.now();
+  $('sesRun').hidden=false;keepAwake(true);sesPaint();drawPlan();
+}
+
 function sesPaint(){
   var it=curItem();
   if(!it){sesFinish();return;}
   $('sesStep').textContent='Étape '+(RUN.i+1)+' sur '+SES.plan.length;
   $('sesRestWrap').hidden=true;
+  $('sesRepsRow').hidden=true;
   if(it.t==='cardio'){
     $('sesName').textContent=it.n;
     $('sesSub').textContent=machineName(it.mach)+' · '+mmss(it.dur);
@@ -1435,6 +1719,12 @@ function sesPaint(){
     $('sesSub').textContent=it.cal&&RUN.set===1?'Série d’étalonnage — fais le maximum de répétitions propres':det;
     $('sesBig').textContent=RUN.set+' / '+it.ser;
     $('sesBigLab').textContent='série';
+    if(!(it.cal&&RUN.set===1)){
+      RUN.reps=(RUN.reps||p.r||e.r[0]);
+      $('sesRepsRow').hidden=false;
+      $('sesRepsV').textContent=RUN.reps;
+      $('sesRepsRow').querySelector('.lab').textContent=e.tps?'secondes':'répétitions';
+    }else $('sesRepsRow').hidden=true;
     $('sesDo').textContent=(it.cal&&RUN.set===1)?'J\u2019ai fini cette série':'Série faite';
     var h='';
     for(var s=1;s<=it.ser;s++)h+='<i class="'+(s<RUN.set?'ok':(s===RUN.set?'now':''))+'"></i>';
@@ -1443,12 +1733,26 @@ function sesPaint(){
   $('sesNext').textContent=SES.plan[RUN.i+1]?('Puis : '+(SES.plan[RUN.i+1].t==='cardio'?SES.plan[RUN.i+1].n:exById(SES.plan[RUN.i+1].id).n)):'Dernière étape';
 }
 function sesStartRun(){
-  audio();RUN.on=true;RUN.i=0;RUN.set=1;RUN.done=[];RUN.startedAt=Date.now();
+  audio();RUN.on=true;RUN.i=0;RUN.set=1;RUN.done=[];RUN.log=[];RUN.reps=undefined;RUN.startedAt=Date.now();
   $('sesRun').hidden=false;keepAwake(true);sesPaint();
 }
 /* minuteur de repos intégré au déroulé */
 function sesRest(sec){
   $('sesRestWrap').hidden=false;RUN.restEnd=Date.now()+sec*1000;
+  (function(){
+    var it=curItem(),txt='';
+    if(it&&it.t==='ex'&&RUN.set<=it.ser){
+      var e=exById(it.id),q=prof(e);
+      txt='Série suivante : <b>'+(e.c0!==null?kg(q.c):'poids du corps')+'</b>';
+    }
+    var nx=SES.plan[RUN.i+1];
+    if(nx&&RUN.set>=it.ser){
+      if(nx.t==='ex'){var e2=exById(nx.id),q2=prof(e2);
+        txt='Ensuite : <b>'+e2.n+'</b>'+(e2.c0!==null?' · règle à '+kg(q2.c):'');}
+      else txt='Ensuite : <b>'+nx.n+'</b>';
+    }
+    $('sesNextUp').innerHTML=txt;
+  })();
   var warned=false;
   (function loop(){
     var left=(RUN.restEnd-Date.now())/1000;
@@ -1473,28 +1777,81 @@ $('sesDo').addEventListener('click',function(){
   var e=exById(it.id),p=prof(e);
   if(it.cal&&RUN.set===1){openCal(it.id);return;}
   RUN.done.push(it.id);
-  if(RUN.set<it.ser){RUN.set++;sesPaint();sesRest(e.repos);}
-  else{sesNextItem();}
+  RUN.log.push({id:it.id,c:p.c,r:(RUN.reps!==undefined?RUN.reps:p.r),cible:p.r,tps:!!e.tps});
+  if(RUN.set<it.ser){RUN.set++;RUN.reps=p.r;saveRun();sesPaint();sesRest(e.repos);}
+  else{demandeRir(it.id,function(){sesNextItem();});}
 });
 function sesNextItem(){
-  RUN.i++;RUN.set=1;sesStopRest();
+  RUN.i++;RUN.set=1;RUN.reps=undefined;sesStopRest();saveRun();
   if(RUN.i>=SES.plan.length){sesFinish();return;}
   gong();sesPaint();
 }
+$('sesRepsRow').addEventListener('click',function(ev){
+  var b=ev.target.closest('[data-rep2]');if(!b)return;
+  var it=curItem();if(!it||it.t!=='ex')return;
+  var e=exById(it.id),pas=e.tps?5:1;
+  RUN.reps=Math.max(0,(RUN.reps||0)+ +b.dataset.rep2*pas);
+  $('sesRepsV').textContent=RUN.reps;
+});
 $('sesSkip').addEventListener('click',sesNextItem);
 $('sesQuit').addEventListener('click',function(){sesFinish();});
 
 function closeSesRun(keep){
   sesStopRest();$('sesRun').hidden=true;if(!keep){RUN.on=false;keepAwake(false);}
+  saveRun();
 }
+/* Après la séance : pour chaque exercice, si toutes les séries ont atteint
+   l'objectif, c'est une réussite. Deux réussites de suite font monter d'un cran —
+   les répétitions d'abord, la charge ensuite, comme sur un vrai programme. */
+function progression(log){
+  var par={},msg=[];
+  log.forEach(function(x){(par[x.id]=par[x.id]||[]).push(x);});
+  Object.keys(par).forEach(function(id){
+    var e=exById(id),p=prof(e),series=par[id];
+    if(!p.cal)return;                       /* pas encore étalonné : on ne touche à rien */
+    var reussi=series.every(function(x){return x.r>=x.cible;});
+    /* réserve déclarée sur la dernière série : 0 = à l'échec, 3+ = beaucoup trop léger */
+    var rir=null;
+    series.forEach(function(x){if(x.rir!==undefined)rir=x.rir;});
+    /* record personnel */
+    var score=(e.c0!==null?CRANS[p.c]:1)*Math.max.apply(null,series.map(function(x){return x.r;}));
+    if(!p.best||score>p.best.s){
+      p.best={s:score,c:p.c,r:Math.max.apply(null,series.map(function(x){return x.r;})),d:Date.now()};
+      if(series.length>1)msg.push({t:'rec',n:e.n,m:'record : '+(e.c0!==null?kg(p.c)+' × ':'')+p.best.r+(e.tps?' s':' répétitions')});
+    }
+    if(reussi&&rir!==null&&rir<=0)reussi=false;      /* série menée à l'échec : on ne monte pas */
+    p.win=reussi?(p.win||0)+1:0;
+    if(reussi&&rir!==null&&rir>=3)p.win=2;            /* nettement trop léger : on monte tout de suite */
+    if(p.win>=2){
+      var pas=e.tps?5:1, haut=e.r[1];
+      if(p.r<haut){
+        p.r=Math.min(haut,p.r+pas);
+        msg.push({t:'up',n:e.n,m:'objectif porté à '+p.r+(e.tps?' secondes':' répétitions')+' par série'});
+      }else if(e.c0!==null&&p.c<CRANS.length-1){
+        p.c=p.c+1;p.r=e.r[0];
+        msg.push({t:'up',n:e.n,m:'charge montée à '+kg(p.c)+', retour à '+p.r+' répétitions'});
+      }else{
+        msg.push({t:'up',n:e.n,m:'haut de la fourchette atteint — tu es au maximum de ce mouvement'});
+      }
+      p.win=0;
+    }
+  });
+  saveProf();
+  return msg;
+}
+
 function sesFinish(){
   var dur=Math.round((Date.now()-RUN.startedAt)/1000);
-  RUN.on=false;closeSesRun(false);
+  RUN.on=false;LS.set('tos-run',null);closeSesRun(false);drawReprise();
   gong();setTimeout(gong,420);say('Séance terminée. Bravo.');
   if(dur<60)return;
+  var msg=progression(RUN.log||[]);
   pendingRpe={rpe:0,dur:dur,complete:RUN.i>=SES.plan.length,machine:P.machine,
     mode:'Séance',blocks:SES.plan.length,date:Date.now(),
-    ex:SES.plan.filter(function(x){return x.t==='ex';}).map(function(x){return x.id;})};
+    ex:SES.plan.filter(function(x){return x.t==='ex';}).map(function(x){return x.id;}),
+    sets:(RUN.log||[]).slice()};
+  $('doneProg').innerHTML=msg.map(function(x){
+    return '<div class="'+(x.t==='rec'?'rec':'')+'"><b>'+x.n+'</b> — '+x.m+'</div>';}).join('');
   $('doneTitle').textContent='Séance terminée';
   $('doneRec').textContent='Séance complète · '+mmss2(dur);
   $('rpeGrid').innerHTML='';
@@ -1503,6 +1860,26 @@ function sesFinish(){
   document.querySelector('#run .zone').hidden=true;document.querySelector('#run .prog').hidden=true;
   $('doneBox').hidden=false;$('run').hidden=false;
 }
+
+/* ---- répétitions en réserve, demandées après la dernière série ---- */
+var rirCb=null;
+function demandeRir(id,cb){
+  var e=exById(id);
+  if(!e||e.tps){cb();return;}                     /* sans objet sur du gainage chronométré */
+  rirCb=cb;
+  $('rirN').textContent=e.n+' — dernière série terminée.';
+  Array.prototype.forEach.call($('rirGrid').children,function(b){b.setAttribute('aria-pressed','false');});
+  $('rir').hidden=false;
+}
+$('rirGrid').addEventListener('click',function(ev){
+  var b=ev.target.closest('[data-rir]');if(!b)return;
+  var v=+b.dataset.rir;
+  for(var i=RUN.log.length-1;i>=0;i--){if(RUN.log[i].rir===undefined){RUN.log[i].rir=v;break;}}
+  $('rir').hidden=true;var c=rirCb;rirCb=null;if(c)c();
+});
+$('rirSkip').addEventListener('click',function(){
+  $('rir').hidden=true;var c=rirCb;rirCb=null;if(c)c();
+});
 
 /* ---- étalonnage : on saisit le nombre de répétitions tenues ---- */
 function openCal(id){
@@ -2073,8 +2450,68 @@ $('anPlay').addEventListener('click',function(){AN.play=!AN.play;if(AN.play)AN.t
 $('anSlow').addEventListener('click',function(){AN.slow=!AN.slow;this.setAttribute('aria-pressed',AN.slow);AN.t0=performance.now()-(AN.c||0)*ANIMS[AN.id].cycle*(AN.slow?2.2:1);});
 
 SES.min=LS.get('tos-min',45);
-drawSes();drawNiveau();
+drawSes();drawNiveau();drawPoids();drawBanner();drawMat();drawReprise();
 show(LS.get('tos-tab','ses'));
+</script>
+
+<script type="module">
+/* Firebase : identification anonyme, puis un document par utilisateur. */
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
+import { getAuth, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
+import { getFirestore, doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyAc4H0Qg_CiL3G-U08EKu2eLWSn84rN5WI",
+  authDomain: "training-os-c6b66.firebaseapp.com",
+  projectId: "training-os-c6b66",
+  storageBucket: "training-os-c6b66.firebasestorage.app",
+  messagingSenderId: "1038499165708",
+  appId: "1:1038499165708:web:507afd82225dd17fcd6029"
+};
+
+try{
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const db = getFirestore(app);
+
+  const maj = (etat,msg)=>{ SYNC.etat=etat; SYNC.msg=msg; if(window.drawSync) drawSync(); };
+
+  SYNC.envoyer = async (force)=>{
+    if(!SYNC.uid){ maj('erreur','pas encore identifié'); return; }
+    try{
+      maj('attente','envoi…');
+      const local = etatLocal();
+      await setDoc(doc(db,'users',SYNC.uid,'sauvegarde','etat'), local);
+      SYNC.dernier = local.v;
+      maj('ok','à jour');
+    }catch(e){ maj('erreur','envoi impossible — reprise au retour du réseau'); }
+  };
+
+  onAuthStateChanged(auth, async (user)=>{
+    if(!user) return;
+    SYNC.uid = user.uid;
+    try{
+      maj('attente','lecture…');
+      const snap = await getDoc(doc(db,'users',user.uid,'sauvegarde','etat'));
+      const local = etatLocal();
+      if(snap.exists()){
+        const dist = snap.data();
+        if((dist.v||0) > (local.v||0)){
+          appliquerEtat(dist);
+          maj('ok','données plus récentes récupérées');
+          setTimeout(()=>location.reload(), 800);
+          return;
+        }
+      }
+      await SYNC.envoyer();
+    }catch(e){ maj('erreur','lecture impossible'); }
+  });
+
+  signInAnonymously(auth).catch(()=>{ maj('erreur','identification refusée'); });
+  maj('attente','connexion…');
+}catch(e){
+  SYNC.etat='erreur'; SYNC.msg='service indisponible'; if(window.drawSync) drawSync();
+}
 </script>
 
 <script>
