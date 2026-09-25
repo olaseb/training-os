@@ -350,7 +350,7 @@ h2.sec{font-family:var(--disp);font-weight:800;font-size:13px;letter-spacing:.14
     <h2 class="sec">Comment tu te sens ?</h2>
     <div class="presets" style="grid-template-columns:repeat(3,1fr)" id="sesForme"></div>
     <h2 class="sec">Une gêne aujourd'hui ?</h2>
-    <div class="presets" style="grid-template-columns:repeat(4,1fr)" id="sesGene"></div>
+    <div class="presets" style="grid-template-columns:repeat(3,1fr)" id="sesGene"></div>
     <button class="btn primary" id="sesMake" style="height:56px">Composer la séance</button>
 
     <div id="sesPlan" hidden>
@@ -1367,7 +1367,7 @@ function yt(q){return 'https://www.youtube.com/results?search_query='+encodeURIC
    c0 : cran de départ conseillé (reprise après longue pause), par haltère
    s/r : séries et fourchette de répétitions · repos en secondes */
 var EX=[
- {id:'pompes',yid:'DrJwXsAIy78',mp:['pecto','triceps','delt'],ms:['abdos'],n:'Pompes sur poignées',grp:'push',mat:'poignees',zones:['epaules','poignets'],
+ {id:'pompes',yid:'DrJwXsAIy78',mp:['pecto','triceps','delt'],ms:['abdos'],n:'Pompes sur poignées',grp:'push',mat:'poignees',zones:['epaules','poignets','coudes'],
   s:3,r:[8,15],repos:75,c0:null,
   cons:'Corps gréé, fessiers serrés, coudes à 45° du buste. Descends jusqu’à ce que la poitrine frôle les poignées.',
   err:'Les coudes qui partent à 90°, le bassin qui s’affaisse.',v:'pompes sur poignées technique'},
@@ -1399,19 +1399,19 @@ var EX=[
   s:3,r:[12,15],repos:60,c0:7,
   cons:'Monte les épaules vers les oreilles, marque un temps en haut, redescends lentement.',
   err:'Rouler les épaules — le mouvement est vertical, point.',v:'shrugs haltères technique'},
- {id:'goblet',yid:'QNPVhVsJS2A',mp:['quad','fess'],ms:['abdos','lombes'],n:'Squat gobelet',grp:'jambes',mat:'halteres',zones:['genoux','dos'],
+ {id:'goblet',yid:'QNPVhVsJS2A',mp:['quad','fess'],ms:['abdos','lombes'],n:'Squat gobelet',grp:'jambes',mat:'halteres',zones:['genoux','dos','jambes'],
   s:4,r:[10,15],repos:90,c0:5,
   cons:'Un haltère tenu vertical contre la poitrine. Descends entre les pieds, buste droit, talons au sol.',
   err:'Les talons qui décollent, les genoux qui rentrent.',v:'squat gobelet technique'},
- {id:'fentes',yid:'T7j9efz104k',mp:['quad','fess'],ms:['ischios','abdos'],n:'Fentes marchées',grp:'jambes',mat:'halteres',zones:['genoux'],
+ {id:'fentes',yid:'T7j9efz104k',mp:['quad','fess'],ms:['ischios','abdos'],n:'Fentes marchées',grp:'jambes',mat:'halteres',zones:['genoux','jambes'],
   s:3,r:[10,12],repos:90,c0:3,
   cons:'Un haltère dans chaque main, bras le long du corps. Le genou arrière descend vers le sol sans le toucher.',
   err:'Un pas trop court, qui fait passer le genou loin devant le pied.',v:'fentes marchées haltères technique'},
- {id:'sdt',yid:'SpLEXWqTMw0',mp:['ischios','fess','lombes'],ms:['dorsaux'],n:'Soulevé de terre jambes semi-tendues',grp:'jambes',mat:'halteres',zones:['dos'],
+ {id:'sdt',yid:'SpLEXWqTMw0',mp:['ischios','fess','lombes'],ms:['dorsaux'],n:'Soulevé de terre jambes semi-tendues',grp:'jambes',mat:'halteres',zones:['dos','jambes'],
   s:3,r:[10,12],repos:90,c0:5,
   cons:'Genoux déverrouillés et figés. Pousse les hanches vers l’arrière, les haltères frôlent les cuisses.',
   err:'Plier les genoux pour descendre plus bas, arrondir le dos.',v:'soulevé de terre jambes tendues haltères'},
- {id:'mollets',yid:'_96rm7OKHro',mp:['mollet'],ms:[],n:'Mollets debout',grp:'jambes',mat:'halteres',zones:[],
+ {id:'mollets',yid:'_96rm7OKHro',mp:['mollet'],ms:[],n:'Mollets debout',grp:'jambes',mat:'halteres',zones:['jambes'],
   s:3,r:[15,20],repos:45,c0:8,
   cons:'Monte le plus haut possible sur la pointe des pieds, marque une seconde, redescends lentement.',
   err:'Rebondir en bas sans amplitude.',v:'extension mollets debout haltères'},
@@ -1427,19 +1427,19 @@ var EX=[
   s:3,r:[12,15],repos:60,c0:0,
   cons:'Buste penché à 45°, dos plat. Ouvre les bras sur les côtés en serrant les omoplates.',
   err:'Charge trop lourde, qui transforme le mouvement en rowing.',v:'oiseau haltères arrière épaules'},
- {id:'curl',yid:'8wvflicHXXw',mp:['biceps'],ms:['avbras'],n:'Curl biceps',grp:'bras',mat:'halteres',zones:[],
+ {id:'curl',yid:'8wvflicHXXw',mp:['biceps'],ms:['avbras'],n:'Curl biceps',grp:'bras',mat:'halteres',zones:['coudes'],
   s:3,r:[10,12],repos:60,c0:3,
   cons:'Coudes collés au buste, supination en montant. Redescends en contrôlant trois secondes.',
   err:'Balancer le dos, lâcher la descente.',v:'curl biceps haltères technique'},
- {id:'marteau',yid:'-3vQ5tTwubU',mp:['biceps','avbras'],ms:[],n:'Curl marteau',grp:'bras',mat:'halteres',zones:[],
+ {id:'marteau',yid:'-3vQ5tTwubU',mp:['biceps','avbras'],ms:[],n:'Curl marteau',grp:'bras',mat:'halteres',zones:['coudes'],
   s:3,r:[10,12],repos:60,c0:3,
   cons:'Paumes face à face tout du long. Sollicite l’avant-bras autant que le biceps.',
   err:'Tourner les poignets en montant.',v:'curl marteau haltères technique'},
- {id:'triceps',yid:'aacoc7TfOLQ',mp:['triceps'],ms:['delt'],n:'Extension triceps au-dessus de la tête',grp:'bras',mat:'halteres',zones:['epaules'],
+ {id:'triceps',yid:'aacoc7TfOLQ',mp:['triceps'],ms:['delt'],n:'Extension triceps au-dessus de la tête',grp:'bras',mat:'halteres',zones:['epaules','coudes'],
   s:3,r:[10,12],repos:60,c0:2,
   cons:'Un haltère à deux mains au-dessus de la tête. Coudes serrés et fixes, seuls les avant-bras bougent.',
   err:'Écarter les coudes, descendre trop vite.',v:'extension triceps haltère au dessus de la tête'},
- {id:'barre',yid:'KXwQd9DoaVw',mp:['triceps'],ms:[],n:'Barre au front sur banc',grp:'bras',mat:'banc',zones:['epaules'],
+ {id:'barre',yid:'KXwQd9DoaVw',mp:['triceps'],ms:[],n:'Barre au front sur banc',grp:'bras',mat:'banc',zones:['epaules','coudes'],
   s:3,r:[10,12],repos:60,c0:2,
   cons:'Allongé, haltères descendus de part et d’autre du front, coudes fixes.',
   err:'Bouger les coudes vers l’avant pour tricher.',v:'barre au front haltères technique'},
@@ -1477,7 +1477,8 @@ function saveProf(){LS.set('tos-prof',PROF);}
 function exById(id){return EX.filter(function(e){return e.id===id;})[0];}
 
 /* gêne du jour : valable pour la journée seulement */
-var ZONES=[{k:'dos',n:'Dos'},{k:'epaules',n:'Épaules'},{k:'genoux',n:'Genoux'},{k:'poignets',n:'Poignets'}];
+var ZONES=[{k:'dos',n:'Dos'},{k:'epaules',n:'Épaules'},{k:'coudes',n:'Coudes'},
+           {k:'jambes',n:'Jambes'},{k:'genoux',n:'Genoux'},{k:'poignets',n:'Poignets'}];
 var GENE=LS.get('tos-gene',{d:'',z:[]});
 function today(){var d=new Date();return d.getFullYear()+'-'+d.getMonth()+'-'+d.getDate();}
 if(GENE.d!==today())GENE={d:today(),z:[]};
