@@ -1107,9 +1107,13 @@ var EX=[
    et s'il a déjà été étalonné. Un exercice non étalonné passe par une série test. */
 var PROF=LS.get('tos-prof',{});
 function prof(e){
-  if(!PROF[e.id])PROF[e.id]={c:e.c0,r:e.r[0],cal:false,n:0};
+  if(!PROF[e.id])PROF[e.id]={c:e.c0,r:e.r[0],cal:false,t:[]};
+  if(!PROF[e.id].t)PROF[e.id].t=[];
   return PROF[e.id];
 }
+/* Deux mesures sont nécessaires : la première séance après une longue coupure
+   surestime souvent les capacités, le corps étant exceptionnellement reposé. */
+function mesures(e){return prof(e).t.length;}
 function saveProf(){LS.set('tos-prof',PROF);}
 function exById(id){return EX.filter(function(e){return e.id===id;})[0];}
 
@@ -1153,7 +1157,7 @@ function makePlan(){
     if(reste<150)return;
     var cand=EX.filter(function(e){return e.grp===g&&libre(e);});
     if(!cand.length)return;
-    var neuf=cand.filter(function(e){return !prof(e).cal;});
+    var neuf=cand.filter(function(e){return mesures(e)<2;});
     var pick;
     if(neuf.length&&!unCal){pick=neuf[0];}
     else{
@@ -1164,7 +1168,7 @@ function makePlan(){
       else{var pool=frais.length?frais:connus;pick=pool[Math.floor(Math.random()*pool.length)];}
     }
     var p=prof(pick);
-    var cal=(!p.cal&&!unCal);
+    var cal=(mesures(pick)<2&&!unCal);
     if(cal)unCal=true;
     var ser=Math.max(2,pick.s+dSer);
     var d=dureeEx(pick,p,ser);
@@ -1191,9 +1195,9 @@ function itemHTML(it,i){
   }
   var e=exById(it.id),p=prof(e);
   var det=it.ser+' × '+(e.tps?(p.r||e.r[0])+' s':(p.r||e.r[0]));
-  if(e.c0!==null&&p.c!==null&&p.c!==undefined)det+=' · '+kg(p.c);
+  if(e.c0!==null&&p.c!==null&&p.c!==undefined)det+=' · '+kg(p.c)+(mesures(e)===1?' (à confirmer)':'');
   return '<div class="exrow'+(it.cal?' cal':'')+'"><span class="bar"></span>'+
-    '<span class="n"><b>'+e.n+(it.cal?' <em class="tag">étalonnage</em>':'')+'</b><span>'+det+'</span></span>'+
+    '<span class="n"><b>'+e.n+(it.cal?' <em class="tag">mesure '+(mesures(e)+1)+' sur 2</em>':'')+'</b><span>'+det+'</span></span>'+
     '<span class="d">'+mmss(it.dur)+'</span>'+
     '<button class="measbtn" data-sinfo="'+it.id+'" aria-label="Fiche de l’exercice">i</button>'+
     '<button class="measbtn" data-sswap="'+i+'" aria-label="Remplacer">⇄</button>'+
@@ -1255,7 +1259,7 @@ function openFiche(id){
   $('ficheV').href=yt(e.v);
   var h='';
   if(e.c0!==null){
-    h+='<div class="frow"><span>Charge par haltère</span><span class="step">'+
+    h+='<div class="frow"><span>Charge par haltère'+(mesures(e)===1?'<br><em style="font-style:normal;font-family:var(--mono);font-size:11px;color:var(--warm)">à confirmer à la prochaine séance</em>':'')+'</span><span class="step">'+
        '<button data-fc="-1">−</button><span class="d tnum" id="ficheKg">'+kg(p.c)+'</span>'+
        '<button data-fc="1">+</button></span></div>';
   }
@@ -1306,7 +1310,7 @@ function sesPaint(){
     $('sesSub').textContent=it.cal&&RUN.set===1?'Série d’étalonnage — fais le maximum de répétitions propres':det;
     $('sesBig').textContent=RUN.set+' / '+it.ser;
     $('sesBigLab').textContent='série';
-    $('sesDo').textContent=(it.cal&&RUN.set===1)?'Série test terminée':'Série faite';
+    $('sesDo').textContent=(it.cal&&RUN.set===1)?'J\u2019ai fini cette série':'Série faite';
     var h='';
     for(var s=1;s<=it.ser;s++)h+='<i class="'+(s<RUN.set?'ok':(s===RUN.set?'now':''))+'"></i>';
     $('sesSets').innerHTML=h;
@@ -1379,7 +1383,8 @@ function sesFinish(){
 function openCal(id){
   var e=exById(id),p=prof(e);
   $('calN').textContent=e.n;
-  $('calSub').textContent=e.c0!==null?('à '+kg(p.c)):'au poids du corps';
+  $('calSub').textContent=(e.c0!==null?('à '+kg(p.c)):'au poids du corps')+
+    ' — mesure '+(mesures(e)+1)+' sur 2';
   $('calV').value=p.r||e.r[0];
   $('cal').dataset.id=id;$('cal').hidden=false;
 }
@@ -1387,20 +1392,36 @@ $('calOk').addEventListener('click',function(){
   var e=exById($('cal').dataset.id),p=prof(e);
   var n=Math.max(1,parseInt($('calV').value,10)||e.r[0]);
   var bas=e.r[0],haut=e.r[1];
-  var msg;
+  var c=p.c,r;
+
   if(e.c0!==null){
-    /* trop peu de répétitions : la charge est trop lourde. Beaucoup : on monte d'un cran. */
-    if(n<bas-2){p.c=Math.max(0,p.c-2);msg='Charge redescendue de deux crans, à '+kg(p.c)+'.';}
-    else if(n<bas){p.c=Math.max(0,p.c-1);msg='Charge redescendue d’un cran, à '+kg(p.c)+'.';}
-    else if(n>haut+6){p.c=Math.min(CRANS.length-1,p.c+2);msg='Charge montée de deux crans, à '+kg(p.c)+'.';}
-    else if(n>haut){p.c=Math.min(CRANS.length-1,p.c+1);msg='Charge montée d’un cran, à '+kg(p.c)+'.';}
-    else{msg='Charge conservée à '+kg(p.c)+'.';}
-    p.r=Math.min(haut,Math.max(bas,Math.round(n*0.8)));
+    /* peu de répétitions : la charge est trop lourde. Beaucoup : on peut monter. */
+    if(n<bas-2)c=Math.max(0,c-2);
+    else if(n<bas)c=Math.max(0,c-1);
+    else if(n>haut+6)c=Math.min(CRANS.length-1,c+2);
+    else if(n>haut)c=Math.min(CRANS.length-1,c+1);
+    r=Math.min(haut,Math.max(bas,Math.round(n*0.8)));
   }else{
-    p.r=Math.max(e.tps?10:3,Math.round(n*0.75));
-    msg=(e.tps?p.r+' secondes':p.r+' répétitions')+' par série de travail.';
+    r=Math.max(e.tps?10:3,Math.round(n*0.75));
   }
-  p.cal=true;p.n=(p.n||0)+1;saveProf();
+
+  p.t.push({c:c,r:r,max:n,d:Date.now()});
+  var msg;
+  if(p.t.length>=2){
+    /* deux mesures : on retient la plus prudente des deux dernières */
+    var a=p.t[p.t.length-2],b=p.t[p.t.length-1];
+    p.c=(e.c0!==null)?Math.min(a.c,b.c):null;
+    p.r=Math.min(a.r,b.r);
+    p.cal=true;
+    var ecart=(e.c0!==null)&&a.c!==b.c;
+    msg=(e.c0!==null?('Charge confirmée à '+kg(p.c)):(p.r+(e.tps?' secondes':' répétitions')))+
+        (ecart?' — la deuxième mesure a corrigé la première.':' — mesure confirmée.');
+  }else{
+    p.c=(e.c0!==null)?c:null;p.r=r;p.cal=false;
+    msg=(e.c0!==null?('Charge provisoire : '+kg(p.c)):(p.r+(e.tps?' secondes':' répétitions')+' provisoires'))+
+        '. On confirmera à la prochaine séance.';
+  }
+  saveProf();
   $('cal').hidden=true;
   $('sesSub').textContent=msg;
   var it=curItem();RUN.done.push(it.id);
