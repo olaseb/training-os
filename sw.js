@@ -1,7 +1,7 @@
 /* Training-Os — service worker
    À chaque mise en ligne d'une nouvelle version, incrémente VERSION.
    L'ancien cache est alors effacé et l'app se met à jour toute seule. */
-const VERSION = 'training-os-v4';
+const VERSION = 'training-os-v11';
 const ASSETS = [
   './',
   './index.html',

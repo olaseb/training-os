@@ -22,6 +22,7 @@
 :root{
   --bg:#0B0C0F; --card:#15171C; --card2:#1B1E24; --ink:#F3F4F6; --dim:#878D99;
   --acc:#FF5A1F; --on-acc:#0B0C0F; --line:#23262D;
+  --accL:#FF7A43; --accD:#C63B0C; --muscL:#434A57; --muscD:#2B313A;
   --warm:#F2B01E; --norm:#E0854E; --fast:#FF5A1F; --cool:#3E7BD6;
   --sans:"Public Sans",system-ui,-apple-system,sans-serif;
   --disp:"Archivo",system-ui,sans-serif;
@@ -30,6 +31,7 @@
 :root[data-app="light"]{
   --bg:#F6F7FA; --card:#FFFFFF; --card2:#EFF0F5; --ink:#14161C; --dim:#6C7180;
   --acc:#F04A12; --on-acc:#FFFFFF; --line:#E3E5EC;
+  --accL:#FF7440; --accD:#C43B0E; --muscL:#CFD4DF; --muscD:#B2B8C6;
   --warm:#D99A0E; --norm:#E8845C; --fast:#F04A12; --cool:#3E7BD6;
 }
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
@@ -129,6 +131,67 @@ h2.sec{font-family:var(--disp);font-weight:800;font-size:13px;letter-spacing:.14
 .dots{display:flex;gap:5px;height:8px}
 .dots i{width:8px;height:8px;border-radius:50%;background:var(--line);display:block}
 .dots i.on{background:var(--acc)}
+/* vidéo */
+.vidbox{border-radius:12px;overflow:hidden;background:#000;aspect-ratio:16/9;border:1px solid var(--line)}
+.vidbox iframe{width:100%;height:100%;border:0;display:block}
+.vidrow{display:flex;gap:8px}
+.vidin{flex:1;height:46px;border-radius:11px;border:1.5px solid var(--line);background:var(--card);color:var(--ink);
+  padding:0 12px;font-family:var(--mono);font-size:13px;min-width:0}
+/* carte musculaire */
+.cartes{background:var(--bg);border:1px solid var(--line);border-radius:14px;padding:10px 6px}
+.carte{width:100%;height:auto;display:block}
+.carte .lead{fill:none;stroke:var(--line);stroke-width:1.4}
+.carte .lead.on{stroke:var(--acc);stroke-width:1.8}
+.carte .leadP{fill:var(--line)}
+.carte .leadP.on{fill:var(--acc)}
+.carte .leadT{fill:var(--dim);font-family:var(--mono);font-size:11px;letter-spacing:.02em}
+.carte .leadT.on{fill:var(--ink);font-weight:600}
+.vues{display:flex;gap:6px;margin-bottom:8px}
+.vues button{flex:1;height:34px;border-radius:9px;border:1.5px solid var(--line);background:var(--card);font-weight:600;font-size:13px;color:var(--dim)}
+.vues button[aria-pressed="true"]{border-color:var(--acc);color:var(--acc)}
+.carte .silh{fill:var(--card2);stroke:none}
+.carte .mN{stroke:var(--card2);stroke-width:.7}
+.carte .mS{stroke:var(--card2);stroke-width:.7}
+.carte .mP{stroke:var(--card2);stroke-width:.7}
+.carte .carteT{fill:var(--dim);font-size:10px;font-family:var(--mono);letter-spacing:.14em;text-transform:uppercase}
+.carteleg{display:flex;flex-direction:column;gap:2px;margin-top:10px}
+.carteleg .lg{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--dim)}
+.carteleg .lg i{width:11px;height:11px;border-radius:3px;flex:0 0 auto;background:var(--acc)}
+.carteleg .lg i.s{opacity:.32}
+/* animation d'exercice */
+.animwrap{background:var(--card2);border:1px solid var(--line);border-radius:14px;padding:10px 10px 12px;display:flex;flex-direction:column;gap:8px}
+.anim{width:100%;height:auto;display:block;border-radius:10px;background:var(--bg)}
+.anim .sol{stroke:var(--line);stroke-width:3;stroke-linecap:round}
+.anim .banc{fill:var(--line)}
+.anim .banc2{stroke:var(--line);stroke-width:7;stroke-linecap:round}
+.anim .o{stroke:var(--dim);stroke-linecap:round;fill:none}
+.anim .f{stroke:var(--card2);stroke-linecap:round;fill:none}
+.anim .oB{stroke:var(--ink);stroke-linecap:round;fill:none}
+.anim .corpsP{fill:var(--card2);stroke:var(--dim);stroke-width:3;stroke-linejoin:round}
+.anim .sternum{stroke:var(--dim);stroke-width:2;fill:none;opacity:.55}
+.anim .teteP{fill:var(--card2);stroke:var(--dim);stroke-width:3}
+.anim .artic{fill:var(--card2);stroke:var(--ink);stroke-width:2.5}
+.anim .traj{stroke:var(--line);stroke-width:2;stroke-dasharray:3 5;fill:none}
+.anim .fonte{fill:var(--ink)}
+.anim .cue{stroke:var(--line);stroke-width:2;stroke-dasharray:4 4;fill:none}
+.anim .cue.on{stroke:var(--acc);stroke-width:2.5;stroke-dasharray:5 4;fill:none}
+.anim .cueL{stroke:var(--line);stroke-width:2;color:var(--line)}
+.anim .cueL.on{stroke:var(--acc);stroke-width:3;color:var(--acc)}
+.anim .cueP{fill:var(--line)}
+.anim .cueP.on{fill:var(--acc)}
+.anim .insetBox{fill:var(--card);stroke:var(--line)}
+.anim .insetT{fill:var(--dim);font-size:9px;font-family:var(--mono);letter-spacing:.1em;text-transform:uppercase}
+.anim .insetT2{fill:var(--acc);font-size:9px;font-family:var(--mono)}
+.anim .insetAxe{stroke:var(--dim);stroke-width:2;stroke-dasharray:3 3}
+.anim .insetOk{stroke:var(--acc);stroke-width:3.5;stroke-linecap:round}
+.anim .insetNo{stroke:var(--line);stroke-width:3;stroke-linecap:round;opacity:.5}
+.antxt{font-size:14px;color:var(--ink);line-height:1.45;min-height:40px}
+.ancue{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:4px}
+.ancue li{font-family:var(--mono);font-size:11.5px;color:var(--acc);padding-left:14px;position:relative;line-height:1.4}
+.ancue li:before{content:'';position:absolute;left:0;top:6px;width:6px;height:6px;border-radius:50%;background:var(--acc)}
+.anctl{display:flex;gap:8px}
+.anctl button{flex:1;height:40px;border-radius:10px;border:1.5px solid var(--line);background:var(--card);font-weight:600;font-size:14px;color:var(--dim)}
+.anctl button[aria-pressed="true"]{border-color:var(--acc);color:var(--acc)}
 /* séance */
 .exrow{display:flex;align-items:center;gap:10px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 12px 12px 0;margin-top:8px;overflow:hidden}
 .exrow .bar{width:5px;align-self:stretch;flex:0 0 5px;margin-right:2px;background:var(--dim)}
@@ -277,6 +340,15 @@ h2.sec{font-family:var(--disp);font-weight:800;font-size:13px;letter-spacing:.14
       <span class="sw"><i></i></span>
     </button>
 
+    <div class="swrow" style="flex-direction:column;align-items:stretch;gap:12px">
+      <span class="n" id="nivTxt"></span>
+      <div class="row">
+        <button class="btn" id="nivEnd" style="height:44px;font-size:14px">Mesurer l'endurance</button>
+        <button class="btn" id="nivMax" style="height:44px;font-size:14px">Mesurer le plafond</button>
+      </div>
+      <button class="btn" id="nivAppl" style="height:44px;font-size:14px" hidden>Régler les allures sur mon niveau</button>
+    </div>
+
     <div class="seg" role="group">
       <button id="modeCont" aria-pressed="false">Continu</button>
       <button id="modeFrac" aria-pressed="true">Fractionné</button>
@@ -409,10 +481,23 @@ h2.sec{font-family:var(--disp);font-weight:800;font-size:13px;letter-spacing:.14
 <div class="sheet" id="fiche" hidden>
   <div class="panel" role="dialog" aria-modal="true">
     <div class="head"><h3 id="ficheN">Exercice</h3><button class="iconbtn" id="ficheClose" aria-label="Fermer">✕</button></div>
+    <div class="cartes" id="carteHolder"></div>
+    <div class="carteleg" id="carteLeg"></div>
+    <div id="ficheVid"></div>
     <div id="ficheSet"></div>
     <p class="fichetxt"><b>Exécution</b><span id="ficheC"></span></p>
     <p class="fichetxt"><b>Erreurs fréquentes</b><span id="ficheE"></span></p>
-    <a class="ytlink" id="ficheV" href="#" target="_blank" rel="noopener">▶ Voir une démonstration</a>
+    <div class="animwrap" id="animBox" hidden>
+      <div id="animHolder"></div>
+      <div class="antxt" id="anTxt"></div>
+      <ul class="ancue" id="anCue"></ul>
+      <div class="anctl">
+        <button id="anPlay">Pause</button>
+        <button id="anSlow" aria-pressed="false">Ralenti</button>
+      </div>
+    </div>
+
+
   </div>
 </div>
 
@@ -425,6 +510,30 @@ h2.sec{font-family:var(--disp);font-weight:800;font-size:13px;letter-spacing:.14
     <input class="numin" id="calV" type="number" inputmode="numeric" min="1" max="200" value="10">
     <button class="btn primary" id="calOk" style="height:56px">Valider</button>
     <button class="btn ghost" id="calCancel">Annuler</button>
+  </div>
+</div>
+
+<!-- étalonnage cardio -->
+<div class="sheet" id="mes" hidden>
+  <div class="panel" role="dialog" aria-modal="true">
+    <div class="head"><h3 id="mesTitle">Mesure</h3><button class="iconbtn" id="mesClose" aria-label="Fermer">✕</button></div>
+    <p class="fichetxt" style="margin:0"><b id="mesSub"></b><span id="mesCons"></span></p>
+    <p class="fichetxt" style="margin:0"><b>Position du téléphone</b><span id="mesPhone"></span></p>
+    <div class="warnbox" id="mesWarn" hidden></div>
+    <button class="btn primary" id="mesGo" style="height:56px">Démarrer la mesure</button>
+
+    <div id="mesLive" hidden style="display:flex;flex-direction:column;gap:10px">
+      <div class="pad" style="min-height:150px">
+        <span class="v tnum" id="mesCad">—</span>
+        <span class="u">par minute, en direct</span>
+        <span class="x">Temps restant <b class="tnum" id="mesT">10:00</b></span>
+      </div>
+    </div>
+
+    <div id="mesRes" hidden style="display:flex;flex-direction:column;gap:12px">
+      <p class="fichetxt" id="mesResTxt" style="margin:0;font-size:15px"></p>
+      <button class="btn primary" id="mesSave" style="height:56px">Enregistrer cette mesure</button>
+    </div>
   </div>
 </div>
 
@@ -634,7 +743,8 @@ $('viewInt').addEventListener('click',function(e){
   else if(t.dataset.m){P.machine=t.dataset.m;
     var u=MACHINES.filter(function(m){return m.k===P.machine;})[0].u;
     [P.warm,P.cycle,P.cool].forEach(function(z){z.forEach(function(b){b.c=b.c.replace(/(coups\/min|km\/h|tr\/min|rythme)/,u);});});
-    contCad=contCad.replace(/(coups\/min|km\/h|tr\/min|rythme)/,u);LS.set('tos-contcad',contCad);drawCont();drawInt();}
+    contCad=contCad.replace(/(coups\/min|km\/h|tr\/min|rythme)/,u);LS.set('tos-contcad',contCad);drawCont();drawInt();
+    if(window.drawNiveau)drawNiveau();}
   else if(t.dataset.rep){P.reps=Math.min(30,Math.max(1,P.reps+ +t.dataset.rep));drawInt();}
   else if(t.dataset.x){P.cycle.splice(+t.dataset.x,1);drawInt();}
   else if(t.dataset.t){P=JSON.parse(JSON.stringify(TEMPLATES[t.dataset.t]));drawInt();}
@@ -1008,95 +1118,95 @@ function yt(q){return 'https://www.youtube.com/results?search_query='+encodeURIC
    c0 : cran de départ conseillé (reprise après longue pause), par haltère
    s/r : séries et fourchette de répétitions · repos en secondes */
 var EX=[
- {id:'pompes',n:'Pompes sur poignées',grp:'push',mat:'poignees',zones:['epaules','poignets'],
+ {id:'pompes',mp:['pecto','triceps','delt'],ms:['abdos'],n:'Pompes sur poignées',grp:'push',mat:'poignees',zones:['epaules','poignets'],
   s:3,r:[8,15],repos:75,c0:null,
   cons:'Corps gréé, fessiers serrés, coudes à 45° du buste. Descends jusqu’à ce que la poitrine frôle les poignées.',
   err:'Les coudes qui partent à 90°, le bassin qui s’affaisse.',v:'pompes sur poignées technique'},
- {id:'dc',n:'Développé couché haltères',grp:'push',mat:'banc',zones:['epaules'],
+ {id:'dc',mp:['pecto','triceps','delt'],ms:['abdos'],n:'Développé couché haltères',grp:'push',mat:'banc',zones:['epaules'],
   s:4,r:[8,12],repos:90,c0:4,
   cons:'Omoplates serrées et plaquées sur le banc, pieds au sol. Descends les haltères au niveau des pectoraux, coudes à 45°.',
   err:'Cambrer excessivement, rebondir en bas.',v:'développé couché haltères technique'},
- {id:'dincl',n:'Développé incliné haltères',grp:'push',mat:'banc',zones:['epaules'],
+ {id:'dincl',mp:['pecto','delt','triceps'],ms:[],n:'Développé incliné haltères',grp:'push',mat:'banc',zones:['epaules'],
   s:3,r:[8,12],repos:90,c0:3,
   cons:'Banc à 30°, pas plus. Trajectoire légèrement convergente vers le haut.',
   err:'Un banc trop incliné transforme le mouvement en développé épaules.',v:'développé incliné haltères 30 degrés'},
- {id:'ecarte',n:'Écarté couché',grp:'push',mat:'banc',zones:['epaules'],
+ {id:'ecarte',mp:['pecto'],ms:['delt'],n:'Écarté couché',grp:'push',mat:'banc',zones:['epaules'],
   s:3,r:[10,15],repos:75,c0:2,
   cons:'Coudes légèrement fléchis et figés. Ouvre jusqu’à sentir l’étirement, pas plus bas.',
   err:'Charge trop lourde, qui transforme l’écarté en développé.',v:'écarté couché haltères technique'},
- {id:'rowing',n:'Rowing haltère un bras',grp:'pull',mat:'banc',zones:['dos'],
+ {id:'rowing',mp:['dorsaux','biceps'],ms:['trap','lombes'],n:'Rowing haltère un bras',grp:'pull',mat:'banc',zones:['dos'],
   s:4,r:[8,12],repos:90,c0:5,
   cons:'Un genou et une main sur le banc, dos plat à l’horizontale. Tire le coude vers la hanche, pas vers l’épaule.',
   err:'Tourner le buste pour arracher la charge.',v:'rowing haltère un bras banc technique'},
- {id:'rowbust',n:'Rowing buste penché, deux haltères',grp:'pull',mat:'halteres',zones:['dos'],
+ {id:'rowbust',mp:['dorsaux','biceps'],ms:['lombes','trap'],n:'Rowing buste penché, deux haltères',grp:'pull',mat:'halteres',zones:['dos'],
   s:3,r:[10,12],repos:90,c0:3,
   cons:'Buste à 45°, dos plat, genoux déverrouillés. Tire vers le nombril.',
   err:'Arrondir le bas du dos — c’est l’exercice à sauter en cas de gêne lombaire.',v:'rowing buste penché haltères dos plat'},
- {id:'pullover',n:'Pull-over haltère',grp:'pull',mat:'banc',zones:['epaules'],
+ {id:'pullover',mp:['dorsaux','pecto'],ms:['triceps'],n:'Pull-over haltère',grp:'pull',mat:'banc',zones:['epaules'],
   s:3,r:[10,14],repos:75,c0:3,
   cons:'Allongé sur le banc, un seul haltère tenu à deux mains. Descends derrière la tête, bras quasi tendus.',
   err:'Descendre trop bas si les épaules manquent de mobilité.',v:'pull over haltère technique'},
- {id:'shrug',n:'Shrugs',grp:'pull',mat:'halteres',zones:[],
+ {id:'shrug',mp:['trap'],ms:['avbras'],n:'Shrugs',grp:'pull',mat:'halteres',zones:[],
   s:3,r:[12,15],repos:60,c0:7,
   cons:'Monte les épaules vers les oreilles, marque un temps en haut, redescends lentement.',
   err:'Rouler les épaules — le mouvement est vertical, point.',v:'shrugs haltères technique'},
- {id:'goblet',n:'Squat gobelet',grp:'jambes',mat:'halteres',zones:['genoux','dos'],
+ {id:'goblet',mp:['quad','fess'],ms:['abdos','lombes'],n:'Squat gobelet',grp:'jambes',mat:'halteres',zones:['genoux','dos'],
   s:4,r:[10,15],repos:90,c0:5,
   cons:'Un haltère tenu vertical contre la poitrine. Descends entre les pieds, buste droit, talons au sol.',
   err:'Les talons qui décollent, les genoux qui rentrent.',v:'squat gobelet technique'},
- {id:'fentes',n:'Fentes marchées',grp:'jambes',mat:'halteres',zones:['genoux'],
+ {id:'fentes',mp:['quad','fess'],ms:['ischios','abdos'],n:'Fentes marchées',grp:'jambes',mat:'halteres',zones:['genoux'],
   s:3,r:[10,12],repos:90,c0:3,
   cons:'Un haltère dans chaque main, bras le long du corps. Le genou arrière descend vers le sol sans le toucher.',
   err:'Un pas trop court, qui fait passer le genou loin devant le pied.',v:'fentes marchées haltères technique'},
- {id:'sdt',n:'Soulevé de terre jambes semi-tendues',grp:'jambes',mat:'halteres',zones:['dos'],
+ {id:'sdt',mp:['ischios','fess','lombes'],ms:['dorsaux'],n:'Soulevé de terre jambes semi-tendues',grp:'jambes',mat:'halteres',zones:['dos'],
   s:3,r:[10,12],repos:90,c0:5,
   cons:'Genoux déverrouillés et figés. Pousse les hanches vers l’arrière, les haltères frôlent les cuisses.',
   err:'Plier les genoux pour descendre plus bas, arrondir le dos.',v:'soulevé de terre jambes tendues haltères'},
- {id:'mollets',n:'Mollets debout',grp:'jambes',mat:'halteres',zones:[],
+ {id:'mollets',mp:['mollet'],ms:[],n:'Mollets debout',grp:'jambes',mat:'halteres',zones:[],
   s:3,r:[15,20],repos:45,c0:8,
   cons:'Monte le plus haut possible sur la pointe des pieds, marque une seconde, redescends lentement.',
   err:'Rebondir en bas sans amplitude.',v:'extension mollets debout haltères'},
- {id:'militaire',n:'Développé militaire assis',grp:'epaules',mat:'banc',zones:['epaules'],
+ {id:'militaire',mp:['delt','triceps'],ms:['trap','abdos'],n:'Développé militaire assis',grp:'epaules',mat:'banc',zones:['epaules'],
   s:3,r:[8,12],repos:90,c0:2,
   cons:'Assis, dos calé, haltères au niveau des oreilles. Pousse vers le haut sans verrouiller violemment.',
   err:'Cambrer le bas du dos pour pousser plus lourd.',v:'développé militaire haltères assis technique'},
- {id:'latere',n:'Élévations latérales',grp:'epaules',mat:'halteres',zones:['epaules'],
+ {id:'latere',mp:['delt'],ms:['trap'],n:'Élévations latérales',grp:'epaules',mat:'halteres',zones:['epaules'],
   s:3,r:[12,15],repos:60,c0:0,
   cons:'Monte jusqu’à l’horizontale, pas au-dessus. Coudes légèrement fléchis, mouvement lent.',
   err:'Balancer le buste pour lancer la charge. Ici, léger est efficace.',v:'élévations latérales haltères technique'},
- {id:'oiseau',n:'Oiseau, buste penché',grp:'epaules',mat:'halteres',zones:['dos','epaules'],
+ {id:'oiseau',mp:['delt','trap'],ms:['dorsaux'],n:'Oiseau, buste penché',grp:'epaules',mat:'halteres',zones:['dos','epaules'],
   s:3,r:[12,15],repos:60,c0:0,
   cons:'Buste penché à 45°, dos plat. Ouvre les bras sur les côtés en serrant les omoplates.',
   err:'Charge trop lourde, qui transforme le mouvement en rowing.',v:'oiseau haltères arrière épaules'},
- {id:'curl',n:'Curl biceps',grp:'bras',mat:'halteres',zones:[],
+ {id:'curl',mp:['biceps'],ms:['avbras'],n:'Curl biceps',grp:'bras',mat:'halteres',zones:[],
   s:3,r:[10,12],repos:60,c0:3,
   cons:'Coudes collés au buste, supination en montant. Redescends en contrôlant trois secondes.',
   err:'Balancer le dos, lâcher la descente.',v:'curl biceps haltères technique'},
- {id:'marteau',n:'Curl marteau',grp:'bras',mat:'halteres',zones:[],
+ {id:'marteau',mp:['biceps','avbras'],ms:[],n:'Curl marteau',grp:'bras',mat:'halteres',zones:[],
   s:3,r:[10,12],repos:60,c0:3,
   cons:'Paumes face à face tout du long. Sollicite l’avant-bras autant que le biceps.',
   err:'Tourner les poignets en montant.',v:'curl marteau haltères technique'},
- {id:'triceps',n:'Extension triceps au-dessus de la tête',grp:'bras',mat:'halteres',zones:['epaules'],
+ {id:'triceps',mp:['triceps'],ms:['delt'],n:'Extension triceps au-dessus de la tête',grp:'bras',mat:'halteres',zones:['epaules'],
   s:3,r:[10,12],repos:60,c0:2,
   cons:'Un haltère à deux mains au-dessus de la tête. Coudes serrés et fixes, seuls les avant-bras bougent.',
   err:'Écarter les coudes, descendre trop vite.',v:'extension triceps haltère au dessus de la tête'},
- {id:'barre',n:'Barre au front sur banc',grp:'bras',mat:'banc',zones:['epaules'],
+ {id:'barre',mp:['triceps'],ms:[],n:'Barre au front sur banc',grp:'bras',mat:'banc',zones:['epaules'],
   s:3,r:[10,12],repos:60,c0:2,
   cons:'Allongé, haltères descendus de part et d’autre du front, coudes fixes.',
   err:'Bouger les coudes vers l’avant pour tricher.',v:'barre au front haltères technique'},
- {id:'planche',n:'Gainage planche',grp:'gainage',mat:'aucun',zones:['epaules'],
+ {id:'planche',mp:['abdos','obliq'],ms:['delt','fess'],n:'Gainage planche',grp:'gainage',mat:'aucun',zones:['epaules'],
   s:3,r:[30,60],repos:60,c0:null,tps:true,
   cons:'Coudes sous les épaules, corps en ligne. Serre les fessiers, rentre le bassin.',
   err:'Les fesses en l’air ou le ventre qui tombe.',v:'gainage planche technique'},
- {id:'roue',n:'Roue abdominale à genoux',grp:'gainage',mat:'roue',zones:['dos','epaules'],
+ {id:'roue',mp:['abdos','obliq'],ms:['dorsaux','delt'],n:'Roue abdominale à genoux',grp:'gainage',mat:'roue',zones:['dos','epaules'],
   s:3,r:[6,12],repos:75,c0:null,
   cons:'À genoux, abdos et fessiers serrés. Déroule seulement aussi loin que tu peux revenir sans creuser le dos.',
   err:'Aller trop loin : le bas du dos se creuse et prend tout.',v:'roue abdominale à genoux technique débutant'},
- {id:'lat',n:'Gainage latéral',grp:'gainage',mat:'aucun',zones:['epaules'],
+ {id:'lat',mp:['obliq'],ms:['abdos','delt'],n:'Gainage latéral',grp:'gainage',mat:'aucun',zones:['epaules'],
   s:2,r:[25,45],repos:45,c0:null,tps:true,
   cons:'Sur le coude, hanches hautes. Une série de chaque côté.',
   err:'Laisser le bassin descendre.',v:'gainage latéral technique'},
- {id:'crunch',n:'Crunch au sol',grp:'gainage',mat:'aucun',zones:[],
+ {id:'crunch',mp:['abdos'],ms:['obliq'],n:'Crunch au sol',grp:'gainage',mat:'aucun',zones:[],
   s:3,r:[15,20],repos:45,c0:null,
   cons:'Décolle les omoplates en soufflant, sans tirer sur la nuque.',
   err:'Tirer la tête avec les mains.',v:'crunch abdominaux technique'}
@@ -1256,7 +1366,7 @@ function openFiche(id){
   $('ficheN').textContent=e.n;
   $('ficheC').textContent=e.cons;
   $('ficheE').textContent=e.err;
-  $('ficheV').href=yt(e.v);
+
   var h='';
   if(e.c0!==null){
     h+='<div class="frow"><span>Charge par haltère'+(mesures(e)===1?'<br><em style="font-style:normal;font-family:var(--mono);font-size:11px;color:var(--warm)">à confirmer à la prochaine séance</em>':'')+'</span><span class="step">'+
@@ -1270,11 +1380,19 @@ function openFiche(id){
   $('ficheSet').innerHTML=h;
   $('fiche').dataset.id=id;
   $('fiche').hidden=false;
+  drawCarte(e,true);drawVid(e);
+  animStart(id);
 }
 $('fiche').addEventListener('click',function(ev){
-  if(ev.target===$('fiche')){$('fiche').hidden=true;return;}
-  var t=ev.target.closest('[data-fc],[data-fr]');if(!t)return;
+  if(ev.target===$('fiche')){$('fiche').hidden=true;animStop();return;}
+  var t=ev.target.closest('[data-fc],[data-fr],[data-vset],[data-vclr]');if(!t)return;
   var e=exById($('fiche').dataset.id),p=prof(e);
+  if(t.dataset.vset){
+    var id=ytId($('vidIn').value);
+    if(!id){$('vidIn').value='';$('vidIn').placeholder='lien non reconnu — recommence';return;}
+    p.vid=id;saveProf();drawVid(e);return;
+  }
+  if(t.dataset.vclr){p.vid='';saveProf();drawVid(e);return;}
   if(t.dataset.fc){
     p.c=Math.max(0,Math.min(CRANS.length-1,(p.c||0)+ +t.dataset.fc));
     $('ficheKg').textContent=kg(p.c);
@@ -1285,7 +1403,11 @@ $('fiche').addEventListener('click',function(ev){
   }
   p.cal=true;saveProf();drawPlan();
 });
-$('ficheClose').addEventListener('click',function(){$('fiche').hidden=true;});
+$('carteLeg').addEventListener('click',function(ev){
+  var b=ev.target.closest('[data-vue]');if(!b||!CV.e)return;
+  CV.vue=b.dataset.vue;drawCarte(CV.e);
+});
+$('ficheClose').addEventListener('click',function(){$('fiche').hidden=true;animStop();});
 
 /* ================= DÉROULÉ DE LA SÉANCE ================= */
 var RUN={on:false,i:0,set:1,done:[],startedAt:0,restRaf:null,restEnd:0};
@@ -1432,8 +1554,489 @@ $('calOk').addEventListener('click',function(){
 $('calCancel').addEventListener('click',function(){$('cal').hidden=true;});
 $('sesStart').addEventListener('click',sesStartRun);
 
+
+/* ================= NIVEAU CARDIO ================= */
+/* Sans affichage sur les machines, la seule grandeur mesurable par le téléphone
+   est la cadence : nombre de mouvements par minute, lu sur l'accéléromètre.
+   On en tire deux repères par machine : l'allure d'endurance et le plafond. */
+
+var CARD=LS.get('tos-cardio',{});
+function card(m){if(!CARD[m])CARD[m]={end:[],max:[]};return CARD[m];}
+function saveCard(){LS.set('tos-cardio',CARD);}
+function valeur(list){                 /* deux mesures : on retient la plus prudente */
+  if(!list.length)return null;
+  if(list.length===1)return list[0].cad;
+  var a=list[list.length-2].cad,b=list[list.length-1].cad;
+  return Math.min(a,b);
+}
+function niveau(m){var c=card(m);return {e:valeur(c.end),p:valeur(c.max),ne:c.end.length,np:c.max.length};}
+
+/* allures de travail déduites du niveau réel */
+function allures(m){
+  var n=niveau(m);if(!n.e||!n.p)return null;
+  var e=n.e,p=Math.max(n.p,n.e+1);
+  return {warm:Math.round(e*0.85),norm:Math.round(e),fast:Math.round(e+0.6*(p-e)),cool:Math.round(e*0.75)};
+}
+
+/* ---- compteur de cadence réutilisable ---- */
+var CM={on:false,peaks:[],base:0,hi:false,last:0,h:null,series:[],t0:0,iv:null};
+CM.handler=function(ev){
+  var a=ev.accelerationIncludingGravity||ev.acceleration;if(!a)return;
+  var m=Math.sqrt((a.x||0)*(a.x||0)+(a.y||0)*(a.y||0)+(a.z||0)*(a.z||0));
+  CM.base=CM.base?CM.base*0.96+m*0.04:m;
+  var d=m-CM.base, now=Date.now();
+  if(!CM.hi&&d>1.1&&now-CM.last>250){CM.hi=true;CM.last=now;CM.peaks.push(now);}
+  if(CM.hi&&d<0.4)CM.hi=false;
+};
+CM.rate=function(win){                  /* cadence sur les `win` dernières secondes */
+  var now=Date.now(),w=(win||20)*1000;
+  var p=CM.peaks.filter(function(t){return now-t<=w;});
+  if(p.length<3)return 0;
+  var span=(p[p.length-1]-p[0])/1000;
+  return span>0?Math.round((p.length-1)/span*60):0;
+};
+CM.start=async function(){
+  CM.peaks=[];CM.series=[];CM.base=0;CM.hi=false;CM.last=0;CM.t0=Date.now();
+  if(typeof DeviceMotionEvent==='undefined')return 'absent';
+  try{
+    if(typeof DeviceMotionEvent.requestPermission==='function'){
+      var r=await DeviceMotionEvent.requestPermission();
+      if(r!=='granted')return 'refuse';
+    }
+  }catch(e){return 'bloque';}
+  CM.on=true;CM.h=CM.handler;window.addEventListener('devicemotion',CM.h);
+  CM.iv=setInterval(function(){var r=CM.rate(20);if(r)CM.series.push({t:Date.now()-CM.t0,r:r});},15000);
+  return 'ok';
+};
+CM.stop=function(){
+  if(CM.h)window.removeEventListener('devicemotion',CM.h);CM.h=null;
+  if(CM.iv)clearInterval(CM.iv);CM.iv=null;CM.on=false;
+};
+/* moyenne hors première demi-minute, et dérive entre début et fin */
+CM.bilan=function(){
+  var s=CM.series.filter(function(x){return x.t>30000;});
+  if(s.length<3)return null;
+  var vals=s.map(function(x){return x.r;}).sort(function(a,b){return a-b;});
+  var med=vals[Math.floor(vals.length/2)];
+  var n=Math.max(1,Math.floor(s.length/3));
+  var deb=s.slice(0,n).reduce(function(t,x){return t+x.r;},0)/n;
+  var fin=s.slice(-n).reduce(function(t,x){return t+x.r;},0)/n;
+  return {cad:med,drift:Math.round((fin-deb)/deb*100)};
+};
+
+/* ---- écran d'étalonnage cardio ---- */
+var MES={type:null,dur:0,raf:null,end:0};
+function openMesure(type){
+  MES.type=type;MES.dur=(type==='end')?600:120;
+  var m=machineName(P.machine);
+  $('mesTitle').textContent=(type==='end')?'Allure d’endurance':'Plafond';
+  $('mesSub').textContent=m+' · '+(MES.dur/60)+' minutes';
+  $('mesCons').textContent=(type==='end')
+    ? 'Dix minutes à une allure que tu pourrais tenir une demi-heure. Ni facile, ni difficile : régulière.'
+    : 'Deux minutes le plus vite possible, après t’être échauffé. C’est un effort maximal.';
+  $('mesPhone').textContent='Téléphone dans la poche ou au brassard, écran vers toi. Ne le tiens pas à la main.';
+  $('mesGo').hidden=false;$('mesLive').hidden=true;$('mesRes').hidden=true;
+  $('mesWarn').hidden=true;
+  $('mes').hidden=false;
+}
+$('mesClose').addEventListener('click',function(){CM.stop();if(MES.raf)cancelAnimationFrame(MES.raf);$('mes').hidden=true;});
+
+$('mesGo').addEventListener('click',async function(){
+  audio();
+  var st=await CM.start();
+  if(st!=='ok'){
+    $('mesWarn').hidden=false;
+    $('mesWarn').textContent=(st==='refuse')
+      ? "Accès au capteur refusé. Autorise-le dans Réglages → Safari → Mouvement et orientation, puis recommence."
+      : "Le capteur de mouvement n'est pas accessible depuis cette page. Il le sera une fois l'application installée sur ton écran d'accueil.";
+    return;
+  }
+  $('mesGo').hidden=true;$('mesLive').hidden=false;
+  MES.end=Date.now()+MES.dur*1000;
+  gong();say((MES.type==='end')?'Dix minutes à allure régulière. C’est parti.':'Deux minutes à fond. C’est parti.');
+  keepAwake(true);
+  (function loop(){
+    var left=(MES.end-Date.now())/1000;
+    if(left<=0){finMesure();return;}
+    $('mesT').textContent=mmss(left);
+    var r=CM.rate(20);
+    $('mesCad').textContent=r||'—';
+    MES.raf=requestAnimationFrame(loop);
+  })();
+});
+
+function finMesure(){
+  if(MES.raf)cancelAnimationFrame(MES.raf);MES.raf=null;
+  CM.stop();keepAwake(false);gong();say('Mesure terminée.');
+  var b=CM.bilan();
+  $('mesLive').hidden=true;$('mesRes').hidden=false;
+  if(!b){
+    $('mesResTxt').innerHTML='Aucun mouvement régulier détecté. Vérifie la position du téléphone et recommence, ou saisis ta cadence à la main dans l’onglet Cardio.';
+    $('mesSave').hidden=true;return;
+  }
+  MES.bilan=b;
+  var d=b.drift;
+  var txt='<b>'+b.cad+'</b> mouvements par minute en moyenne.';
+  if(MES.type==='end'){
+    txt+='<br>'+(d<=-8?'Ta cadence a baissé de '+Math.abs(d)+' % sur la fin : l’allure était un peu trop haute pour toi.'
+      :(d>=8?'Ta cadence a monté de '+d+' % sur la fin : tu avais de la marge.'
+      :'Cadence stable du début à la fin — l’allure était juste.'));
+  }
+  $('mesResTxt').innerHTML=txt;
+  $('mesSave').hidden=false;
+}
+$('mesSave').addEventListener('click',function(){
+  var c=card(P.machine),b=MES.bilan;
+  if(!b)return;
+  var corr=b.cad;
+  if(MES.type==='end'&&b.drift<=-8)corr=Math.round(b.cad*0.94);   /* allure tenue trop haute */
+  (MES.type==='end'?c.end:c.max).push({cad:corr,drift:b.drift,date:Date.now()});
+  saveCard();$('mes').hidden=true;drawNiveau();
+});
+
+/* ---- encart « ton niveau » dans l'onglet Cardio ---- */
+function drawNiveau(){
+  var n=niveau(P.machine),m=machineName(P.machine),u=MACHINES.filter(function(x){return x.k===P.machine;})[0].u;
+  var h='';
+  if(!n.e&&!n.p){
+    h='<b>Niveau non mesuré sur '+m.toLowerCase()+'</b><span>Deux mesures suffisent : une d’endurance, une de plafond.</span>';
+  }else{
+    h='<b>'+m+' — '+(n.e?('endurance '+n.e):'endurance à mesurer')+(n.p?(' · plafond '+n.p):' · plafond à mesurer')+'</b>'+
+      '<span>'+(n.ne<2||n.np<2?'à confirmer par une deuxième mesure':'niveau confirmé')+' · en '+u+'</span>';
+  }
+  $('nivTxt').innerHTML=h;
+  $('nivAppl').hidden=!allures(P.machine);
+}
+$('nivEnd').addEventListener('click',function(){openMesure('end');});
+$('nivMax').addEventListener('click',function(){openMesure('max');});
+$('nivAppl').addEventListener('click',function(){
+  var a=allures(P.machine);if(!a)return;
+  var u=MACHINES.filter(function(x){return x.k===P.machine;})[0].u;
+  function set(b){b.c=(a[b.k]||a.norm)+' '+u;}
+  P.warm.forEach(set);P.cycle.forEach(set);P.cool.forEach(set);
+  contCad=a.norm+' '+u;LS.set('tos-contcad',contCad);
+  drawInt();drawCont();
+});
+
+
+/* ================= CARTE MUSCULAIRE ================= */
+/* Silhouette dessinée en demi-corps, puis mise en miroir : la symétrie est
+   exacte, et chaque muscle a sa forme réelle plutôt qu'un ovale. */
+
+var SILH='M-1,38 C10,39 18,43 24,49 C31,54 35,60 36,70 C38,84 39,99 38,113'+
+  ' C37,129 36,147 34,163 C33,173 32,179 30,181 L24,181 C25,173 26,163 26,153'+
+  ' C27,137 28,121 27,107 C26,93 25,81 24,71 C23,65 22,61 21,59'+
+  ' C19,72 16,86 15,98 C14,108 14,115 15,123 C17,133 22,141 24,151'+
+  ' C25,166 24,184 22,200 C22,211 20,217 19,223 C19,237 18,253 16,267'+
+  ' C15,277 15,285 15,289 L4,289 C4,281 4,269 4,257 C4,231 3,207 3,189'+
+  ' C3,171 2,159 1,151 C-1,147 -1,143 -1,139 Z';
+var TETE={cx:60,cy:22,r:15};
+var COU='M-1,24 L9,24 L9,41 L-1,41 Z';
+
+/* Chaque groupe est découpé en faisceaux, comme sur une planche d'anatomie :
+   le deltoïde en trois faisceaux, le pectoral en deux, le quadriceps en trois,
+   le mollet en deux jumeaux. Les formes sont dessinées en demi-corps puis mises
+   en miroir, ce qui garantit une symétrie parfaite. */
+var MUSC={
+ trap:   {n:'Trapèzes',
+   f:['M2,40 C10,42 17,47 21,54 C14,58 7,58 2,57 Z'],
+   d:['M1,38 C9,41 16,47 21,55 C14,61 7,63 1,63 Z',
+      'M1,66 C8,67 14,72 17,79 C11,83 5,84 1,84 Z']},
+ delt:   {n:'Épaules',
+   f:['M19,54 C25,49 30,52 33,61 C30,68 24,70 20,65 Z',
+      'M31,57 C35,60 37,68 36,77 C33,80 29,77 28,70 Z'],
+   d:['M19,54 C26,49 33,54 36,66 C33,75 26,77 21,71 Z',
+      'M30,70 C34,72 36,78 35,84 C31,84 29,79 29,73 Z']},
+ pecto:  {n:'Pectoraux',
+   f:['M3,66 C10,64 16,67 20,72 C16,77 9,78 3,77 Z',
+      'M3,79 C10,79 16,81 20,78 C19,88 12,92 3,91 Z']},
+ dorsaux:{n:'Dorsaux',
+   d:['M2,72 C11,76 18,84 20,96 C16,107 8,111 2,110 Z',
+      'M13,69 C17,71 19,76 19,81 C16,81 13,77 13,69 Z']},
+ lombes: {n:'Lombaires', d:['M1,113 L11,113 C12,123 11,131 9,137 L1,137 Z']},
+ biceps: {n:'Biceps', f:['M25,80 C30,80 33,87 33,97 C33,106 30,111 26,111 C24,101 24,90 25,80 Z']},
+ triceps:{n:'Triceps', d:['M25,79 C31,80 34,88 34,99 C34,108 30,113 26,112 C24,102 24,89 25,79 Z']},
+ avbras: {n:'Avant-bras',
+   f:['M27,116 C31,116 35,124 34,138 C33,150 30,158 27,158 C26,142 26,128 27,116 Z'],
+   d:['M27,116 C31,116 35,124 34,138 C33,150 30,158 27,158 C26,142 26,128 27,116 Z']},
+ abdos:  {n:'Abdominaux',
+   f:['M1,95 L12,97 L12,105 L1,105 Z',
+      'M1,107 L12,107 L12,116 L1,116 Z',
+      'M1,118 L11,118 C11,126 10,132 9,137 L1,137 Z']},
+ obliq:  {n:'Obliques',
+   f:['M13,99 C17,104 18,115 16,127 C14,123 13,111 13,99 Z',
+      'M16,89 C19,91 20,96 20,100 C17,99 16,94 16,89 Z']},
+ quad:   {n:'Quadriceps',
+   f:['M4,155 C10,155 14,163 14,178 C14,193 11,205 8,209 C5,205 3,190 3,172 Z',
+      'M15,160 C19,165 19,178 17,190 C15,197 13,200 12,201 C13,186 14,170 15,160 Z',
+      'M0,152 C4,155 6,164 6,176 C6,186 4,194 2,197 C1,181 0,166 0,152 Z']},
+ fess:   {n:'Fessiers', d:['M1,141 C11,141 19,149 19,161 C18,171 10,175 1,173 Z']},
+ ischios:{n:'Ischio-jambiers',
+   d:['M3,177 C10,177 15,184 15,196 C15,208 12,215 9,217 C6,212 3,198 3,184 Z',
+      'M0,178 C4,181 7,189 7,200 C7,209 5,215 3,217 C2,203 0,190 0,178 Z']},
+ mollet: {n:'Mollets',
+   f:['M6,228 C10,230 12,240 11,252 C10,260 8,265 7,266 C6,253 6,238 6,228 Z',
+      'M13,226 C17,228 18,238 17,250 C16,258 14,264 12,264 C12,250 12,236 13,226 Z'],
+   d:['M4,224 C9,226 12,235 12,247 C12,258 10,266 8,268 C6,257 4,238 4,224 Z',
+      'M13,226 C17,228 19,237 18,249 C17,258 15,264 13,265 C12,251 12,236 13,226 Z']}
+};
+
+
+function demi(d,cls){return '<path d="'+d+'" class="'+cls+'"/>';}
+
+/* Point d'ancrage de chaque muscle, pour y accrocher son étiquette.
+   g : côté gauche du dessin, d : côté droit. */
+var ANCRES={
+ delt:   [30,60],  pecto:[46,78],  biceps:[22,96], triceps:[22,96],
+ avbras: [28,134], abdos:[60,116], obliq:[46,114], quad:[48,186],
+ mollet: [50,250], trap:[60,50],   dorsaux:[48,92], lombes:[60,126],
+ fess:   [50,156], ischios:[48,196]
+};
+
+function carteSVG(vue,prim,sec){
+  var g='';
+  Object.keys(MUSC).forEach(function(k){
+    var m=MUSC[k],ds=m[vue];if(!ds)return;
+    var cls=prim.indexOf(k)>=0?'mP':(sec.indexOf(k)>=0?'mS':'mN');
+    var url=prim.indexOf(k)>=0?'gP':(sec.indexOf(k)>=0?'gS':'gN');
+    g+=ds.map(function(d){return '<path d="'+d+'" class="'+cls+'" fill="url(#'+url+vue+')"/>';}).join('');
+  });
+  var corps='<path d="'+SILH+'" class="silh"/><path d="'+COU+'" class="silh"/>';
+  var miroir=function(inner){return '<g transform="translate(60,0)">'+inner+'</g>'+
+                                   '<g transform="translate(60,0) scale(-1,1)">'+inner+'</g>';};
+
+  /* étiquettes : les muscles sollicités, nommés à gauche et à droite */
+  var DX=92;                                   /* décalage du corps dans le cadre */
+  var listes=prim.concat(sec).filter(function(k){return MUSC[k]&&MUSC[k][vue]&&ANCRES[k];});
+  listes.sort(function(x,y){return ANCRES[x][1]-ANCRES[y][1];});
+  var gauche=[],droite=[];
+  listes.forEach(function(k,i){(i%2?droite:gauche).push(k);});
+
+  function pose(arr,cote){
+    var n=arr.length,h=0,out='';
+    var y0=56,pas=n>1?Math.min(46,(236-y0)/(n-1)):0;
+    arr.forEach(function(k,i){
+      var A=ANCRES[k], ax=(cote<0? DX+A[0] : DX+(120-A[0])), ay=A[1];
+      var ly=y0+i*pas;
+      var lx=(cote<0? DX-16 : DX+136);
+      var coude=(cote<0? DX-4 : DX+124);
+      var on=prim.indexOf(k)>=0?' on':'';
+      out+='<polyline points="'+ax+','+ay+' '+coude+','+ay+' '+coude+','+ly+' '+lx+','+ly+'" class="lead'+on+'"/>'+
+           '<circle cx="'+ax+'" cy="'+ay+'" r="2.6" class="leadP'+on+'"/>'+
+           '<text x="'+(cote<0?lx-5:lx+5)+'" y="'+(ly+4)+'" text-anchor="'+(cote<0?'end':'start')+'" class="leadT'+on+'">'+MUSC[k].n+'</text>';
+    });
+    return out;
+  }
+
+  return '<svg viewBox="0 0 304 300" class="carte" aria-hidden="true">'+
+    '<defs>'+
+    '<linearGradient id="gP'+vue+'" x1="0" y1="0" x2="0.7" y2="1">'+
+      '<stop offset="0" stop-color="var(--accL)"/><stop offset="1" stop-color="var(--accD)"/></linearGradient>'+
+    '<linearGradient id="gS'+vue+'" x1="0" y1="0" x2="0.7" y2="1">'+
+      '<stop offset="0" stop-color="var(--accL)" stop-opacity="0.45"/><stop offset="1" stop-color="var(--accD)" stop-opacity="0.4"/></linearGradient>'+
+    '<linearGradient id="gN'+vue+'" x1="0" y1="0" x2="0.7" y2="1">'+
+      '<stop offset="0" stop-color="var(--muscL)"/><stop offset="1" stop-color="var(--muscD)"/></linearGradient>'+
+    '<clipPath id="cl'+vue+'">'+
+      '<path d="'+SILH+'" transform="translate(60,0)"/><path d="'+SILH+'" transform="translate(60,0) scale(-1,1)"/>'+
+      '<circle cx="60" cy="'+TETE.cy+'" r="'+TETE.r+'"/>'+
+      '<path d="'+COU+'" transform="translate(60,0)"/><path d="'+COU+'" transform="translate(60,0) scale(-1,1)"/>'+
+    '</clipPath></defs>'+
+    '<g transform="translate('+DX+',0)">'+miroir(corps)+'<circle cx="60" cy="'+TETE.cy+'" r="'+TETE.r+'" class="silh"/>'+
+      '<g clip-path="url(#cl'+vue+')">'+miroir(g)+'</g></g>'+
+    pose(gauche,-1)+pose(droite,1)+
+    '</svg>';
+}
+function drawCarte(e,auto){
+  var prim=e.mp||[],sec=e.ms||[];
+  CV.e=e;
+  /* à l'ouverture, on montre la vue qui porte le plus de muscles moteurs */
+  if(auto){
+    var cnt=function(v){return prim.filter(function(k){return MUSC[k]&&MUSC[k][v];}).length;};
+    CV.vue=cnt('d')>cnt('f')?'d':'f';
+  }
+  $('carteHolder').innerHTML=carteSVG(CV.vue,prim,sec);
+  $('carteLeg').innerHTML=
+    '<div class="vues"><button data-vue="f" aria-pressed="'+(CV.vue==='f')+'">Face</button>'+
+    '<button data-vue="d" aria-pressed="'+(CV.vue==='d')+'">Dos</button></div>'+
+    '<div class="lg"><i class="p"></i>muscles moteurs<i class="s" style="margin-left:14px"></i>en soutien</div>';
+}
+var CV={vue:'f',e:null};
+
+/* ---- vidéo de démonstration, choisie une fois par l'utilisateur ---- */
+function ytId(u){
+  var m=String(u||'').match(/(?:v=|youtu\.be\/|embed\/|shorts\/)([A-Za-z0-9_-]{11})/);
+  return m?m[1]:(/^[A-Za-z0-9_-]{11}$/.test(String(u||'').trim())?String(u).trim():'');
+}
+function drawVid(e){
+  var p=prof(e),h='';
+  if(p.vid){
+    h+='<div class="vidbox"><iframe src="https://www.youtube.com/embed/'+p.vid+'?rel=0&modestbranding=1" title="Démonstration" allow="encrypted-media" allowfullscreen loading="lazy"></iframe></div>'+
+       '<button class="btn ghost" data-vclr="1" style="height:40px;margin-top:8px;font-size:13px">Changer de vidéo</button>';
+  }else{
+    h+='<a class="ytlink" href="'+yt(e.v)+'" target="_blank" rel="noopener">▶ Chercher une démonstration</a>'+
+       '<p class="fichetxt" style="margin:10px 0 0"><span>Choisis celle qui te parle, copie son lien, et colle-le ici : elle s\u2019affichera directement dans cette fiche, pour toujours.</span></p>'+
+       '<div class="vidrow" style="margin-top:8px"><input class="vidin" id="vidIn" placeholder="lien YouTube" spellcheck="false">'+
+       '<button class="btn" data-vset="1" style="flex:0 0 96px;height:46px;font-size:14px">Ajouter</button></div>';
+  }
+  $('ficheVid').innerHTML=h;
+}
+/* ---- vidéo de démonstration, choisie une fois par l'utilisateur ---- */
+function ytId(u){
+  var m=String(u||'').match(/(?:v=|youtu\.be\/|embed\/|shorts\/)([A-Za-z0-9_-]{11})/);
+  return m?m[1]:(/^[A-Za-z0-9_-]{11}$/.test(String(u||'').trim())?String(u).trim():'');
+}
+function drawVid(e){
+  var p=prof(e),h='';
+  if(p.vid){
+    h+='<div class="vidbox"><iframe src="https://www.youtube.com/embed/'+p.vid+'?rel=0&modestbranding=1" title="Démonstration" allow="encrypted-media" allowfullscreen loading="lazy"></iframe></div>'+
+       '<button class="btn ghost" data-vclr="1" style="height:40px;margin-top:8px;font-size:13px">Changer de vidéo</button>';
+  }else{
+    h+='<a class="ytlink" href="'+yt(e.v)+'" target="_blank" rel="noopener">▶ Chercher une démonstration</a>'+
+       '<p class="fichetxt" style="margin:10px 0 0"><span>Choisis celle qui te parle, copie son lien, et colle-le ici : elle s\u2019affichera directement dans cette fiche, pour toujours.</span></p>'+
+       '<div class="vidrow" style="margin-top:8px"><input class="vidin" id="vidIn" placeholder="lien YouTube" spellcheck="false">'+
+       '<button class="btn" data-vset="1" style="flex:0 0 96px;height:46px;font-size:14px">Ajouter</button></div>';
+  }
+  $('ficheVid').innerHTML=h;
+}
+
+/* ================= ANIMATIONS DES MOUVEMENTS ================= */
+/* Figure de profil articulée. Le but n'est pas de montrer la trajectoire —
+   elle est évidente — mais la posture à tenir pendant qu'on l'exécute. */
+
+function lerp(a,b,t){return a+(b-a)*t;}
+function pt(A,B,t){return [lerp(A[0],B[0],t),lerp(A[1],B[1],t)];}
+function ease(t){return t<0.5?2*t*t:1-Math.pow(-2*t+2,2)/2;}
+
+var ANIMS={
+ dc:{
+  cycle:4400,
+  phase:function(c){
+    if(c<0.09) return {t:0,txt:'Position basse — les haltères frôlent les pectoraux. Aucun rebond.',cues:['coude','omo','abdo']};
+    if(c<0.43) return {t:ease((c-0.09)/0.34),txt:'Poussée — souffle en montant, pousse par la poitrine.',cues:['omo','pieds']};
+    if(c<0.55) return {t:1,txt:'Position haute — bras tendus sans verrouiller les coudes.',cues:['omo','poitrine']};
+    if(c<0.93) return {t:1-ease((c-0.55)/0.38),txt:'Descente contrôlée sur deux secondes. Coudes à 45°, jamais écartés à 90°.',cues:['coude','abdo','omo']};
+    return {t:0,txt:'Position basse — les haltères frôlent les pectoraux. Aucun rebond.',cues:['coude','omo','abdo']};
+  },
+  pose:function(t){
+    return {
+      tete:[82,136], cou:[98,140], epaule:[120,140], hanche:[204,144],
+      genou:[250,180], pied:[242,236],
+      coude:pt([142,172],[126,96],t),
+      main :pt([136,114],[130,58], t)
+    };
+  },
+  cues:{
+    omo:     {p:function(P){return [120,156];}, d:[0,1],  n:'Omoplates serrées et plaquées dans le banc'},
+    poitrine:{p:function(P){return [152,110];}, d:[0,-1], n:'Cage thoracique sortie, haute'},
+    abdo:    {p:function(P){return [186,138];}, d:null,   n:'Abdos gainés — le bas du dos ne se creuse pas'},
+    coude:   {p:function(P){return [P.coude[0]+14,P.coude[1]+10];}, d:[1,0], n:'Coudes à 45° du buste, jamais à 90°'},
+    pieds:   {p:function(P){return [242,230];}, d:[0,1],  n:'Pieds ancrés, poussée dans le sol'}
+  },
+  decor:'<line x1="40" y1="238" x2="372" y2="238" class="sol"/>'+
+        '<rect x="66" y="150" width="188" height="14" rx="6" class="banc"/>'+
+        '<line x1="88" y1="164" x2="88" y2="238" class="banc2"/>'+
+        '<line x1="234" y1="164" x2="234" y2="238" class="banc2"/>',
+  traj:'M136,114 L130,58',
+  inset:'coude'
+ }
+};
+
+var AN={id:null,raf:null,t0:0,play:true,slow:false,c:0};
+
+function seg(a,b,w,cls){return '<line x1="'+a[0].toFixed(1)+'" y1="'+a[1].toFixed(1)+'" x2="'+b[0].toFixed(1)+'" y2="'+b[1].toFixed(1)+'" stroke-width="'+w+'" class="'+cls+'"/>';}
+function fleche(x,y,dx,dy,on){
+  var L=17, x0=x+dx*L, y0=y+dy*L, cls=on?' on':'';
+  var a=Math.atan2(-dy,-dx), s=5.5;
+  var p1=[x+Math.cos(a+2.6)*s, y+Math.sin(a+2.6)*s], p2=[x+Math.cos(a-2.6)*s, y+Math.sin(a-2.6)*s];
+  return '<line x1="'+x0+'" y1="'+y0+'" x2="'+(x-dx*4)+'" y2="'+(y-dy*4)+'" class="cueL'+cls+'"/>'+
+         '<polygon points="'+x+','+y+' '+p1[0].toFixed(1)+','+p1[1].toFixed(1)+' '+p2[0].toFixed(1)+','+p2[1].toFixed(1)+'" class="cueP'+cls+'"/>';
+}
+
+function drawAnim(id,c){
+  var A=ANIMS[id];if(!A)return;
+  var ph=A.phase(c), P=A.pose(ph.t);
+  var haut=ph.cues.indexOf('poitrine')>=0;
+  $('anDecor').innerHTML=A.decor+'<path d="'+A.traj+'" class="traj"/>';
+
+  /* membres dessinés en deux passes : contour puis remplissage, pour rester lisibles quand ils se croisent */
+  function limb(a,b,w,ink){
+    return '<line x1="'+a[0].toFixed(1)+'" y1="'+a[1].toFixed(1)+'" x2="'+b[0].toFixed(1)+'" y2="'+b[1].toFixed(1)+'" stroke-width="'+(w+6)+'" class="'+(ink?'oB':'o')+'"/>'+
+           '<line x1="'+a[0].toFixed(1)+'" y1="'+a[1].toFixed(1)+'" x2="'+b[0].toFixed(1)+'" y2="'+b[1].toFixed(1)+'" stroke-width="'+w+'" class="f"/>';
+  }
+  var arche=haut?10:4;
+  var buste=
+    '<path d="M104,144 C102,133 112,127 126,'+(123-arche)+
+    ' C146,'+(115-arche)+' 166,'+(115-arche)+' 180,'+(124-arche)+
+    ' C192,131 200,136 208,141 L208,150 L104,150 Z" class="corpsP"/>'+
+    '<path d="M132,'+(126-arche)+' C146,'+(119-arche)+' 160,'+(119-arche)+' 172,'+(126-arche)+'" class="sternum"/>';
+
+  $('anCorps').innerHTML=
+    limb(P.hanche,P.genou,17)+limb(P.genou,P.pied,13)+
+    '<path d="M'+(P.pied[0]-2)+',236 L'+(P.pied[0]+16)+',236" class="o" stroke-width="9"/>'+
+    buste+
+    limb(P.cou,P.tete,15)+
+    '<circle cx="'+P.tete[0]+'" cy="'+P.tete[1]+'" r="14" class="teteP"/>'+
+    limb(P.epaule,P.coude,12,true)+limb(P.coude,P.main,10,true)+
+    '<circle cx="'+P.coude[0].toFixed(1)+'" cy="'+P.coude[1].toFixed(1)+'" r="5.5" class="artic"/>'+
+    '<g transform="translate('+P.main[0].toFixed(1)+','+P.main[1].toFixed(1)+')">'+
+      '<rect x="-3.5" y="-18" width="7" height="36" rx="3" class="fonte"/>'+
+      '<rect x="-12" y="-16" width="24" height="11" rx="3" class="fonte"/>'+
+      '<rect x="-12" y="5" width="24" height="11" rx="3" class="fonte"/>'+
+    '</g>';
+
+  var h='';
+  Object.keys(A.cues).forEach(function(k){
+    var q=A.cues[k], on=ph.cues.indexOf(k)>=0, xy=q.p(P);
+    if(!q.d){
+      h+='<ellipse cx="'+xy[0]+'" cy="'+xy[1]+'" rx="27" ry="14" class="cue'+(on?' on':'')+'"/>';
+    }else{
+      h+=fleche(xy[0],xy[1],q.d[0],q.d[1],on);
+    }
+  });
+  $('anCues').innerHTML=h;
+
+  if(A.inset&&ph.cues.indexOf(A.inset)>=0){
+    $('anInset').innerHTML=
+      '<g transform="translate(288,18)">'+
+      '<rect x="0" y="0" width="104" height="92" rx="9" class="insetBox"/>'+
+      '<text x="52" y="16" text-anchor="middle" class="insetT">vu de dessus</text>'+
+      '<line x1="52" y1="24" x2="52" y2="70" class="insetAxe"/>'+
+      '<line x1="52" y1="46" x2="22" y2="66" class="insetNo"/><line x1="52" y1="46" x2="82" y2="66" class="insetNo"/>'+
+      '<line x1="52" y1="46" x2="24" y2="46" class="insetNo"/><line x1="52" y1="46" x2="80" y2="46" class="insetNo"/>'+
+      '<line x1="52" y1="46" x2="28" y2="62" class="insetOk"/><line x1="52" y1="46" x2="76" y2="62" class="insetOk"/>'+
+      '<text x="52" y="85" text-anchor="middle" class="insetT2">45° — juste</text>'+
+      '</g>';
+  }else $('anInset').innerHTML='';
+
+  $('anTxt').textContent=ph.txt;
+  $('anCue').innerHTML=ph.cues.map(function(k){return '<li>'+A.cues[k].n+'</li>';}).join('');
+}
+
+function animSVG(){
+  return '<svg viewBox="0 0 400 260" class="anim" aria-label="Animation du mouvement">'+
+    '<g id="anDecor"></g><g id="anCorps"></g><g id="anCues"></g><g id="anInset"></g></svg>';
+}
+function animStart(id){
+  animStop();
+  if(!ANIMS[id]){$('animBox').hidden=true;return;}
+  $('animBox').hidden=false;
+  $('animHolder').innerHTML=animSVG();
+  AN.id=id;AN.t0=performance.now();AN.play=true;AN.c=0;
+  $('anPlay').textContent='Pause';
+  (function loop(now){
+    var d=ANIMS[AN.id].cycle*(AN.slow?2.4:1);
+    if(AN.play)AN.c=(((now-AN.t0)%d)/d);
+    drawAnim(AN.id,AN.c);
+    AN.raf=requestAnimationFrame(loop);
+  })(performance.now());
+}
+function animStop(){if(AN.raf)cancelAnimationFrame(AN.raf);AN.raf=null;}
+
+$('anPlay').addEventListener('click',function(){AN.play=!AN.play;if(AN.play)AN.t0=performance.now()-(AN.c||0)*ANIMS[AN.id].cycle*(AN.slow?2.2:1);this.textContent=AN.play?'Pause':'Reprendre';});
+$('anSlow').addEventListener('click',function(){AN.slow=!AN.slow;this.setAttribute('aria-pressed',AN.slow);AN.t0=performance.now()-(AN.c||0)*ANIMS[AN.id].cycle*(AN.slow?2.2:1);});
+
 SES.min=LS.get('tos-min',45);
-drawSes();
+drawSes();drawNiveau();
 show(LS.get('tos-tab','ses'));
 </script>
 
