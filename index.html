@@ -150,9 +150,12 @@ h2.sec{font-family:var(--disp);font-weight:800;font-size:13px;letter-spacing:.14
 .vues button{flex:1;height:34px;border-radius:9px;border:1.5px solid var(--line);background:var(--card);font-weight:600;font-size:13px;color:var(--dim)}
 .vues button[aria-pressed="true"]{border-color:var(--acc);color:var(--acc)}
 .carte .silh{fill:var(--card2);stroke:none}
-.carte .mN{stroke:var(--card2);stroke-width:.7}
-.carte .mS{stroke:var(--card2);stroke-width:.7}
-.carte .mP{stroke:var(--card2);stroke-width:.7}
+.carte .det{fill:none;stroke:var(--ink);stroke-width:1.1;opacity:.22;stroke-linecap:round}
+.carte .visage{fill:none;stroke:var(--ink);stroke-width:1.2;opacity:.3}
+.carte .cheveux{fill:var(--ink);opacity:.14}
+.carte .mN{stroke:var(--card2);stroke-width:.5}
+.carte .mS{stroke:var(--card2);stroke-width:.5}
+.carte .mP{stroke:var(--card2);stroke-width:.5}
 .carte .carteT{fill:var(--dim);font-size:10px;font-family:var(--mono);letter-spacing:.14em;text-transform:uppercase}
 .carteleg{display:flex;flex-direction:column;gap:2px;margin-top:10px}
 .carteleg .lg{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--dim)}
@@ -1118,95 +1121,95 @@ function yt(q){return 'https://www.youtube.com/results?search_query='+encodeURIC
    c0 : cran de départ conseillé (reprise après longue pause), par haltère
    s/r : séries et fourchette de répétitions · repos en secondes */
 var EX=[
- {id:'pompes',mp:['pecto','triceps','delt'],ms:['abdos'],n:'Pompes sur poignées',grp:'push',mat:'poignees',zones:['epaules','poignets'],
+ {id:'pompes',yid:'DrJwXsAIy78',mp:['pecto','triceps','delt'],ms:['abdos'],n:'Pompes sur poignées',grp:'push',mat:'poignees',zones:['epaules','poignets'],
   s:3,r:[8,15],repos:75,c0:null,
   cons:'Corps gréé, fessiers serrés, coudes à 45° du buste. Descends jusqu’à ce que la poitrine frôle les poignées.',
   err:'Les coudes qui partent à 90°, le bassin qui s’affaisse.',v:'pompes sur poignées technique'},
- {id:'dc',mp:['pecto','triceps','delt'],ms:['abdos'],n:'Développé couché haltères',grp:'push',mat:'banc',zones:['epaules'],
+ {id:'dc',yid:'HBXn_SAlPw0',mp:['pecto','triceps','delt'],ms:['abdos'],n:'Développé couché haltères',grp:'push',mat:'banc',zones:['epaules'],
   s:4,r:[8,12],repos:90,c0:4,
   cons:'Omoplates serrées et plaquées sur le banc, pieds au sol. Descends les haltères au niveau des pectoraux, coudes à 45°.',
   err:'Cambrer excessivement, rebondir en bas.',v:'développé couché haltères technique'},
- {id:'dincl',mp:['pecto','delt','triceps'],ms:[],n:'Développé incliné haltères',grp:'push',mat:'banc',zones:['epaules'],
+ {id:'dincl',yid:'BpBSWeHH_Os',mp:['pecto','delt','triceps'],ms:[],n:'Développé incliné haltères',grp:'push',mat:'banc',zones:['epaules'],
   s:3,r:[8,12],repos:90,c0:3,
   cons:'Banc à 30°, pas plus. Trajectoire légèrement convergente vers le haut.',
   err:'Un banc trop incliné transforme le mouvement en développé épaules.',v:'développé incliné haltères 30 degrés'},
- {id:'ecarte',mp:['pecto'],ms:['delt'],n:'Écarté couché',grp:'push',mat:'banc',zones:['epaules'],
+ {id:'ecarte',yid:'PbxQJt1l1YU',mp:['pecto'],ms:['delt'],n:'Écarté couché',grp:'push',mat:'banc',zones:['epaules'],
   s:3,r:[10,15],repos:75,c0:2,
   cons:'Coudes légèrement fléchis et figés. Ouvre jusqu’à sentir l’étirement, pas plus bas.',
   err:'Charge trop lourde, qui transforme l’écarté en développé.',v:'écarté couché haltères technique'},
- {id:'rowing',mp:['dorsaux','biceps'],ms:['trap','lombes'],n:'Rowing haltère un bras',grp:'pull',mat:'banc',zones:['dos'],
+ {id:'rowing',yid:'xJX8_oLf-Vo',mp:['dorsaux','biceps'],ms:['trap','lombes'],n:'Rowing haltère un bras',grp:'pull',mat:'banc',zones:['dos'],
   s:4,r:[8,12],repos:90,c0:5,
   cons:'Un genou et une main sur le banc, dos plat à l’horizontale. Tire le coude vers la hanche, pas vers l’épaule.',
   err:'Tourner le buste pour arracher la charge.',v:'rowing haltère un bras banc technique'},
- {id:'rowbust',mp:['dorsaux','biceps'],ms:['lombes','trap'],n:'Rowing buste penché, deux haltères',grp:'pull',mat:'halteres',zones:['dos'],
+ {id:'rowbust',yid:'JWWNLDAVQNo',mp:['dorsaux','biceps'],ms:['lombes','trap'],n:'Rowing buste penché, deux haltères',grp:'pull',mat:'halteres',zones:['dos'],
   s:3,r:[10,12],repos:90,c0:3,
   cons:'Buste à 45°, dos plat, genoux déverrouillés. Tire vers le nombril.',
   err:'Arrondir le bas du dos — c’est l’exercice à sauter en cas de gêne lombaire.',v:'rowing buste penché haltères dos plat'},
- {id:'pullover',mp:['dorsaux','pecto'],ms:['triceps'],n:'Pull-over haltère',grp:'pull',mat:'banc',zones:['epaules'],
+ {id:'pullover',yid:'lJOTTVwLSnk',mp:['dorsaux','pecto'],ms:['triceps'],n:'Pull-over haltère',grp:'pull',mat:'banc',zones:['epaules'],
   s:3,r:[10,14],repos:75,c0:3,
   cons:'Allongé sur le banc, un seul haltère tenu à deux mains. Descends derrière la tête, bras quasi tendus.',
   err:'Descendre trop bas si les épaules manquent de mobilité.',v:'pull over haltère technique'},
- {id:'shrug',mp:['trap'],ms:['avbras'],n:'Shrugs',grp:'pull',mat:'halteres',zones:[],
+ {id:'shrug',yid:'nwSmkoHM-Jw',mp:['trap'],ms:['avbras'],n:'Shrugs',grp:'pull',mat:'halteres',zones:[],
   s:3,r:[12,15],repos:60,c0:7,
   cons:'Monte les épaules vers les oreilles, marque un temps en haut, redescends lentement.',
   err:'Rouler les épaules — le mouvement est vertical, point.',v:'shrugs haltères technique'},
- {id:'goblet',mp:['quad','fess'],ms:['abdos','lombes'],n:'Squat gobelet',grp:'jambes',mat:'halteres',zones:['genoux','dos'],
+ {id:'goblet',yid:'QNPVhVsJS2A',mp:['quad','fess'],ms:['abdos','lombes'],n:'Squat gobelet',grp:'jambes',mat:'halteres',zones:['genoux','dos'],
   s:4,r:[10,15],repos:90,c0:5,
   cons:'Un haltère tenu vertical contre la poitrine. Descends entre les pieds, buste droit, talons au sol.',
   err:'Les talons qui décollent, les genoux qui rentrent.',v:'squat gobelet technique'},
- {id:'fentes',mp:['quad','fess'],ms:['ischios','abdos'],n:'Fentes marchées',grp:'jambes',mat:'halteres',zones:['genoux'],
+ {id:'fentes',yid:'T7j9efz104k',mp:['quad','fess'],ms:['ischios','abdos'],n:'Fentes marchées',grp:'jambes',mat:'halteres',zones:['genoux'],
   s:3,r:[10,12],repos:90,c0:3,
   cons:'Un haltère dans chaque main, bras le long du corps. Le genou arrière descend vers le sol sans le toucher.',
   err:'Un pas trop court, qui fait passer le genou loin devant le pied.',v:'fentes marchées haltères technique'},
- {id:'sdt',mp:['ischios','fess','lombes'],ms:['dorsaux'],n:'Soulevé de terre jambes semi-tendues',grp:'jambes',mat:'halteres',zones:['dos'],
+ {id:'sdt',yid:'SpLEXWqTMw0',mp:['ischios','fess','lombes'],ms:['dorsaux'],n:'Soulevé de terre jambes semi-tendues',grp:'jambes',mat:'halteres',zones:['dos'],
   s:3,r:[10,12],repos:90,c0:5,
   cons:'Genoux déverrouillés et figés. Pousse les hanches vers l’arrière, les haltères frôlent les cuisses.',
   err:'Plier les genoux pour descendre plus bas, arrondir le dos.',v:'soulevé de terre jambes tendues haltères'},
- {id:'mollets',mp:['mollet'],ms:[],n:'Mollets debout',grp:'jambes',mat:'halteres',zones:[],
+ {id:'mollets',yid:'_96rm7OKHro',mp:['mollet'],ms:[],n:'Mollets debout',grp:'jambes',mat:'halteres',zones:[],
   s:3,r:[15,20],repos:45,c0:8,
   cons:'Monte le plus haut possible sur la pointe des pieds, marque une seconde, redescends lentement.',
   err:'Rebondir en bas sans amplitude.',v:'extension mollets debout haltères'},
- {id:'militaire',mp:['delt','triceps'],ms:['trap','abdos'],n:'Développé militaire assis',grp:'epaules',mat:'banc',zones:['epaules'],
+ {id:'militaire',yid:'CE9KiCPFw0E',mp:['delt','triceps'],ms:['trap','abdos'],n:'Développé militaire assis',grp:'epaules',mat:'banc',zones:['epaules'],
   s:3,r:[8,12],repos:90,c0:2,
   cons:'Assis, dos calé, haltères au niveau des oreilles. Pousse vers le haut sans verrouiller violemment.',
   err:'Cambrer le bas du dos pour pousser plus lourd.',v:'développé militaire haltères assis technique'},
- {id:'latere',mp:['delt'],ms:['trap'],n:'Élévations latérales',grp:'epaules',mat:'halteres',zones:['epaules'],
+ {id:'latere',yid:'q_DYeb_daeY',mp:['delt'],ms:['trap'],n:'Élévations latérales',grp:'epaules',mat:'halteres',zones:['epaules'],
   s:3,r:[12,15],repos:60,c0:0,
   cons:'Monte jusqu’à l’horizontale, pas au-dessus. Coudes légèrement fléchis, mouvement lent.',
   err:'Balancer le buste pour lancer la charge. Ici, léger est efficace.',v:'élévations latérales haltères technique'},
- {id:'oiseau',mp:['delt','trap'],ms:['dorsaux'],n:'Oiseau, buste penché',grp:'epaules',mat:'halteres',zones:['dos','epaules'],
+ {id:'oiseau',yid:'E3KdLunjyM8',mp:['delt','trap'],ms:['dorsaux'],n:'Oiseau, buste penché',grp:'epaules',mat:'halteres',zones:['dos','epaules'],
   s:3,r:[12,15],repos:60,c0:0,
   cons:'Buste penché à 45°, dos plat. Ouvre les bras sur les côtés en serrant les omoplates.',
   err:'Charge trop lourde, qui transforme le mouvement en rowing.',v:'oiseau haltères arrière épaules'},
- {id:'curl',mp:['biceps'],ms:['avbras'],n:'Curl biceps',grp:'bras',mat:'halteres',zones:[],
+ {id:'curl',yid:'8wvflicHXXw',mp:['biceps'],ms:['avbras'],n:'Curl biceps',grp:'bras',mat:'halteres',zones:[],
   s:3,r:[10,12],repos:60,c0:3,
   cons:'Coudes collés au buste, supination en montant. Redescends en contrôlant trois secondes.',
   err:'Balancer le dos, lâcher la descente.',v:'curl biceps haltères technique'},
- {id:'marteau',mp:['biceps','avbras'],ms:[],n:'Curl marteau',grp:'bras',mat:'halteres',zones:[],
+ {id:'marteau',yid:'-3vQ5tTwubU',mp:['biceps','avbras'],ms:[],n:'Curl marteau',grp:'bras',mat:'halteres',zones:[],
   s:3,r:[10,12],repos:60,c0:3,
   cons:'Paumes face à face tout du long. Sollicite l’avant-bras autant que le biceps.',
   err:'Tourner les poignets en montant.',v:'curl marteau haltères technique'},
- {id:'triceps',mp:['triceps'],ms:['delt'],n:'Extension triceps au-dessus de la tête',grp:'bras',mat:'halteres',zones:['epaules'],
+ {id:'triceps',yid:'aacoc7TfOLQ',mp:['triceps'],ms:['delt'],n:'Extension triceps au-dessus de la tête',grp:'bras',mat:'halteres',zones:['epaules'],
   s:3,r:[10,12],repos:60,c0:2,
   cons:'Un haltère à deux mains au-dessus de la tête. Coudes serrés et fixes, seuls les avant-bras bougent.',
   err:'Écarter les coudes, descendre trop vite.',v:'extension triceps haltère au dessus de la tête'},
- {id:'barre',mp:['triceps'],ms:[],n:'Barre au front sur banc',grp:'bras',mat:'banc',zones:['epaules'],
+ {id:'barre',yid:'KXwQd9DoaVw',mp:['triceps'],ms:[],n:'Barre au front sur banc',grp:'bras',mat:'banc',zones:['epaules'],
   s:3,r:[10,12],repos:60,c0:2,
   cons:'Allongé, haltères descendus de part et d’autre du front, coudes fixes.',
   err:'Bouger les coudes vers l’avant pour tricher.',v:'barre au front haltères technique'},
- {id:'planche',mp:['abdos','obliq'],ms:['delt','fess'],n:'Gainage planche',grp:'gainage',mat:'aucun',zones:['epaules'],
+ {id:'planche',yid:'mv42eVXvMDc',mp:['abdos','obliq'],ms:['delt','fess'],n:'Gainage planche',grp:'gainage',mat:'aucun',zones:['epaules'],
   s:3,r:[30,60],repos:60,c0:null,tps:true,
   cons:'Coudes sous les épaules, corps en ligne. Serre les fessiers, rentre le bassin.',
   err:'Les fesses en l’air ou le ventre qui tombe.',v:'gainage planche technique'},
- {id:'roue',mp:['abdos','obliq'],ms:['dorsaux','delt'],n:'Roue abdominale à genoux',grp:'gainage',mat:'roue',zones:['dos','epaules'],
+ {id:'roue',yid:'yJ2Or6zX3LM',mp:['abdos','obliq'],ms:['dorsaux','delt'],n:'Roue abdominale à genoux',grp:'gainage',mat:'roue',zones:['dos','epaules'],
   s:3,r:[6,12],repos:75,c0:null,
   cons:'À genoux, abdos et fessiers serrés. Déroule seulement aussi loin que tu peux revenir sans creuser le dos.',
   err:'Aller trop loin : le bas du dos se creuse et prend tout.',v:'roue abdominale à genoux technique débutant'},
- {id:'lat',mp:['obliq'],ms:['abdos','delt'],n:'Gainage latéral',grp:'gainage',mat:'aucun',zones:['epaules'],
+ {id:'lat',yid:'cqehV0kVvjM',mp:['obliq'],ms:['abdos','delt'],n:'Gainage latéral',grp:'gainage',mat:'aucun',zones:['epaules'],
   s:2,r:[25,45],repos:45,c0:null,tps:true,
   cons:'Sur le coude, hanches hautes. Une série de chaque côté.',
   err:'Laisser le bassin descendre.',v:'gainage latéral technique'},
- {id:'crunch',mp:['abdos'],ms:['obliq'],n:'Crunch au sol',grp:'gainage',mat:'aucun',zones:[],
+ {id:'crunch',yid:'ylepxaWA0ng',mp:['abdos'],ms:['obliq'],n:'Crunch au sol',grp:'gainage',mat:'aucun',zones:[],
   s:3,r:[15,20],repos:45,c0:null,
   cons:'Décolle les omoplates en soufflant, sans tirer sur la nuque.',
   err:'Tirer la tête avec les mains.',v:'crunch abdominaux technique'}
@@ -1392,7 +1395,7 @@ $('fiche').addEventListener('click',function(ev){
     if(!id){$('vidIn').value='';$('vidIn').placeholder='lien non reconnu — recommence';return;}
     p.vid=id;saveProf();drawVid(e);return;
   }
-  if(t.dataset.vclr){p.vid='';saveProf();drawVid(e);return;}
+  if(t.dataset.vswap){$('vidSwap').hidden=!$('vidSwap').hidden;return;}
   if(t.dataset.fc){
     p.c=Math.max(0,Math.min(CRANS.length-1,(p.c||0)+ +t.dataset.fc));
     $('ficheKg').textContent=kg(p.c);
@@ -1737,6 +1740,17 @@ var COU='M-1,24 L9,24 L9,41 L-1,41 Z';
    le deltoïde en trois faisceaux, le pectoral en deux, le quadriceps en trois,
    le mollet en deux jumeaux. Les formes sont dessinées en demi-corps puis mises
    en miroir, ce qui garantit une symétrie parfaite. */
+/* Détails qui distinguent immédiatement la face du dos : clavicules et nombril
+   devant, colonne et sillon fessier derrière, genoux devant, talons derrière. */
+var DETAIL={
+ f:['M3,60 C9,58 14,56 19,53',            /* clavicule */
+    'M12,210 C15,212 16,218 15,223 C12,223 11,216 12,210',  /* rotule */
+    'M6,284 L16,284'],                    /* orteils */
+ d:['M1,44 L1,140',                       /* colonne */
+    'M1,143 L1,168',                      /* sillon fessier */
+    'M5,74 C9,78 13,84 15,90',            /* omoplate */
+    'M5,283 C9,281 13,281 15,283']        /* talon */
+};
 var MUSC={
  trap:   {n:'Trapèzes',
    f:['M2,40 C10,42 17,47 21,54 C14,58 7,58 2,57 Z'],
@@ -1748,8 +1762,10 @@ var MUSC={
    d:['M19,54 C26,49 33,54 36,66 C33,75 26,77 21,71 Z',
       'M30,70 C34,72 36,78 35,84 C31,84 29,79 29,73 Z']},
  pecto:  {n:'Pectoraux',
-   f:['M3,66 C10,64 16,67 20,72 C16,77 9,78 3,77 Z',
-      'M3,79 C10,79 16,81 20,78 C19,88 12,92 3,91 Z']},
+   /* un seul éventail par côté : large au sternum, convergeant vers l'aisselle.
+      Les deux formes se touchent, le liseré marque le faisceau claviculaire. */
+   f:['M2,64 C9,63 15,66 19,71 C14,74 8,75 2,75 Z',
+      'M2,75 C8,75 14,74 19,71 C19,77 16,83 12,86 C8,88 5,88 2,88 Z']},
  dorsaux:{n:'Dorsaux',
    d:['M2,72 C11,76 18,84 20,96 C16,107 8,111 2,110 Z',
       'M13,69 C17,71 19,76 19,81 C16,81 13,77 13,69 Z']},
@@ -1765,7 +1781,7 @@ var MUSC={
       'M1,118 L11,118 C11,126 10,132 9,137 L1,137 Z']},
  obliq:  {n:'Obliques',
    f:['M13,99 C17,104 18,115 16,127 C14,123 13,111 13,99 Z',
-      'M16,89 C19,91 20,96 20,100 C17,99 16,94 16,89 Z']},
+      'M16,94 C19,96 20,100 20,104 C17,103 16,99 16,94 Z']},
  quad:   {n:'Quadriceps',
    f:['M4,155 C10,155 14,163 14,178 C14,193 11,205 8,209 C5,205 3,190 3,172 Z',
       'M15,160 C19,165 19,178 17,190 C15,197 13,200 12,201 C13,186 14,170 15,160 Z',
@@ -1802,6 +1818,7 @@ function carteSVG(vue,prim,sec){
     g+=ds.map(function(d){return '<path d="'+d+'" class="'+cls+'" fill="url(#'+url+vue+')"/>';}).join('');
   });
   var corps='<path d="'+SILH+'" class="silh"/><path d="'+COU+'" class="silh"/>';
+  var det=(DETAIL[vue]||[]).map(function(d){return '<path d="'+d+'" class="det"/>';}).join('');
   var miroir=function(inner){return '<g transform="translate(60,0)">'+inner+'</g>'+
                                    '<g transform="translate(60,0) scale(-1,1)">'+inner+'</g>';};
 
@@ -1842,7 +1859,11 @@ function carteSVG(vue,prim,sec){
       '<path d="'+COU+'" transform="translate(60,0)"/><path d="'+COU+'" transform="translate(60,0) scale(-1,1)"/>'+
     '</clipPath></defs>'+
     '<g transform="translate('+DX+',0)">'+miroir(corps)+'<circle cx="60" cy="'+TETE.cy+'" r="'+TETE.r+'" class="silh"/>'+
-      '<g clip-path="url(#cl'+vue+')">'+miroir(g)+'</g></g>'+
+      '<g clip-path="url(#cl'+vue+')">'+miroir(g)+miroir(det)+'</g>'+
+      (vue==='f'
+        ? '<ellipse cx="60" cy="24" rx="9" ry="11" class="visage"/>'
+        : '<path d="M51,14 C54,9 66,9 69,14 C70,20 69,26 68,30 C64,27 56,27 52,30 C51,26 50,20 51,14 Z" class="cheveux"/>')+
+    '</g>'+
     pose(gauche,-1)+pose(droite,1)+
     '</svg>';
 }
@@ -1852,7 +1873,13 @@ function drawCarte(e,auto){
   /* à l'ouverture, on montre la vue qui porte le plus de muscles moteurs */
   if(auto){
     var cnt=function(v){return prim.filter(function(k){return MUSC[k]&&MUSC[k][v];}).length;};
-    CV.vue=cnt('d')>cnt('f')?'d':'f';
+    var cf=cnt('f'),cd=cnt('d');
+    if(cd>cf)CV.vue='d';
+    else if(cf>cd)CV.vue='f';
+    else{ /* égalité : on suit le premier muscle moteur listé */
+      var p0=prim[0];
+      CV.vue=(MUSC[p0]&&MUSC[p0].d&&!MUSC[p0].f)?'d':'f';
+    }
   }
   $('carteHolder').innerHTML=carteSVG(CV.vue,prim,sec);
   $('carteLeg').innerHTML=
@@ -1869,9 +1896,14 @@ function ytId(u){
 }
 function drawVid(e){
   var p=prof(e),h='';
-  if(p.vid){
-    h+='<div class="vidbox"><iframe src="https://www.youtube.com/embed/'+p.vid+'?rel=0&modestbranding=1" title="Démonstration" allow="encrypted-media" allowfullscreen loading="lazy"></iframe></div>'+
-       '<button class="btn ghost" data-vclr="1" style="height:40px;margin-top:8px;font-size:13px">Changer de vidéo</button>';
+  var vid=p.vid||e.yid;
+  if(vid){
+    h+='<div class="vidbox"><iframe src="https://www.youtube.com/embed/'+vid+'?rel=0&modestbranding=1" title="Démonstration" allow="encrypted-media" allowfullscreen loading="lazy"></iframe></div>'+
+       '<div class="vidrow" style="margin-top:8px">'+
+       '<a class="btn ghost" style="height:40px;font-size:13px;text-decoration:none" href="'+yt(e.v)+'" target="_blank" rel="noopener">Autres vidéos</a>'+
+       '<button class="btn ghost" data-vswap="1" style="height:40px;font-size:13px">Remplacer</button></div>'+
+       '<div class="vidrow" id="vidSwap" hidden style="margin-top:8px"><input class="vidin" id="vidIn" placeholder="coller un lien YouTube" spellcheck="false">'+
+       '<button class="btn" data-vset="1" style="flex:0 0 90px;height:46px;font-size:14px">Valider</button></div>';
   }else{
     h+='<a class="ytlink" href="'+yt(e.v)+'" target="_blank" rel="noopener">▶ Chercher une démonstration</a>'+
        '<p class="fichetxt" style="margin:10px 0 0"><span>Choisis celle qui te parle, copie son lien, et colle-le ici : elle s\u2019affichera directement dans cette fiche, pour toujours.</span></p>'+
@@ -1887,9 +1919,14 @@ function ytId(u){
 }
 function drawVid(e){
   var p=prof(e),h='';
-  if(p.vid){
-    h+='<div class="vidbox"><iframe src="https://www.youtube.com/embed/'+p.vid+'?rel=0&modestbranding=1" title="Démonstration" allow="encrypted-media" allowfullscreen loading="lazy"></iframe></div>'+
-       '<button class="btn ghost" data-vclr="1" style="height:40px;margin-top:8px;font-size:13px">Changer de vidéo</button>';
+  var vid=p.vid||e.yid;
+  if(vid){
+    h+='<div class="vidbox"><iframe src="https://www.youtube.com/embed/'+vid+'?rel=0&modestbranding=1" title="Démonstration" allow="encrypted-media" allowfullscreen loading="lazy"></iframe></div>'+
+       '<div class="vidrow" style="margin-top:8px">'+
+       '<a class="btn ghost" style="height:40px;font-size:13px;text-decoration:none" href="'+yt(e.v)+'" target="_blank" rel="noopener">Autres vidéos</a>'+
+       '<button class="btn ghost" data-vswap="1" style="height:40px;font-size:13px">Remplacer</button></div>'+
+       '<div class="vidrow" id="vidSwap" hidden style="margin-top:8px"><input class="vidin" id="vidIn" placeholder="coller un lien YouTube" spellcheck="false">'+
+       '<button class="btn" data-vset="1" style="flex:0 0 90px;height:46px;font-size:14px">Valider</button></div>';
   }else{
     h+='<a class="ytlink" href="'+yt(e.v)+'" target="_blank" rel="noopener">▶ Chercher une démonstration</a>'+
        '<p class="fichetxt" style="margin:10px 0 0"><span>Choisis celle qui te parle, copie son lien, et colle-le ici : elle s\u2019affichera directement dans cette fiche, pour toujours.</span></p>'+
