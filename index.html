@@ -129,6 +129,36 @@ h2.sec{font-family:var(--disp);font-weight:800;font-size:13px;letter-spacing:.14
 .dots{display:flex;gap:5px;height:8px}
 .dots i{width:8px;height:8px;border-radius:50%;background:var(--line);display:block}
 .dots i.on{background:var(--acc)}
+/* historique */
+.sum{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.tile{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 10px;text-align:center}
+.tile b{display:block;font-family:var(--disp);font-weight:800;font-size:26px;letter-spacing:-.03em;line-height:1.05}
+.tile span{display:block;font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);margin-top:5px}
+.daylab{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);margin-top:14px}
+.hrow{display:flex;align-items:center;gap:12px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 12px 12px 0;margin-top:8px;overflow:hidden}
+.hrow .bar{width:5px;align-self:stretch;flex:0 0 5px;margin-right:2px;background:var(--acc)}
+.hrow .n{flex:1;min-width:0}
+.hrow .n b{display:block;font-size:15px;font-weight:700;letter-spacing:-.01em}
+.hrow .n span{display:block;font-family:var(--mono);font-size:12px;color:var(--dim);margin-top:2px}
+.hrow .d{font-family:var(--mono);font-weight:600;font-size:15px}
+.rpepill{font-family:var(--mono);font-size:12px;font-weight:600;border:1px solid var(--line);border-radius:999px;padding:4px 9px;color:var(--dim);flex:0 0 auto}
+.delbtn{width:30px;height:30px;border-radius:8px;color:var(--dim);font-size:17px;flex:0 0 auto;display:flex;align-items:center;justify-content:center}
+.empty{background:var(--card);border:1px dashed var(--line);border-radius:14px;padding:26px 18px;text-align:center;color:var(--dim);font-size:14px}
+.weeks{display:flex;gap:6px;height:78px}
+.weeks div{flex:1;display:flex;flex-direction:column;gap:6px}
+.weeks .bw{flex:1;display:flex;align-items:flex-end}
+.weeks i{display:block;width:100%;border-radius:3px 3px 0 0;background:var(--acc);min-height:3px}
+.weeks em{font-family:var(--mono);font-size:10px;font-style:normal;letter-spacing:.04em;color:var(--dim);text-align:center;height:14px}
+.weeks div.now em{color:var(--acc);font-weight:600}
+
+/* fin de séance */
+.done{flex:1;display:flex;flex-direction:column;justify-content:center;gap:16px;text-align:center}
+.done h2{font-family:var(--disp);font-weight:800;font-size:clamp(30px,9vw,42px);text-transform:uppercase;letter-spacing:-.03em;margin:0}
+.done .rec{font-family:var(--mono);font-size:13px;color:var(--dim);letter-spacing:.06em}
+.rpe{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
+.rpe button{height:52px;border-radius:11px;border:1.5px solid var(--line);background:var(--card);font-family:var(--disp);font-weight:800;font-size:19px;color:var(--dim)}
+.rpe button[aria-pressed="true"]{background:var(--acc);border-color:var(--acc);color:var(--on-acc)}
+.rpelab{display:flex;justify-content:space-between;font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim)}
 .warnbox{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--warm);border-radius:10px;padding:12px 14px;font-size:13px;color:var(--dim)}
 
 /* runner overlay */
@@ -164,6 +194,7 @@ h2.sec{font-family:var(--disp);font-weight:800;font-size:13px;letter-spacing:.14
   <div class="seg" role="group">
     <button id="tabRest" aria-pressed="true">Repos</button>
     <button id="tabInt" aria-pressed="false">Cardio</button>
+    <button id="tabHist" aria-pressed="false">Historique</button>
   </div>
 
   <!-- ============ REPOS ============ -->
@@ -256,11 +287,24 @@ h2.sec{font-family:var(--disp);font-weight:800;font-size:13px;letter-spacing:.14
     <p class="hint">Touche une allure pour l'écrire à ta façon. Tout est enregistré sur ce téléphone.</p>
     </div>
   </section>
+
+  <!-- ============ HISTORIQUE ============ -->
+  <section id="viewHist" style="display:none;flex-direction:column;gap:14px">
+    <div class="sum">
+      <div class="tile"><b id="sumMin">0</b><span>min cette semaine</span></div>
+      <div class="tile"><b id="sumNb">0</b><span>séances</span></div>
+      <div class="tile"><b id="sumRpe">—</b><span>effort moyen</span></div>
+    </div>
+    <h2 class="sec">Six dernières semaines</h2>
+    <div class="weeks" id="weeks"></div>
+    <h2 class="sec">Séances</h2>
+    <div id="histList"></div>
+  </section>
 </div>
 
 <!-- runner -->
 <div class="run" id="run" hidden>
-  <div style="display:flex;justify-content:flex-end;margin-bottom:10px">
+  <div id="runMetroRow" style="display:flex;justify-content:flex-end;margin-bottom:10px">
     <button class="chipbtn" id="runMetro" aria-pressed="false">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 18V5.5l10-2v12.5"/><circle cx="6.5" cy="18.5" r="2.6"/><circle cx="16.5" cy="16.5" r="2.6"/></svg>
       Cadence
@@ -275,10 +319,23 @@ h2.sec{font-family:var(--disp);font-weight:800;font-size:13px;letter-spacing:.14
     <div class="meta"><span id="runTotal">Reste 12:00</span><span id="runNext">Puis : normal</span></div>
   </div>
   <div class="prog"><i id="runProg"></i></div>
-  <div class="row">
+  <div class="row" id="runCtrls">
     <button class="btn" id="runPause">Pause</button>
     <button class="btn" id="runSkip">Bloc suivant</button>
     <button class="btn ghost" id="runStop" style="flex:0 0 84px">Arrêter</button>
+  </div>
+
+  <div class="done" id="doneBox" hidden>
+    <h2 id="doneTitle">Séance terminée</h2>
+    <div class="rec" id="doneRec">Rameur · fractionné · 20:00</div>
+    <div>
+      <div class="rpelab"><span>Facile</span><span>Maximal</span></div>
+      <div class="rpe" id="rpeGrid" style="margin-top:8px"></div>
+    </div>
+    <div class="row">
+      <button class="btn primary" id="doneSave" style="flex:2">Enregistrer</button>
+      <button class="btn ghost" id="doneSkip">Passer</button>
+    </div>
   </div>
 </div>
 <!-- feuille : mesurer la cadence -->
@@ -543,22 +600,58 @@ function nextBlock(){
 }
 function finishRun(){
   gong();setTimeout(gong,420);buzz([220,110,220,110,320]);say('Séance terminée. Bravo.');
-  stopRun();
+  askRpe(true);
 }
+/* écran de fin : on demande la difficulté ressentie, en un appui */
+var pendingRpe=null;
+function askRpe(complete){
+  runner.on=false;if(runner.raf)cancelAnimationFrame(runner.raf);runner.raf=null;metroStop();
+  var elapsed=Math.round((Date.now()-runner.startedAt)/1000);
+  var planned=runner.total;
+  var dur=complete?planned:Math.min(elapsed,planned);
+  if(dur<60){stopRun();return;}            /* trop court : on ne retient rien */
+  pendingRpe={rpe:0,dur:dur,complete:!!complete,
+    machine:(runner.ctx&&runner.ctx.machine)||P.machine,
+    mode:(runner.ctx&&runner.ctx.mode)||'Cardio',
+    blocks:runner.list.length,date:Date.now()};
+  var mn=MACHINES.filter(function(m){return m.k===pendingRpe.machine;})[0];
+  $('doneTitle').textContent=complete?'Séance terminée':'Séance arrêtée';
+  $('doneRec').textContent=(mn?mn.n:'Cardio')+' · '+pendingRpe.mode.toLowerCase()+' · '+mmss2(dur);
+  $('rpeGrid').innerHTML='';
+  for(var i=1;i<=10;i++)$('rpeGrid').innerHTML+='<button data-rpe="'+i+'" aria-pressed="false">'+i+'</button>';
+  $('runCtrls').hidden=true;$('runSteps').hidden=true;$('runMetroRow').hidden=true;
+  document.querySelector('#run .zone').hidden=true;document.querySelector('#run .prog').hidden=true;
+  $('doneBox').hidden=false;$('run').hidden=false;
+  keepAwake(false);
+}
+$('rpeGrid').addEventListener('click',function(e){
+  var b=e.target.closest('[data-rpe]');if(!b||!pendingRpe)return;
+  pendingRpe.rpe=+b.dataset.rpe;
+  Array.prototype.forEach.call(this.children,function(x){x.setAttribute('aria-pressed',x===b);});
+});
+$('doneSave').addEventListener('click',function(){
+  if(pendingRpe){HIST.unshift(pendingRpe);LS.set('tos-hist',HIST);drawHist();}
+  pendingRpe=null;stopRun();show('hist');
+});
+$('doneSkip').addEventListener('click',function(){pendingRpe=null;stopRun();});
 function stopRun(){
   runner.on=false;if(runner.raf)cancelAnimationFrame(runner.raf);runner.raf=null;
   metroStop();$('run').hidden=true;keepAwake(false);
 }
-function launch(list){
+function launch(list,ctx){
   audio();if(!list.length)return;
   runner.on=true;runner.list=list;runner.i=0;runner.paused=false;
+  runner.ctx=ctx||{};runner.startedAt=Date.now();
+  $('doneBox').hidden=true;$('runCtrls').hidden=false;$('runMetroRow').hidden=false;
+  $('runSteps').hidden=false;document.querySelector('#run .zone').hidden=false;
+  document.querySelector('#run .prog').hidden=false;
   runner.total=list.reduce(function(t,b){return t+b.d;},0);
   $('runSteps').innerHTML=list.map(function(b){
     return '<i style="background:'+colorOf(b.k)+';flex:'+b.d+';height:'+(b.k==='fast'?100:b.k==='norm'?70:45)+'%"></i>';}).join('');
   $('run').hidden=false;metroLabel();keepAwake(true);startBlock(true);
 }
 $('intStart').addEventListener('click',function(){
-  launch(seq().map(function(b){return {k:b.k,n:b.n,c:b.c,d:b.d};}));
+  launch(seq().map(function(b){return {k:b.k,n:b.n,c:b.c,d:b.d};}),{mode:'Fractionné',machine:P.machine});
 });
 $('runPause').addEventListener('click',function(){
   if(runner.paused){runner.paused=false;runner.end=Date.now()+runner.left*1000;runner.raf=requestAnimationFrame(runLoop);
@@ -585,7 +678,7 @@ document.querySelectorAll('[data-cadj]').forEach(function(b){b.addEventListener(
 $('contCad').addEventListener('change',function(){contCad=$('contCad').value;LS.set('tos-contcad',contCad);});
 $('contStart').addEventListener('click',function(){
   contCad=$('contCad').value;LS.set('tos-contcad',contCad);
-  launch([{k:'norm',n:'Allure constante',c:contCad,d:contDur}]);
+  launch([{k:'norm',n:'Allure constante',c:contCad,d:contDur}],{mode:'Continu',machine:P.machine});
 });
 function setMode(m){
   var c=m==='cont';
@@ -597,7 +690,10 @@ function setMode(m){
 $('modeCont').addEventListener('click',function(){setMode('cont');});
 $('modeFrac').addEventListener('click',function(){setMode('frac');});
 $('runSkip').addEventListener('click',function(){if(runner.raf)cancelAnimationFrame(runner.raf);nextBlock();});
-$('runStop').addEventListener('click',function(){say('');if('speechSynthesis' in window)speechSynthesis.cancel();stopRun();});
+$('runStop').addEventListener('click',function(){
+  if('speechSynthesis' in window)speechSynthesis.cancel();
+  askRpe(false);
+});
 
 /* ================= MESURE DE CADENCE ================= */
 var meas={target:null,unit:'coups/min',value:0};
@@ -717,18 +813,89 @@ document.addEventListener('click',function(e){
   var b=e.target.closest('[data-meas]');if(!b)return;openMeas(b.dataset.meas);
 });
 
+/* ================= HISTORIQUE ================= */
+var HIST=LS.get('tos-hist',[]);
+var JOURS=['dimanche','lundi','mardi','mercredi','jeudi','vendredi','samedi'];
+var MOIS=['janvier','février','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','décembre'];
+
+function dayKey(ts){var d=new Date(ts);return d.getFullYear()+'-'+d.getMonth()+'-'+d.getDate();}
+function dayLabel(ts){
+  var d=new Date(ts),t=new Date(),h=new Date(Date.now()-86400000);
+  if(dayKey(ts)===dayKey(t))return "Aujourd'hui";
+  if(dayKey(ts)===dayKey(h))return 'Hier';
+  return JOURS[d.getDay()]+' '+d.getDate()+' '+MOIS[d.getMonth()];
+}
+/* lundi 00:00 de la semaine contenant ts */
+function weekStart(ts){
+  var d=new Date(ts);d.setHours(0,0,0,0);
+  d.setDate(d.getDate()-((d.getDay()+6)%7));
+  return d.getTime();
+}
+function machineName(k){var m=MACHINES.filter(function(x){return x.k===k;})[0];return m?m.n:'Cardio';}
+
+function drawHist(){
+  var now=Date.now(), w0=weekStart(now);
+  var week=HIST.filter(function(h){return h.date>=w0;});
+  var min=Math.round(week.reduce(function(t,h){return t+h.dur;},0)/60);
+  var rpes=week.filter(function(h){return h.rpe>0;});
+  $('sumMin').textContent=min;
+  $('sumNb').textContent=week.length;
+  $('sumRpe').textContent=rpes.length?(rpes.reduce(function(t,h){return t+h.rpe;},0)/rpes.length).toFixed(1).replace('.0',''):'—';
+
+  /* six dernières semaines, la courante à droite */
+  var bars=[];
+  for(var i=5;i>=0;i--){
+    var start=w0-i*604800000, end=start+604800000;
+    var m=Math.round(HIST.filter(function(h){return h.date>=start&&h.date<end;})
+      .reduce(function(t,h){return t+h.dur;},0)/60);
+    bars.push({m:m,now:i===0});
+  }
+  var mx=Math.max(1,Math.max.apply(null,bars.map(function(b){return b.m;})));
+  $('weeks').innerHTML=bars.map(function(b){
+    return '<div'+(b.now?' class="now"':'')+'><span class="bw"><i style="height:'+Math.round(b.m/mx*100)+
+      '%;opacity:'+(b.m?1:.22)+'"></i></span><em>'+(b.m||'·')+'</em></div>';
+  }).join('');
+
+  if(!HIST.length){
+    $('histList').innerHTML='<div class="empty">Aucune séance enregistrée pour l\'instant.<br>Elles apparaîtront ici dès que tu en auras terminé une.</div>';
+    return;
+  }
+  var html='',last='';
+  HIST.slice(0,60).forEach(function(h,i){
+    var k=dayKey(h.date);
+    if(k!==last){html+='<div class="daylab">'+dayLabel(h.date)+'</div>';last=k;}
+    var t=new Date(h.date);
+    html+='<div class="hrow"><span class="bar"></span><span class="n"><b>'+machineName(h.machine)+
+      (h.complete?'':' · arrêtée')+'</b><span>'+h.mode.toLowerCase()+' · '+
+      String(t.getHours()).padStart(2,'0')+'h'+String(t.getMinutes()).padStart(2,'0')+'</span></span>'+
+      (h.rpe?'<span class="rpepill">'+h.rpe+'/10</span>':'')+
+      '<span class="d">'+mmss2(h.dur)+'</span>'+
+      '<button class="delbtn" data-del="'+i+'" aria-label="Supprimer cette séance">✕</button></div>';
+  });
+  $('histList').innerHTML=html;
+}
+$('histList').addEventListener('click',function(e){
+  var b=e.target.closest('[data-del]');if(!b)return;
+  HIST.splice(+b.dataset.del,1);LS.set('tos-hist',HIST);drawHist();
+});
+
 /* ---------------- tabs ---------------- */
+var VIEWS={rest:'viewRest',int:'viewInt',hist:'viewHist'};
+var TABS={rest:'tabRest',int:'tabInt',hist:'tabHist'};
 function show(which){
-  var r=which==='rest';
-  $('viewRest').style.display=r?'flex':'none';
-  $('viewInt').style.display=r?'none':'flex';
-  $('tabRest').setAttribute('aria-pressed',r);$('tabInt').setAttribute('aria-pressed',!r);
+  if(!VIEWS[which])which='rest';
+  Object.keys(VIEWS).forEach(function(k){
+    $(VIEWS[k]).style.display=(k===which)?'flex':'none';
+    $(TABS[k]).setAttribute('aria-pressed',k===which);
+  });
+  if(which==='hist')drawHist();
   LS.set('tos-tab',which);
 }
 $('tabRest').addEventListener('click',function(){show('rest');});
 $('tabInt').addEventListener('click',function(){show('int');});
+$('tabHist').addEventListener('click',function(){show('hist');});
 
-drawPresets();restLeft=restDur;paintRest();drawInt();drawCont();metroLabel();
+drawPresets();restLeft=restDur;paintRest();drawInt();drawCont();metroLabel();drawHist();
 setMode(LS.get('tos-mode','frac'));show(LS.get('tos-tab','rest'));
 </script>
 
