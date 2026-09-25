@@ -26,19 +26,23 @@ Fonctionne dans le navigateur, s'installe sur l'écran d'accueil de l'iPhone, et
 
 **Construit**
 
-- Chronomètre de repos : anneau, durées prédéfinies, ±15 s, alerte à 10 s et à 0, écran maintenu allumé
-- Cardio en mode **continu** : une durée, une allure, une sonnerie à la fin
-- Cardio en mode **fractionné** : blocs modifiables, cycle répétable, quatre modèles, annonces vocales
-- **Son de cadence** : un clic au rythme écrit dans l'allure, activable en pleine séance
-- **Mesure de cadence** : au toucher, ou par l'accéléromètre du téléphone
+- Générateur de séance : durée disponible, forme du jour, gêne du jour, corps entier
+- Déroulé guidé : séries, repos automatique, étalonnage, saisie des répétitions réelles
+- Progression automatique : deux séances réussies font monter les répétitions puis la charge
+- Records personnels par exercice
+- Fiches : carte musculaire annotée face/dos, vidéo de démonstration, consignes et erreurs
+- Musculation : 23 exercices, charges limitées aux crans réels de l'haltère
+- Chronomètre de repos autonome
+- Cardio continu et fractionné, son de cadence, mesure de cadence au toucher ou par l'accéléromètre
+- Niveau cardio : endurance et plafond, allures de fractionné déduites
+- Historique : séances, détail des séries, effort ressenti, volume hebdomadaire
+- Poids et tour de taille, une fois par mois
 
 **À construire**
 
-- Générateur de séance par durée disponible, avec remplacement et suppression d'exercices
-- Bibliothèque d'exercices : animations, vidéos, consignes
-- Musculation : inventaire des disques d'haltères et charges réellement montables
-- Historique, progression, blocs étalons d'évaluation du niveau
-- Synchronisation Firebase
+- Sauvegarde hors du téléphone (export de fichier ou synchronisation Firebase)
+- Semaine allégée périodique
+- Graphiques de progression par exercice
 
 Le cahier des charges complet vit dans le projet Claude « Training-OS ».
 
