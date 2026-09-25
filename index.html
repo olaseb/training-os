@@ -129,6 +129,32 @@ h2.sec{font-family:var(--disp);font-weight:800;font-size:13px;letter-spacing:.14
 .dots{display:flex;gap:5px;height:8px}
 .dots i{width:8px;height:8px;border-radius:50%;background:var(--line);display:block}
 .dots i.on{background:var(--acc)}
+/* séance */
+.exrow{display:flex;align-items:center;gap:10px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 12px 12px 0;margin-top:8px;overflow:hidden}
+.exrow .bar{width:5px;align-self:stretch;flex:0 0 5px;margin-right:2px;background:var(--dim)}
+.exrow.cal .bar{background:var(--warm)}
+.exrow .n{flex:1;min-width:0}
+.exrow .n b{display:block;font-size:15px;font-weight:700;letter-spacing:-.01em}
+.exrow .n span{display:block;font-family:var(--mono);font-size:12px;color:var(--dim);margin-top:2px}
+.exrow .d{font-family:var(--mono);font-weight:600;font-size:14px;flex:0 0 auto}
+.tag{font-family:var(--mono);font-size:10px;font-style:normal;letter-spacing:.1em;text-transform:uppercase;color:var(--warm);border:1px solid var(--warm);border-radius:5px;padding:1px 5px;margin-left:6px;vertical-align:middle}
+.frow{display:flex;align-items:center;justify-content:space-between;gap:12px;border-top:1px solid var(--line);padding-block:12px;font-size:15px}
+.frow:first-child{border-top:0}
+.fichetxt{font-size:14px;color:var(--dim);line-height:1.55}
+.fichetxt b{color:var(--ink);display:block;font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;margin-bottom:4px;font-weight:600}
+.ytlink{display:flex;align-items:center;justify-content:center;gap:9px;height:50px;border-radius:12px;border:1.5px solid var(--line);background:var(--card);font-weight:700;font-size:15px;color:var(--ink);text-decoration:none}
+.sets{display:flex;gap:6px;justify-content:center;margin-top:14px}
+.sets i{width:26px;height:6px;border-radius:3px;background:var(--line);display:block}
+.sets i.ok{background:var(--acc)}
+.sets i.now{background:var(--ink)}
+.restwrap{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin-bottom:12px}
+.restwrap .top2{display:flex;align-items:baseline;justify-content:space-between}
+.restwrap .top2 span{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim)}
+.restwrap .top2 b{font-family:var(--disp);font-weight:800;font-size:24px;letter-spacing:-.03em}
+.restwrap .track{height:6px;border-radius:3px;background:var(--line);overflow:hidden;margin-top:8px}
+.restwrap .track i{display:block;height:100%;background:var(--acc);width:0%}
+.numin{width:100%;height:64px;border-radius:12px;border:1.5px solid var(--line);background:var(--card);color:var(--ink);
+  font-family:var(--disp);font-weight:800;font-size:34px;text-align:center;letter-spacing:-.03em}
 /* historique */
 .sum{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
 .tile{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 10px;text-align:center}
@@ -192,13 +218,32 @@ h2.sec{font-family:var(--disp);font-weight:800;font-size:13px;letter-spacing:.14
   </div>
 
   <div class="seg" role="group">
-    <button id="tabRest" aria-pressed="true">Repos</button>
+    <button id="tabSes" aria-pressed="true">Séance</button>
+    <button id="tabRest" aria-pressed="false">Repos</button>
     <button id="tabInt" aria-pressed="false">Cardio</button>
     <button id="tabHist" aria-pressed="false">Historique</button>
   </div>
 
   <!-- ============ REPOS ============ -->
-  <section id="viewRest" style="display:flex;flex-direction:column;gap:14px">
+  <!-- ============ SÉANCE ============ -->
+  <section id="viewSes" style="display:flex;flex-direction:column;gap:14px">
+    <h2 class="sec">Tu as combien de temps ?</h2>
+    <div class="presets" id="sesTime"></div>
+    <h2 class="sec">Comment tu te sens ?</h2>
+    <div class="presets" style="grid-template-columns:repeat(3,1fr)" id="sesForme"></div>
+    <h2 class="sec">Une gêne aujourd'hui ?</h2>
+    <div class="presets" style="grid-template-columns:repeat(4,1fr)" id="sesGene"></div>
+    <button class="btn primary" id="sesMake" style="height:56px">Composer la séance</button>
+
+    <div id="sesPlan" hidden>
+      <div class="total" style="margin-top:18px"><b class="tnum" id="sesTot">00:00</b><span id="sesDesc"></span></div>
+      <div id="sesList"></div>
+      <button class="btn primary" id="sesStart" style="height:58px;margin-top:14px">Démarrer la séance</button>
+      <p class="hint" style="margin-top:12px">Touche <b>i</b> pour la fiche d'un exercice, ⇄ pour le remplacer, ✕ pour le retirer.</p>
+    </div>
+  </section>
+
+  <section id="viewRest" style="display:none;flex-direction:column;gap:14px">
     <div class="ringbox">
       <svg viewBox="0 0 200 200" aria-hidden="true">
         <circle cx="100" cy="100" r="88" fill="none" stroke="var(--line)" stroke-width="10"/>
@@ -338,6 +383,51 @@ h2.sec{font-family:var(--disp);font-weight:800;font-size:13px;letter-spacing:.14
     </div>
   </div>
 </div>
+<!-- déroulé de la séance -->
+<div class="run" id="sesRun" hidden>
+  <div class="zone">
+    <div class="cad" id="sesStep">Étape 1</div>
+    <div class="phase" id="sesName">Exercice</div>
+    <div class="cad" id="sesSub"></div>
+    <div class="cnt tnum" id="sesBig">1 / 3</div>
+    <div class="cad" id="sesBigLab" style="letter-spacing:.2em;text-transform:uppercase">série</div>
+    <div class="sets" id="sesSets"></div>
+    <div class="meta" style="margin-top:14px"><span id="sesNext"></span></div>
+  </div>
+  <div class="restwrap" id="sesRestWrap" hidden>
+    <div class="top2"><span>Repos</span><b class="tnum" id="sesRestT">1:30</b></div>
+    <div class="track"><i id="sesRestBar"></i></div>
+  </div>
+  <div class="row">
+    <button class="btn primary" id="sesDo" style="flex:2">Série faite</button>
+    <button class="btn" id="sesSkip">Suivant</button>
+    <button class="btn ghost" id="sesQuit" style="flex:0 0 76px">Fin</button>
+  </div>
+</div>
+
+<!-- fiche d'exercice -->
+<div class="sheet" id="fiche" hidden>
+  <div class="panel" role="dialog" aria-modal="true">
+    <div class="head"><h3 id="ficheN">Exercice</h3><button class="iconbtn" id="ficheClose" aria-label="Fermer">✕</button></div>
+    <div id="ficheSet"></div>
+    <p class="fichetxt"><b>Exécution</b><span id="ficheC"></span></p>
+    <p class="fichetxt"><b>Erreurs fréquentes</b><span id="ficheE"></span></p>
+    <a class="ytlink" id="ficheV" href="#" target="_blank" rel="noopener">▶ Voir une démonstration</a>
+  </div>
+</div>
+
+<!-- étalonnage -->
+<div class="sheet" id="cal" hidden>
+  <div class="panel" role="dialog" aria-modal="true">
+    <div class="head"><h3>Série d'étalonnage</h3></div>
+    <p class="fichetxt" style="margin:0"><span id="calN"></span> — <span id="calSub"></span>.<br>
+    Combien de répétitions propres as-tu tenues, en t'arrêtant avant de perdre la technique ?</p>
+    <input class="numin" id="calV" type="number" inputmode="numeric" min="1" max="200" value="10">
+    <button class="btn primary" id="calOk" style="height:56px">Valider</button>
+    <button class="btn ghost" id="calCancel">Annuler</button>
+  </div>
+</div>
+
 <!-- feuille : mesurer la cadence -->
 <div class="sheet" id="sheet" hidden>
   <div class="panel" role="dialog" aria-modal="true" aria-label="Mesurer la cadence">
@@ -605,6 +695,11 @@ function finishRun(){
 /* écran de fin : on demande la difficulté ressentie, en un appui */
 var pendingRpe=null;
 function askRpe(complete){
+  if(runner.ctx&&runner.ctx.fromSes){
+    stopRun();
+    if(typeof RUN!=='undefined'&&RUN.on){$('sesRun').hidden=false;sesNextItem();}
+    return;
+  }
   runner.on=false;if(runner.raf)cancelAnimationFrame(runner.raf);runner.raf=null;metroStop();
   var elapsed=Math.round((Date.now()-runner.startedAt)/1000);
   var planned=runner.total;
@@ -880,8 +975,8 @@ $('histList').addEventListener('click',function(e){
 });
 
 /* ---------------- tabs ---------------- */
-var VIEWS={rest:'viewRest',int:'viewInt',hist:'viewHist'};
-var TABS={rest:'tabRest',int:'tabInt',hist:'tabHist'};
+var VIEWS={ses:'viewSes',rest:'viewRest',int:'viewInt',hist:'viewHist'};
+var TABS={ses:'tabSes',rest:'tabRest',int:'tabInt',hist:'tabHist'};
 function show(which){
   if(!VIEWS[which])which='rest';
   Object.keys(VIEWS).forEach(function(k){
@@ -889,14 +984,436 @@ function show(which){
     $(TABS[k]).setAttribute('aria-pressed',k===which);
   });
   if(which==='hist')drawHist();
+  if(which==='ses'&&window.drawSes)drawSes();
   LS.set('tos-tab',which);
 }
+$('tabSes').addEventListener('click',function(){show('ses');});
 $('tabRest').addEventListener('click',function(){show('rest');});
 $('tabInt').addEventListener('click',function(){show('int');});
 $('tabHist').addEventListener('click',function(){show('hist');});
 
 drawPresets();restLeft=restDur;paintRest();drawInt();drawCont();metroLabel();drawHist();
-setMode(LS.get('tos-mode','frac'));show(LS.get('tos-tab','rest'));
+setMode(LS.get('tos-mode','frac'));
+</script>
+
+<script>
+/* ================= BIBLIOTHÈQUE D'EXERCICES ================= */
+/* crans réels de l'haltère ZEUZ, en kg */
+var CRANS=[2.5,3.5,4.5,5.5,6.5,8,9,10,11.5,13.5,16,18,20.5,22.5,24];
+function kg(i){var v=CRANS[Math.max(0,Math.min(CRANS.length-1,i))];return String(v).replace('.',',')+' kg';}
+function yt(q){return 'https://www.youtube.com/results?search_query='+encodeURIComponent(q);}
+
+/* grp : rôle dans la séance — push, pull, jambes, epaules, bras, gainage, cardio
+   zones : ce que l'exercice sollicite et qu'une gêne peut contre-indiquer
+   c0 : cran de départ conseillé (reprise après longue pause), par haltère
+   s/r : séries et fourchette de répétitions · repos en secondes */
+var EX=[
+ {id:'pompes',n:'Pompes sur poignées',grp:'push',mat:'poignees',zones:['epaules','poignets'],
+  s:3,r:[8,15],repos:75,c0:null,
+  cons:'Corps gréé, fessiers serrés, coudes à 45° du buste. Descends jusqu’à ce que la poitrine frôle les poignées.',
+  err:'Les coudes qui partent à 90°, le bassin qui s’affaisse.',v:'pompes sur poignées technique'},
+ {id:'dc',n:'Développé couché haltères',grp:'push',mat:'banc',zones:['epaules'],
+  s:4,r:[8,12],repos:90,c0:4,
+  cons:'Omoplates serrées et plaquées sur le banc, pieds au sol. Descends les haltères au niveau des pectoraux, coudes à 45°.',
+  err:'Cambrer excessivement, rebondir en bas.',v:'développé couché haltères technique'},
+ {id:'dincl',n:'Développé incliné haltères',grp:'push',mat:'banc',zones:['epaules'],
+  s:3,r:[8,12],repos:90,c0:3,
+  cons:'Banc à 30°, pas plus. Trajectoire légèrement convergente vers le haut.',
+  err:'Un banc trop incliné transforme le mouvement en développé épaules.',v:'développé incliné haltères 30 degrés'},
+ {id:'ecarte',n:'Écarté couché',grp:'push',mat:'banc',zones:['epaules'],
+  s:3,r:[10,15],repos:75,c0:2,
+  cons:'Coudes légèrement fléchis et figés. Ouvre jusqu’à sentir l’étirement, pas plus bas.',
+  err:'Charge trop lourde, qui transforme l’écarté en développé.',v:'écarté couché haltères technique'},
+ {id:'rowing',n:'Rowing haltère un bras',grp:'pull',mat:'banc',zones:['dos'],
+  s:4,r:[8,12],repos:90,c0:5,
+  cons:'Un genou et une main sur le banc, dos plat à l’horizontale. Tire le coude vers la hanche, pas vers l’épaule.',
+  err:'Tourner le buste pour arracher la charge.',v:'rowing haltère un bras banc technique'},
+ {id:'rowbust',n:'Rowing buste penché, deux haltères',grp:'pull',mat:'halteres',zones:['dos'],
+  s:3,r:[10,12],repos:90,c0:3,
+  cons:'Buste à 45°, dos plat, genoux déverrouillés. Tire vers le nombril.',
+  err:'Arrondir le bas du dos — c’est l’exercice à sauter en cas de gêne lombaire.',v:'rowing buste penché haltères dos plat'},
+ {id:'pullover',n:'Pull-over haltère',grp:'pull',mat:'banc',zones:['epaules'],
+  s:3,r:[10,14],repos:75,c0:3,
+  cons:'Allongé sur le banc, un seul haltère tenu à deux mains. Descends derrière la tête, bras quasi tendus.',
+  err:'Descendre trop bas si les épaules manquent de mobilité.',v:'pull over haltère technique'},
+ {id:'shrug',n:'Shrugs',grp:'pull',mat:'halteres',zones:[],
+  s:3,r:[12,15],repos:60,c0:7,
+  cons:'Monte les épaules vers les oreilles, marque un temps en haut, redescends lentement.',
+  err:'Rouler les épaules — le mouvement est vertical, point.',v:'shrugs haltères technique'},
+ {id:'goblet',n:'Squat gobelet',grp:'jambes',mat:'halteres',zones:['genoux','dos'],
+  s:4,r:[10,15],repos:90,c0:5,
+  cons:'Un haltère tenu vertical contre la poitrine. Descends entre les pieds, buste droit, talons au sol.',
+  err:'Les talons qui décollent, les genoux qui rentrent.',v:'squat gobelet technique'},
+ {id:'fentes',n:'Fentes marchées',grp:'jambes',mat:'halteres',zones:['genoux'],
+  s:3,r:[10,12],repos:90,c0:3,
+  cons:'Un haltère dans chaque main, bras le long du corps. Le genou arrière descend vers le sol sans le toucher.',
+  err:'Un pas trop court, qui fait passer le genou loin devant le pied.',v:'fentes marchées haltères technique'},
+ {id:'sdt',n:'Soulevé de terre jambes semi-tendues',grp:'jambes',mat:'halteres',zones:['dos'],
+  s:3,r:[10,12],repos:90,c0:5,
+  cons:'Genoux déverrouillés et figés. Pousse les hanches vers l’arrière, les haltères frôlent les cuisses.',
+  err:'Plier les genoux pour descendre plus bas, arrondir le dos.',v:'soulevé de terre jambes tendues haltères'},
+ {id:'mollets',n:'Mollets debout',grp:'jambes',mat:'halteres',zones:[],
+  s:3,r:[15,20],repos:45,c0:8,
+  cons:'Monte le plus haut possible sur la pointe des pieds, marque une seconde, redescends lentement.',
+  err:'Rebondir en bas sans amplitude.',v:'extension mollets debout haltères'},
+ {id:'militaire',n:'Développé militaire assis',grp:'epaules',mat:'banc',zones:['epaules'],
+  s:3,r:[8,12],repos:90,c0:2,
+  cons:'Assis, dos calé, haltères au niveau des oreilles. Pousse vers le haut sans verrouiller violemment.',
+  err:'Cambrer le bas du dos pour pousser plus lourd.',v:'développé militaire haltères assis technique'},
+ {id:'latere',n:'Élévations latérales',grp:'epaules',mat:'halteres',zones:['epaules'],
+  s:3,r:[12,15],repos:60,c0:0,
+  cons:'Monte jusqu’à l’horizontale, pas au-dessus. Coudes légèrement fléchis, mouvement lent.',
+  err:'Balancer le buste pour lancer la charge. Ici, léger est efficace.',v:'élévations latérales haltères technique'},
+ {id:'oiseau',n:'Oiseau, buste penché',grp:'epaules',mat:'halteres',zones:['dos','epaules'],
+  s:3,r:[12,15],repos:60,c0:0,
+  cons:'Buste penché à 45°, dos plat. Ouvre les bras sur les côtés en serrant les omoplates.',
+  err:'Charge trop lourde, qui transforme le mouvement en rowing.',v:'oiseau haltères arrière épaules'},
+ {id:'curl',n:'Curl biceps',grp:'bras',mat:'halteres',zones:[],
+  s:3,r:[10,12],repos:60,c0:3,
+  cons:'Coudes collés au buste, supination en montant. Redescends en contrôlant trois secondes.',
+  err:'Balancer le dos, lâcher la descente.',v:'curl biceps haltères technique'},
+ {id:'marteau',n:'Curl marteau',grp:'bras',mat:'halteres',zones:[],
+  s:3,r:[10,12],repos:60,c0:3,
+  cons:'Paumes face à face tout du long. Sollicite l’avant-bras autant que le biceps.',
+  err:'Tourner les poignets en montant.',v:'curl marteau haltères technique'},
+ {id:'triceps',n:'Extension triceps au-dessus de la tête',grp:'bras',mat:'halteres',zones:['epaules'],
+  s:3,r:[10,12],repos:60,c0:2,
+  cons:'Un haltère à deux mains au-dessus de la tête. Coudes serrés et fixes, seuls les avant-bras bougent.',
+  err:'Écarter les coudes, descendre trop vite.',v:'extension triceps haltère au dessus de la tête'},
+ {id:'barre',n:'Barre au front sur banc',grp:'bras',mat:'banc',zones:['epaules'],
+  s:3,r:[10,12],repos:60,c0:2,
+  cons:'Allongé, haltères descendus de part et d’autre du front, coudes fixes.',
+  err:'Bouger les coudes vers l’avant pour tricher.',v:'barre au front haltères technique'},
+ {id:'planche',n:'Gainage planche',grp:'gainage',mat:'aucun',zones:['epaules'],
+  s:3,r:[30,60],repos:60,c0:null,tps:true,
+  cons:'Coudes sous les épaules, corps en ligne. Serre les fessiers, rentre le bassin.',
+  err:'Les fesses en l’air ou le ventre qui tombe.',v:'gainage planche technique'},
+ {id:'roue',n:'Roue abdominale à genoux',grp:'gainage',mat:'roue',zones:['dos','epaules'],
+  s:3,r:[6,12],repos:75,c0:null,
+  cons:'À genoux, abdos et fessiers serrés. Déroule seulement aussi loin que tu peux revenir sans creuser le dos.',
+  err:'Aller trop loin : le bas du dos se creuse et prend tout.',v:'roue abdominale à genoux technique débutant'},
+ {id:'lat',n:'Gainage latéral',grp:'gainage',mat:'aucun',zones:['epaules'],
+  s:2,r:[25,45],repos:45,c0:null,tps:true,
+  cons:'Sur le coude, hanches hautes. Une série de chaque côté.',
+  err:'Laisser le bassin descendre.',v:'gainage latéral technique'},
+ {id:'crunch',n:'Crunch au sol',grp:'gainage',mat:'aucun',zones:[],
+  s:3,r:[15,20],repos:45,c0:null,
+  cons:'Décolle les omoplates en soufflant, sans tirer sur la nuque.',
+  err:'Tirer la tête avec les mains.',v:'crunch abdominaux technique'}
+];
+
+/* ================= PROFIL D'EXERCICES ================= */
+/* Pour chaque exercice : le cran d'haltère retenu, les répétitions de travail,
+   et s'il a déjà été étalonné. Un exercice non étalonné passe par une série test. */
+var PROF=LS.get('tos-prof',{});
+function prof(e){
+  if(!PROF[e.id])PROF[e.id]={c:e.c0,r:e.r[0],cal:false,n:0};
+  return PROF[e.id];
+}
+function saveProf(){LS.set('tos-prof',PROF);}
+function exById(id){return EX.filter(function(e){return e.id===id;})[0];}
+
+/* gêne du jour : valable pour la journée seulement */
+var ZONES=[{k:'dos',n:'Dos'},{k:'epaules',n:'Épaules'},{k:'genoux',n:'Genoux'},{k:'poignets',n:'Poignets'}];
+var GENE=LS.get('tos-gene',{d:'',z:[]});
+function today(){var d=new Date();return d.getFullYear()+'-'+d.getMonth()+'-'+d.getDate();}
+if(GENE.d!==today())GENE={d:today(),z:[]};
+function saveGene(){GENE.d=today();LS.set('tos-gene',GENE);}
+
+/* ================= GÉNÉRATEUR ================= */
+var SES={min:45,forme:'normal',plan:null};
+var ORDRE=['push','pull','jambes','epaules','bras','gainage'];
+
+function dureeEx(e,p,series){
+  var reps=p.r||e.r[0];
+  var travail=e.tps?reps:reps*3.5;               /* gainage : la valeur est en secondes */
+  return Math.round(series*(travail+e.repos)+40);
+}
+function libre(e){                                /* pas de gêne sur une zone sollicitée */
+  return !e.zones.some(function(z){return GENE.z.indexOf(z)>=0;});
+}
+function derniers(){                              /* exercices des 2 dernières séances muscu */
+  var out=[];
+  HIST.filter(function(h){return h.ex;}).slice(0,2).forEach(function(h){out=out.concat(h.ex);});
+  return out;
+}
+
+function makePlan(){
+  var T=SES.min*60, plan=[];
+  var vus=derniers();
+  var chaud=SES.min>=30?300:240;
+  var calme=SES.min>=45?180:0;
+  var reste=T-chaud-calme;
+  plan.push({t:'cardio',id:'warm',n:'Échauffement',mach:P.machine,dur:chaud,k:'warm'});
+
+  var dSer=SES.forme==='fatigue'?-1:0;
+  var unCal=false;                                 /* un seul étalonnage par séance */
+
+  ORDRE.forEach(function(g){
+    if(reste<150)return;
+    var cand=EX.filter(function(e){return e.grp===g&&libre(e);});
+    if(!cand.length)return;
+    var neuf=cand.filter(function(e){return !prof(e).cal;});
+    var pick;
+    if(neuf.length&&!unCal){pick=neuf[0];}
+    else{
+      var connus=cand.filter(function(e){return prof(e).cal;});
+      var frais=connus.filter(function(e){return vus.indexOf(e.id)<0;});
+      /* rien d'étalonné dans ce groupe : on prend l'exercice de base, le premier de la liste */
+      if(!connus.length)pick=cand[0];
+      else{var pool=frais.length?frais:connus;pick=pool[Math.floor(Math.random()*pool.length)];}
+    }
+    var p=prof(pick);
+    var cal=(!p.cal&&!unCal);
+    if(cal)unCal=true;
+    var ser=Math.max(2,pick.s+dSer);
+    var d=dureeEx(pick,p,ser);
+    if(d>reste&&plan.filter(function(x){return x.t==='ex';}).length>=3)return;
+    plan.push({t:'ex',id:pick.id,ser:ser,cal:cal,dur:d});
+    reste-=d;
+  });
+
+  /* ce qui reste part dans un bloc cardio de fin, plafonné à 10 minutes */
+  if(SES.min>=45&&reste>=180)plan.push({t:'cardio',id:'fin',n:'Cardio de fin',mach:P.machine,dur:Math.min(600,Math.round(reste/30)*30),k:'fast'});
+  if(calme)plan.push({t:'cardio',id:'calme',n:'Retour au calme',mach:P.machine,dur:calme,k:'cool'});
+  SES.plan=plan;
+  return plan;
+}
+function planDur(){return (SES.plan||[]).reduce(function(t,i){return t+i.dur;},0);}
+
+/* ================= AFFICHAGE DE LA SÉANCE ================= */
+function itemHTML(it,i){
+  if(it.t==='cardio'){
+    return '<div class="exrow"><span class="bar" style="background:'+colorOf(it.k)+'"></span>'+
+      '<span class="n"><b>'+it.n+'</b><span>'+machineName(it.mach)+' · allure libre</span></span>'+
+      '<span class="d">'+mmss(it.dur)+'</span>'+
+      '<button class="delbtn" data-sdel="'+i+'" aria-label="Retirer">✕</button></div>';
+  }
+  var e=exById(it.id),p=prof(e);
+  var det=it.ser+' × '+(e.tps?(p.r||e.r[0])+' s':(p.r||e.r[0]));
+  if(e.c0!==null&&p.c!==null&&p.c!==undefined)det+=' · '+kg(p.c);
+  return '<div class="exrow'+(it.cal?' cal':'')+'"><span class="bar"></span>'+
+    '<span class="n"><b>'+e.n+(it.cal?' <em class="tag">étalonnage</em>':'')+'</b><span>'+det+'</span></span>'+
+    '<span class="d">'+mmss(it.dur)+'</span>'+
+    '<button class="measbtn" data-sinfo="'+it.id+'" aria-label="Fiche de l’exercice">i</button>'+
+    '<button class="measbtn" data-sswap="'+i+'" aria-label="Remplacer">⇄</button>'+
+    '<button class="delbtn" data-sdel="'+i+'" aria-label="Retirer">✕</button></div>';
+}
+function drawPlan(){
+  if(!SES.plan){$('sesPlan').hidden=true;return;}
+  $('sesPlan').hidden=false;
+  $('sesList').innerHTML=SES.plan.map(itemHTML).join('');
+  var n=SES.plan.filter(function(i){return i.t==='ex';}).length;
+  $('sesTot').textContent=mmss2(planDur());
+  $('sesDesc').textContent=n+' exercice'+(n>1?'s':'')+' · objectif '+SES.min+' min';
+  $('sesTot').style.color=Math.abs(planDur()-SES.min*60)>300?'var(--warm)':'';
+}
+function drawSes(){
+  $('sesTime').innerHTML=[20,30,45,60,75].map(function(m){
+    return '<button data-smin="'+m+'" aria-pressed="'+(m===SES.min)+'">'+m+' min</button>';}).join('');
+  $('sesForme').innerHTML=[['frais','En forme'],['normal','Normal'],['fatigue','Fatigué']].map(function(f){
+    return '<button data-sf="'+f[0]+'" aria-pressed="'+(f[0]===SES.forme)+'">'+f[1]+'</button>';}).join('');
+  $('sesGene').innerHTML=ZONES.map(function(z){
+    return '<button data-sz="'+z.k+'" aria-pressed="'+(GENE.z.indexOf(z.k)>=0)+'">'+z.n+'</button>';}).join('');
+  drawPlan();
+}
+$('viewSes').addEventListener('click',function(e){
+  var t=e.target.closest('[data-smin],[data-sf],[data-sz],[data-sdel],[data-sswap],[data-sinfo]');
+  if(!t)return;
+  if(t.dataset.smin){SES.min=+t.dataset.smin;LS.set('tos-min',SES.min);if(SES.plan)makePlan();drawSes();}
+  else if(t.dataset.sf){SES.forme=t.dataset.sf;if(SES.plan)makePlan();drawSes();}
+  else if(t.dataset.sz){
+    var k=t.dataset.sz,i=GENE.z.indexOf(k);
+    if(i>=0)GENE.z.splice(i,1);else GENE.z.push(k);
+    saveGene();if(SES.plan)makePlan();drawSes();
+  }
+  else if(t.dataset.sdel){SES.plan.splice(+t.dataset.sdel,1);drawPlan();}
+  else if(t.dataset.sswap){swapEx(+t.dataset.sswap);}
+  else if(t.dataset.sinfo){openFiche(t.dataset.sinfo);}
+});
+$('sesMake').addEventListener('click',function(){makePlan();drawSes();});
+
+/* remplacer : un autre exercice du même rôle, non présent dans la séance */
+function swapEx(i){
+  var it=SES.plan[i];if(it.t!=='ex')return;
+  var e=exById(it.id);
+  var dedans=SES.plan.filter(function(x){return x.t==='ex';}).map(function(x){return x.id;});
+  var alt=EX.filter(function(x){return x.grp===e.grp&&x.id!==e.id&&libre(x)&&dedans.indexOf(x.id)<0;});
+  if(!alt.length){say('');return;}
+  var nx=alt[Math.floor(Math.random()*alt.length)],p=prof(nx);
+  SES.plan[i]={t:'ex',id:nx.id,ser:Math.max(2,nx.s+(SES.forme==='fatigue'?-1:0)),cal:!p.cal,dur:0};
+  SES.plan[i].dur=dureeEx(nx,p,SES.plan[i].ser);
+  drawPlan();
+}
+
+/* ================= FICHE D'EXERCICE ================= */
+function openFiche(id){
+  var e=exById(id),p=prof(e);
+  $('ficheN').textContent=e.n;
+  $('ficheC').textContent=e.cons;
+  $('ficheE').textContent=e.err;
+  $('ficheV').href=yt(e.v);
+  var h='';
+  if(e.c0!==null){
+    h+='<div class="frow"><span>Charge par haltère</span><span class="step">'+
+       '<button data-fc="-1">−</button><span class="d tnum" id="ficheKg">'+kg(p.c)+'</span>'+
+       '<button data-fc="1">+</button></span></div>';
+  }
+  h+='<div class="frow"><span>'+(e.tps?'Secondes par série':'Répétitions par série')+'</span><span class="step">'+
+     '<button data-fr="-1">−</button><span class="d tnum" id="ficheR">'+(p.r||e.r[0])+'</span>'+
+     '<button data-fr="1">+</button></span></div>';
+  h+='<div class="frow"><span>Repos entre séries</span><span class="d tnum">'+mmss(e.repos)+'</span></div>';
+  $('ficheSet').innerHTML=h;
+  $('fiche').dataset.id=id;
+  $('fiche').hidden=false;
+}
+$('fiche').addEventListener('click',function(ev){
+  if(ev.target===$('fiche')){$('fiche').hidden=true;return;}
+  var t=ev.target.closest('[data-fc],[data-fr]');if(!t)return;
+  var e=exById($('fiche').dataset.id),p=prof(e);
+  if(t.dataset.fc){
+    p.c=Math.max(0,Math.min(CRANS.length-1,(p.c||0)+ +t.dataset.fc));
+    $('ficheKg').textContent=kg(p.c);
+  }else{
+    var pas=e.tps?5:1;
+    p.r=Math.max(e.tps?10:4,(p.r||e.r[0])+ +t.dataset.fr*pas);
+    $('ficheR').textContent=p.r;
+  }
+  p.cal=true;saveProf();drawPlan();
+});
+$('ficheClose').addEventListener('click',function(){$('fiche').hidden=true;});
+
+/* ================= DÉROULÉ DE LA SÉANCE ================= */
+var RUN={on:false,i:0,set:1,done:[],startedAt:0,restRaf:null,restEnd:0};
+
+function curItem(){return SES.plan[RUN.i];}
+function sesPaint(){
+  var it=curItem();
+  if(!it){sesFinish();return;}
+  $('sesStep').textContent='Étape '+(RUN.i+1)+' sur '+SES.plan.length;
+  $('sesRestWrap').hidden=true;
+  if(it.t==='cardio'){
+    $('sesName').textContent=it.n;
+    $('sesSub').textContent=machineName(it.mach)+' · '+mmss(it.dur);
+    $('sesBig').textContent=mmss(it.dur);
+    $('sesBigLab').textContent='à faire';
+    $('sesDo').textContent='Lancer le minuteur';
+    $('sesSets').innerHTML='';
+  }else{
+    var e=exById(it.id),p=prof(e);
+    $('sesName').textContent=e.n;
+    var det=(e.c0!==null?kg(p.c)+' · ':'')+(e.tps?(p.r||e.r[0])+' s':(p.r||e.r[0])+' répétitions');
+    $('sesSub').textContent=it.cal&&RUN.set===1?'Série d’étalonnage — fais le maximum de répétitions propres':det;
+    $('sesBig').textContent=RUN.set+' / '+it.ser;
+    $('sesBigLab').textContent='série';
+    $('sesDo').textContent=(it.cal&&RUN.set===1)?'Série test terminée':'Série faite';
+    var h='';
+    for(var s=1;s<=it.ser;s++)h+='<i class="'+(s<RUN.set?'ok':(s===RUN.set?'now':''))+'"></i>';
+    $('sesSets').innerHTML=h;
+  }
+  $('sesNext').textContent=SES.plan[RUN.i+1]?('Puis : '+(SES.plan[RUN.i+1].t==='cardio'?SES.plan[RUN.i+1].n:exById(SES.plan[RUN.i+1].id).n)):'Dernière étape';
+}
+function sesStartRun(){
+  audio();RUN.on=true;RUN.i=0;RUN.set=1;RUN.done=[];RUN.startedAt=Date.now();
+  $('sesRun').hidden=false;keepAwake(true);sesPaint();
+}
+/* minuteur de repos intégré au déroulé */
+function sesRest(sec){
+  $('sesRestWrap').hidden=false;RUN.restEnd=Date.now()+sec*1000;
+  var warned=false;
+  (function loop(){
+    var left=(RUN.restEnd-Date.now())/1000;
+    if(left<=10.4&&left>9.4&&!warned){warned=true;tick();say('Dix secondes');}
+    if(left<=0){$('sesRestWrap').hidden=true;gong();say('C’est reparti');RUN.restRaf=null;return;}
+    $('sesRestT').textContent=mmss(left);
+    $('sesRestBar').style.width=(100*(1-left/sec)).toFixed(1)+'%';
+    RUN.restRaf=requestAnimationFrame(loop);
+  })();
+}
+function sesStopRest(){if(RUN.restRaf)cancelAnimationFrame(RUN.restRaf);RUN.restRaf=null;$('sesRestWrap').hidden=true;}
+
+$('sesDo').addEventListener('click',function(){
+  var it=curItem();if(!it)return;
+  sesStopRest();
+  if(it.t==='cardio'){
+    closeSesRun(true);
+    if(it.k==='warm'||it.k==='cool'){contDur=it.dur;drawCont();setMode('cont');}
+    launch([{k:it.k,n:it.n,c:contCad,d:it.dur}],{mode:'Continu',machine:it.mach,fromSes:true});
+    return;
+  }
+  var e=exById(it.id),p=prof(e);
+  if(it.cal&&RUN.set===1){openCal(it.id);return;}
+  RUN.done.push(it.id);
+  if(RUN.set<it.ser){RUN.set++;sesPaint();sesRest(e.repos);}
+  else{sesNextItem();}
+});
+function sesNextItem(){
+  RUN.i++;RUN.set=1;sesStopRest();
+  if(RUN.i>=SES.plan.length){sesFinish();return;}
+  gong();sesPaint();
+}
+$('sesSkip').addEventListener('click',sesNextItem);
+$('sesQuit').addEventListener('click',function(){sesFinish();});
+
+function closeSesRun(keep){
+  sesStopRest();$('sesRun').hidden=true;if(!keep){RUN.on=false;keepAwake(false);}
+}
+function sesFinish(){
+  var dur=Math.round((Date.now()-RUN.startedAt)/1000);
+  RUN.on=false;closeSesRun(false);
+  gong();setTimeout(gong,420);say('Séance terminée. Bravo.');
+  if(dur<60)return;
+  pendingRpe={rpe:0,dur:dur,complete:RUN.i>=SES.plan.length,machine:P.machine,
+    mode:'Séance',blocks:SES.plan.length,date:Date.now(),
+    ex:SES.plan.filter(function(x){return x.t==='ex';}).map(function(x){return x.id;})};
+  $('doneTitle').textContent='Séance terminée';
+  $('doneRec').textContent='Séance complète · '+mmss2(dur);
+  $('rpeGrid').innerHTML='';
+  for(var i=1;i<=10;i++)$('rpeGrid').innerHTML+='<button data-rpe="'+i+'" aria-pressed="false">'+i+'</button>';
+  $('runCtrls').hidden=true;$('runSteps').hidden=true;$('runMetroRow').hidden=true;
+  document.querySelector('#run .zone').hidden=true;document.querySelector('#run .prog').hidden=true;
+  $('doneBox').hidden=false;$('run').hidden=false;
+}
+
+/* ---- étalonnage : on saisit le nombre de répétitions tenues ---- */
+function openCal(id){
+  var e=exById(id),p=prof(e);
+  $('calN').textContent=e.n;
+  $('calSub').textContent=e.c0!==null?('à '+kg(p.c)):'au poids du corps';
+  $('calV').value=p.r||e.r[0];
+  $('cal').dataset.id=id;$('cal').hidden=false;
+}
+$('calOk').addEventListener('click',function(){
+  var e=exById($('cal').dataset.id),p=prof(e);
+  var n=Math.max(1,parseInt($('calV').value,10)||e.r[0]);
+  var bas=e.r[0],haut=e.r[1];
+  var msg;
+  if(e.c0!==null){
+    /* trop peu de répétitions : la charge est trop lourde. Beaucoup : on monte d'un cran. */
+    if(n<bas-2){p.c=Math.max(0,p.c-2);msg='Charge redescendue de deux crans, à '+kg(p.c)+'.';}
+    else if(n<bas){p.c=Math.max(0,p.c-1);msg='Charge redescendue d’un cran, à '+kg(p.c)+'.';}
+    else if(n>haut+6){p.c=Math.min(CRANS.length-1,p.c+2);msg='Charge montée de deux crans, à '+kg(p.c)+'.';}
+    else if(n>haut){p.c=Math.min(CRANS.length-1,p.c+1);msg='Charge montée d’un cran, à '+kg(p.c)+'.';}
+    else{msg='Charge conservée à '+kg(p.c)+'.';}
+    p.r=Math.min(haut,Math.max(bas,Math.round(n*0.8)));
+  }else{
+    p.r=Math.max(e.tps?10:3,Math.round(n*0.75));
+    msg=(e.tps?p.r+' secondes':p.r+' répétitions')+' par série de travail.';
+  }
+  p.cal=true;p.n=(p.n||0)+1;saveProf();
+  $('cal').hidden=true;
+  $('sesSub').textContent=msg;
+  var it=curItem();RUN.done.push(it.id);
+  if(RUN.set<it.ser){RUN.set++;setTimeout(function(){sesPaint();$('sesSub').textContent=msg;},50);sesRest(e.repos);}
+  else sesNextItem();
+  drawPlan();
+});
+$('calCancel').addEventListener('click',function(){$('cal').hidden=true;});
+$('sesStart').addEventListener('click',sesStartRun);
+
+SES.min=LS.get('tos-min',45);
+drawSes();
+show(LS.get('tos-tab','ses'));
 </script>
 
 <script>
